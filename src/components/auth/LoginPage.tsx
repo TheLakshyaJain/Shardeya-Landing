@@ -100,21 +100,6 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack, initialMode = 'log
     return { text: isHi ? 'उद्यम-स्तरीय' : 'Enterprise Secure', color: 'bg-forest', width: 'w-full' };
   };
 
-  // Demo Autofill Helper
-  const handleAutofill = (type: 'dev' | 'broker') => {
-    setAuthMode('login');
-    setErrorMessage('');
-    if (type === 'dev') {
-      setRole('developer');
-      setLoginEmail('director@apexdevelopers.com');
-      setLoginPassword('Shardeya@2026');
-    } else {
-      setRole('broker');
-      setLoginEmail('partner@apexrealty.com');
-      setLoginPassword('Shardeya@2026');
-    }
-  };
-
   // Sign In Handler
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -477,26 +462,6 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack, initialMode = 'log
                       className="font-bold text-forest hover:underline"
                     >
                       Create one
-                    </button>
-                  </div>
-
-                  {/* Discreet Demo Pre-fill links */}
-                  <div className="pt-4 border-t border-sand-200 text-center text-[11px] text-espresso-500">
-                    <span>Demo accounts: </span>
-                    <button
-                      type="button"
-                      onClick={() => handleAutofill('dev')}
-                      className="text-forest hover:underline font-medium"
-                    >
-                      Apex Developer
-                    </button>
-                    <span className="mx-1.5">•</span>
-                    <button
-                      type="button"
-                      onClick={() => handleAutofill('broker')}
-                      className="text-forest hover:underline font-medium"
-                    >
-                      Diamond Broker
                     </button>
                   </div>
                 </form>
