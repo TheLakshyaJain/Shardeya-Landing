@@ -80,6 +80,8 @@ public class ProjectService {
         }
         project.setPincode(req.pincode());
         project.setGoogleMapsUrl(req.googleMapsUrl());
+        project.setLatitude(req.latitude());
+        project.setLongitude(req.longitude());
         project.setLaunchDate(req.launchDate());
         project.setExpectedCompletionDate(req.expectedCompletionDate());
         project.setDescription(req.description());
@@ -147,6 +149,8 @@ public class ProjectService {
         if (req.stateCode() != null) project.setStateCode(req.stateCode());
         if (req.pincode() != null) project.setPincode(req.pincode());
         if (req.googleMapsUrl() != null) project.setGoogleMapsUrl(req.googleMapsUrl());
+        if (req.latitude() != null) project.setLatitude(req.latitude());
+        if (req.longitude() != null) project.setLongitude(req.longitude());
         if (req.totalAreaValue() != null && req.totalAreaUnit() != null) {
             AreaMeasure area = areaConversionService.toSqft(req.totalAreaValue(), req.totalAreaUnit(), project.getStateCode());
             project.setTotalAreaValue(area.value());
@@ -315,6 +319,7 @@ public class ProjectService {
         long delta = p.getDeclaredPlotCount() - counts.total();
         return new ProjectDetailResponse(p.getId(), p.getName(), p.getProjectType().name(), p.getStatus().name(),
                 p.getAddress(), p.getLocality(), p.getCity(), p.getStateCode(), p.getPincode(), p.getGoogleMapsUrl(),
+                p.getLatitude(), p.getLongitude(),
                 p.getTotalAreaValue(), p.getTotalAreaUnit(), p.getTotalAreaSqft(), p.getDeclaredPlotCount(),
                 p.getLaunchDate(), p.getExpectedCompletionDate(), p.getDescription(), readApprovals(p.getApprovals()),
                 p.getReraNumber(), p.getCoverMediaId(), p.getLayoutMediaId(), p.getBrochureMediaId(),

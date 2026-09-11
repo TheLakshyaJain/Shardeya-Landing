@@ -47,6 +47,9 @@ public record ProjectCreateRequest(
         @Pattern(regexp = "^https://.*", message = "error.project.mapsUrlInvalid")
         String googleMapsUrl,
 
+        BigDecimal latitude,
+        BigDecimal longitude,
+
         @NotNull(message = "error.project.areaRequired")
         @DecimalMin(value = "0.0001", message = "error.project.areaInvalid")
         @Max(value = 3_000_000, message = "error.project.areaInvalid")

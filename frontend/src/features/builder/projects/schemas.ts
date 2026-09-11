@@ -22,6 +22,13 @@ export function buildProjectSchema(t: TFunction) {
       .regex(/^[1-9][0-9]{5}$/, e(t, 'project.pincodeInvalid'))
       .optional()
       .or(z.literal('')),
+    googleMapsUrl: z
+      .string()
+      .regex(/^https:\/\/.*$/, e(t, 'project.mapsUrlInvalid'))
+      .optional()
+      .or(z.literal('')),
+    latitude: z.number().min(-90).max(90).optional().nullable(),
+    longitude: z.number().min(-180).max(180).optional().nullable(),
     // Backend caps at 3,000,000 (03-BUILDER-MODULES.md B-02 §11) -- this was
     // missing here, so the wizard let a user fill out all 5 steps and reach
     // Review before the backend rejected an over-limit value on submit,
@@ -49,7 +56,7 @@ export type ProjectFormValues = z.infer<ReturnType<typeof buildProjectSchema>>;
 
 export const PROJECT_FORM_STEP_FIELDS: (keyof ProjectFormValues)[][] = [
   ['name', 'projectType'],
-  ['address', 'locality', 'city', 'stateCode', 'pincode'],
+  ['address', 'locality', 'city', 'stateCode', 'pincode', 'googleMapsUrl', 'latitude', 'longitude'],
   ['totalAreaValue', 'totalAreaUnit', 'declaredPlotCount', 'launchDate', 'expectedCompletionDate', 'description', 'reraNumber'],
   ['coverMediaId', 'layoutMediaId', 'brochureMediaId'],
   [],

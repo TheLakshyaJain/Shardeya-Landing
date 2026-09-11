@@ -29,6 +29,7 @@ import { attachProjectMedia, deleteProject, detachProjectMedia, getProject, list
 import { ProjectStatusSelector } from '../components/ProjectStatusSelector';
 import { GridLayoutEditor } from '@/features/builder/plots/components/GridLayoutEditor';
 import { PlotsListTab } from '@/features/builder/plots/components/PlotsListTab';
+import { ProjectLocationMap } from '@/components/maps/ProjectLocationMap';
 
 export function ProjectDetailPage() {
   const { t } = useTranslation(['project', 'common']);
@@ -182,6 +183,19 @@ export function ProjectDetailPage() {
               </>
             )}
           </dl>
+
+          <div className="pt-2">
+            <ProjectLocationMap
+              latitude={project.latitude}
+              longitude={project.longitude}
+              googleMapsUrl={project.googleMapsUrl}
+              projectName={project.name}
+              address={project.address}
+              locality={project.locality}
+              city={project.city}
+              onEditLocation={canEdit ? () => navigate(`/builder/projects/${project.id}/edit`) : undefined}
+            />
+          </div>
         </TabsContent>
 
         <TabsContent value="grid" className="pt-4">

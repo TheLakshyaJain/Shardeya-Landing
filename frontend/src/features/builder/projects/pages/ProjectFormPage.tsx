@@ -13,6 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { FormError } from '@/components/forms/FormError';
 import { AreaInput } from '@/components/forms/AreaInput';
 import { ImageUploader } from '@/components/media/ImageUploader';
+import { MapLocationPicker } from '@/components/maps/MapLocationPicker';
 import { EntitlementGuard } from '@/components/feedback/EntitlementGuard';
 import { INDIAN_STATES } from '@/lib/indianStates';
 import { resolveErrorMessage } from '@/lib/api/errorMessage';
@@ -44,6 +45,9 @@ export function ProjectFormPage() {
       city: '',
       stateCode: '',
       pincode: '',
+      googleMapsUrl: '',
+      latitude: null,
+      longitude: null,
       totalAreaValue: undefined,
       totalAreaUnit: 'SQ_FT',
       declaredPlotCount: undefined,
@@ -67,6 +71,9 @@ export function ProjectFormPage() {
         city: existing.data.city,
         stateCode: existing.data.stateCode,
         pincode: existing.data.pincode ?? '',
+        googleMapsUrl: existing.data.googleMapsUrl ?? '',
+        latitude: existing.data.latitude ?? null,
+        longitude: existing.data.longitude ?? null,
         totalAreaValue: existing.data.totalAreaValue,
         totalAreaUnit: existing.data.totalAreaUnit,
         declaredPlotCount: existing.data.declaredPlotCount,
@@ -87,6 +94,9 @@ export function ProjectFormPage() {
       const req: ProjectCreateRequest = {
         ...values,
         pincode: values.pincode || undefined,
+        googleMapsUrl: values.googleMapsUrl || undefined,
+        latitude: values.latitude ?? null,
+        longitude: values.longitude ?? null,
         launchDate: values.launchDate || undefined,
         expectedCompletionDate: values.expectedCompletionDate || undefined,
         description: values.description || undefined,
@@ -209,6 +219,22 @@ export function ProjectFormPage() {
                 <FormError message={form.formState.errors.pincode?.message} />
               </div>
             </div>
+
+            <div className="pt-2">
+              <MapLocationPicker
+                latitude={values.latitude}
+                longitude={values.longitude}
+                initialCity={values.city || values.locality}
+                onChange={(lat, lng, mapsUrl) => {
+                  form.setValue('latitude', lat, { shouldValidate: true });
+                  form.setValue('longitude', lng, { shouldValidate: true });
+                  if (mapsUrl) {
+                    form.setValue('googleMapsUrl', mapsUrl, { shouldValidate: true });
+                  }
+                }}
+              />
+              <FormError message={form.formState.errors.latitude?.message ?? form.formState.errors.longitude?.message} />
+            </div>
           </div>
         )}
 
@@ -307,6 +333,14 @@ export function ProjectFormPage() {
               </dd>
               <dt className="text-muted-foreground">{t('form.fields.declaredPlotCount')}</dt>
               <dd>{values.declaredPlotCount}</dd>
+              {values.latitude && values.longitude && (
+                <>
+                  <dt className="text-muted-foreground">Map Location</dt>
+                  <dd className="font-mono text-xs text-emerald-700 font-medium">
+                    {values.latitude.toFixed(5)}° N, {values.longitude.toFixed(5)}° E
+                  </dd>
+                </>
+              )}
             </dl>
           </div>
         )}

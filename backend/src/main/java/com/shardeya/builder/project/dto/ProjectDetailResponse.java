@@ -8,6 +8,7 @@ import java.util.UUID;
 public record ProjectDetailResponse(
         UUID id, String name, String projectType, String status,
         String address, String locality, String city, String stateCode, String pincode, String googleMapsUrl,
+        BigDecimal latitude, BigDecimal longitude,
         BigDecimal totalAreaValue, String totalAreaUnit, BigDecimal totalAreaSqft,
         int declaredPlotCount, LocalDate launchDate, LocalDate expectedCompletionDate,
         String description, List<ApprovalTag> approvals, String reraNumber,

@@ -23,6 +23,8 @@ public record ProjectUpdateRequest(
         @Pattern(regexp = "^[A-Z]{2}$", message = "error.project.stateInvalid") String stateCode,
         @Pattern(regexp = "^[1-9][0-9]{5}$", message = "error.project.pincodeInvalid") String pincode,
         @Pattern(regexp = "^https://.*", message = "error.project.mapsUrlInvalid") String googleMapsUrl,
+        BigDecimal latitude,
+        BigDecimal longitude,
         @DecimalMin(value = "0.0001", message = "error.project.areaInvalid")
         @Max(value = 3_000_000, message = "error.project.areaInvalid")
         BigDecimal totalAreaValue,

@@ -62,6 +62,12 @@ public class Project {
     @Column(name = "google_maps_url", columnDefinition = "text")
     private String googleMapsUrl;
 
+    @Column(precision = 10, scale = 7)
+    private BigDecimal latitude;
+
+    @Column(precision = 10, scale = 7)
+    private BigDecimal longitude;
+
     @Column(name = "total_area_value", nullable = false, precision = 14, scale = 4)
     private BigDecimal totalAreaValue;
 
@@ -231,6 +237,22 @@ public class Project {
 
     public void setGoogleMapsUrl(String googleMapsUrl) {
         this.googleMapsUrl = googleMapsUrl;
+    }
+
+    public BigDecimal getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(BigDecimal latitude) {
+        this.latitude = latitude;
+    }
+
+    public BigDecimal getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(BigDecimal longitude) {
+        this.longitude = longitude;
     }
 
     public BigDecimal getTotalAreaValue() {

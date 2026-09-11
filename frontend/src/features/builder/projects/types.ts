@@ -39,6 +39,8 @@ export interface ProjectDetailResponse {
   stateCode: string;
   pincode: string | null;
   googleMapsUrl: string | null;
+  latitude: number | null;
+  longitude: number | null;
   totalAreaValue: number;
   totalAreaUnit: string;
   totalAreaSqft: number;
@@ -66,6 +68,9 @@ export interface ProjectCreateRequest {
   city: string;
   stateCode: string;
   pincode?: string;
+  googleMapsUrl?: string;
+  latitude?: number | null;
+  longitude?: number | null;
   totalAreaValue: number;
   totalAreaUnit: string;
   declaredPlotCount: number;
