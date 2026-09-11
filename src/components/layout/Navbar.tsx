@@ -4,9 +4,10 @@ import { useLanguage } from '../../context/LanguageContext';
 
 interface NavbarProps {
   onOpenDemo: () => void;
+  onOpenLogin?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo, onOpenLogin }) => {
   const { language, toggleLanguage, t } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -62,6 +63,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
               </span>
             </button>
 
+            {/* Login Button */}
+            {onOpenLogin && (
+              <button
+                onClick={onOpenLogin}
+                className="text-xs font-bold uppercase tracking-wider text-espresso-800 hover:text-forest transition-colors px-2 py-1.5"
+              >
+                {isHi ? 'लॉगिन' : 'Login'}
+              </button>
+            )}
+
             {/* Launch Demo CTA */}
             <button
               onClick={onOpenDemo}
@@ -107,7 +118,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
               </a>
             );
           })}
-          <div className="pt-3 border-t border-sand-300">
+          <div className="pt-3 border-t border-sand-300 space-y-2">
+            {onOpenLogin && (
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenLogin();
+                }}
+                className="w-full py-2.5 px-4 rounded-lg border border-sand-300 text-espresso-800 font-sans font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2 hover:bg-sand-200 transition-colors"
+              >
+                {isHi ? 'लॉगिन' : 'Login'}
+              </button>
+            )}
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
