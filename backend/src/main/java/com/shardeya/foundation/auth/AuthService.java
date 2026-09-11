@@ -229,19 +229,20 @@ public class AuthService {
         }
     }
 
-    // Mirrors V6_012__backfill_broker_tiers.sql's exact seed shape (names,
-    // Hindi names, ranges, sort order) so a freshly-signed-up org's tiers
-    // are byte-for-byte identical to what the backfill gave every
-    // pre-existing org -- any drift between the two would be confusing
-    // ("why does my org's Silver start at a different deal count?").
+    // B-14 §20.4 default tiers (Business Executive through President)
+    // aligned with designation slabs.
     private void seedDefaultBrokerTiers(UUID orgId) {
         record DefaultTier(String name, String nameHi, int minDeals, Integer maxDeals, short sortOrder) {
         }
         List<DefaultTier> defaults = List.of(
-                new DefaultTier("Bronze", "ब्रॉन्ज़", 0, 2, (short) 1),
-                new DefaultTier("Silver", "सिल्वर", 3, 9, (short) 2),
-                new DefaultTier("Gold", "गोल्ड", 10, 24, (short) 3),
-                new DefaultTier("Platinum", "प्लैटिनम", 25, null, (short) 4));
+                new DefaultTier("Business Executive", "बिज़नेस एक्ज़िक्यूटिव", 0, 0, (short) 1),
+                new DefaultTier("Senior Business Executive", "सीनियर बिज़नेस एक्ज़िक्यूटिव", 1, 1, (short) 2),
+                new DefaultTier("Business Development Officer", "बिज़नेस डेवलपमेंट ऑफिसर", 2, 2, (short) 3),
+                new DefaultTier("Business Manager", "बिज़नेस मैनेजर", 3, 5, (short) 4),
+                new DefaultTier("Assistant Sales Director", "असिस्टेंट सेल्स डायरेक्टर", 6, 9, (short) 5),
+                new DefaultTier("Sales Director", "सेल्स डायरेक्टर", 10, 14, (short) 6),
+                new DefaultTier("Vice President", "वाइस प्रेसिडेंट", 15, 19, (short) 7),
+                new DefaultTier("President", "प्रेसिडेंट", 20, null, (short) 8));
         for (DefaultTier d : defaults) {
             brokerTierRepository.save(new com.shardeya.builder.broker.BrokerTier(
                     UUID.randomUUID(), orgId, d.name(), d.nameHi(), d.minDeals(), d.maxDeals(), d.sortOrder()));

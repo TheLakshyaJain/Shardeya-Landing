@@ -23,7 +23,7 @@ import { NetworkTab } from '../components/NetworkTab';
 import { NotesTab } from '../components/NotesTab';
 
 export function BrokerDetailPage() {
-  const { t } = useTranslation(['broker', 'common']);
+  const { t, i18n } = useTranslation(['broker', 'common']);
   const { id } = useParams<{ id: string }>();
   const queryClient = useQueryClient();
   const canManage = useCan('BROKER_MANAGE');
@@ -87,7 +87,13 @@ export function BrokerDetailPage() {
 
       <div className="mb-4 flex flex-wrap items-center gap-3">
         <Badge variant={broker.status === 'ACTIVE' ? 'default' : 'outline'}>{t(`status.${broker.status}`)}</Badge>
-        {broker.tierName && (
+        {(broker.currentDesignationName || broker.tierName) && (
+          <Badge variant="outline" className="border-emerald-300 bg-emerald-50 text-emerald-800 dark:border-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300 font-medium">
+            {(i18n.language === 'hi' ? broker.currentDesignationNameHi : broker.currentDesignationName) ?? broker.tierName}
+            {broker.currentCommissionRate != null && ` (₹${broker.currentCommissionRate}/sq.ft.)`}
+          </Badge>
+        )}
+        {broker.tierName && !broker.currentDesignationName && (
           <span className="text-sm text-muted-foreground">
             {nextTier
               ? t('detail.tierProgress', { tierName: broker.tierName, remaining, nextTierName: nextTier.name })
@@ -138,7 +144,9 @@ export function BrokerDetailPage() {
             <dd>
               {broker.commissionType === 'PERCENTAGE'
                 ? `${broker.commissionPct}%`
-                : formatIndianCurrency(broker.commissionFixed ?? 0)}
+                : broker.commissionType === 'DESIGNATION'
+                  ? `${(i18n.language === 'hi' ? broker.currentDesignationNameHi : broker.currentDesignationName) ?? 'Designation'} (₹${broker.currentCommissionRate ?? 0}/sq.ft.)`
+                  : formatIndianCurrency(broker.commissionFixed ?? 0)}
             </dd>
           </dl>
           {canViewSensitive && <BankDetailsSection brokerId={broker.id} />}

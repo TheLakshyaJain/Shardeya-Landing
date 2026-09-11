@@ -159,6 +159,7 @@
     "columns": {
       "name": "Name",
       "dealsRange": "Deals Range",
+      "rate": "Commission Rate",
       "bonus": "Bonus",
       "actions": "Actions"
     }

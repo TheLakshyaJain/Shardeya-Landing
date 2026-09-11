@@ -12,15 +12,16 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { FormError } from '@/components/forms/FormError';
 import { resolveErrorMessage } from '@/lib/api/errorMessage';
-import { createTier, deleteTier, listTiers, recalculateTiers, updateTier } from '../api/brokerApi';
+import { createTier, deleteTier, listDesignationSlabs, listTiers, recalculateTiers, updateTier } from '../api/brokerApi';
 import type { BonusType, BrokerTierResponse } from '../types';
 
 export function TierConfigPage() {
-  const { t } = useTranslation(['broker', 'common']);
+  const { t, i18n } = useTranslation(['broker', 'common']);
   const queryClient = useQueryClient();
   const [editing, setEditing] = useState<BrokerTierResponse | 'new' | null>(null);
 
   const tiersQuery = useQuery({ queryKey: ['broker-tiers'], queryFn: () => listTiers() });
+  const slabsQuery = useQuery({ queryKey: ['designation-slabs'], queryFn: listDesignationSlabs });
   const deleteMutation = useMutation({
     mutationFn: (id: string) => deleteTier(id),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['broker-tiers'] }),
@@ -28,6 +29,7 @@ export function TierConfigPage() {
   const recalcMutation = useMutation({ mutationFn: recalculateTiers });
 
   const tiers = [...(tiersQuery.data ?? [])].sort((a, b) => a.sortOrder - b.sortOrder);
+  const rateMap = new Map((slabsQuery.data ?? []).map((s) => [s.name, s.ratePerSqft]));
 
   return (
     <div>
@@ -54,24 +56,36 @@ export function TierConfigPage() {
             <TableRow>
               <TableHead>{t('tier.columns.name')}</TableHead>
               <TableHead>{t('tier.columns.dealsRange')}</TableHead>
+              <TableHead>{t('tier.columns.rate')}</TableHead>
               <TableHead>{t('tier.columns.bonus')}</TableHead>
               <TableHead>{t('tier.columns.actions')}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {tiers.map((tier) => (
-              <TableRow key={tier.id} className="cursor-pointer" onClick={() => setEditing(tier)}>
-                <TableCell>{tier.name}</TableCell>
-                <TableCell>
-                  {tier.minDeals} – {tier.maxDeals ?? '∞'}
-                </TableCell>
-                <TableCell>
-                  {tier.bonusType === 'NONE'
-                    ? t('tier.bonusTypeNone')
-                    : tier.bonusType === 'PCT'
-                      ? `${tier.bonusValue}%`
-                      : tier.bonusValue}
-                </TableCell>
+            {tiers.map((tier) => {
+              const rate = rateMap.get(tier.name);
+              return (
+                <TableRow key={tier.id} className="cursor-pointer" onClick={() => setEditing(tier)}>
+                  <TableCell className="font-medium">
+                    {(i18n.language === 'hi' ? tier.nameHi : tier.name) || tier.name}
+                  </TableCell>
+                  <TableCell>
+                    {tier.minDeals} – {tier.maxDeals ?? '∞'}
+                  </TableCell>
+                  <TableCell>
+                    {rate != null ? (
+                      <span className="font-medium text-emerald-700 dark:text-emerald-400">₹{rate}/sq.ft.</span>
+                    ) : (
+                      '—'
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    {tier.bonusType === 'NONE'
+                      ? t('tier.bonusTypeNone')
+                      : tier.bonusType === 'PCT'
+                        ? `${tier.bonusValue}%`
+                        : tier.bonusValue}
+                  </TableCell>
                 <TableCell>
                   <Button
                     variant="ghost"
@@ -85,7 +99,8 @@ export function TierConfigPage() {
                   </Button>
                 </TableCell>
               </TableRow>
-            ))}
+            );
+          })}
           </TableBody>
         </Table>
       )}

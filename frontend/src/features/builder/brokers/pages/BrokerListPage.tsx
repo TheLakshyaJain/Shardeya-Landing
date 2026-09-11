@@ -16,7 +16,7 @@ import { listBrokers } from '../api/brokerApi';
 import { BrokerFormDialog } from '../components/BrokerFormDialog';
 
 export function BrokerListPage() {
-  const { t } = useTranslation(['broker', 'common']);
+  const { t, i18n } = useTranslation(['broker', 'common']);
   const canManage = useCan('BROKER_MANAGE');
   const [search, setSearch] = useState('');
   const [addOpen, setAddOpen] = useState(false);
@@ -82,7 +82,9 @@ export function BrokerListPage() {
                 </TableCell>
                 <TableCell>{b.mobile}</TableCell>
                 <TableCell>{b.cityArea ?? '—'}</TableCell>
-                <TableCell>{b.tierName ?? '—'}</TableCell>
+                <TableCell>
+                  {(i18n.language === 'hi' ? b.currentDesignationNameHi : b.currentDesignationName) ?? b.tierName ?? '—'}
+                </TableCell>
                 <TableCell>{b.dealsClosedCount}</TableCell>
                 <TableCell>{formatIndianCurrency(b.commissionDue)}</TableCell>
                 <TableCell>

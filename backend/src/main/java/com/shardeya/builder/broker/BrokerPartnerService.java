@@ -407,12 +407,15 @@ public class BrokerPartnerService {
     }
 
     private BrokerResponse toResponse(BrokerPartner b) {
-        String tierName = null;
-        if (b.getTierId() != null) {
-            tierName = tierRepository.findById(b.getTierId()).map(BrokerTier::getName).orElse(null);
-        }
         DesignationSlab designation = b.getCurrentDesignationId() == null ? null
                 : designationSlabRepository.findById(b.getCurrentDesignationId()).orElse(null);
+        String tierName = null;
+        if (designation != null) {
+            tierName = designation.getName();
+        } else if (b.getTierId() != null) {
+            tierName = tierRepository.findByIdAndOrgIdAndDeletedAtIsNull(b.getTierId(), b.getOrgId())
+                    .map(BrokerTier::getName).orElse(null);
+        }
         java.math.BigDecimal[] earnedPaidDue = commissionFigures(b);
         java.math.BigDecimal earned = earnedPaidDue[0];
         java.math.BigDecimal paid = earnedPaidDue[1];

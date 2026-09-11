@@ -159,6 +159,7 @@
     "columns": {
       "name": "नाम",
       "dealsRange": "सौदा सीमा",
+      "rate": "कमीशन दर",
       "bonus": "बोनस",
       "actions": "कार्रवाई"
     }
