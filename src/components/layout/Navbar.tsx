@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
-import { Globe, Menu, X, ChevronRight, Layers, MessageSquare, Calculator, Users } from 'lucide-react';
+import { 
+  Globe, Menu, X, ChevronRight, Layers, MessageSquare, 
+  Calculator, Users, LogOut, ShieldCheck 
+} from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
+import { useAuth } from '../../context/AuthContext';
 
 interface NavbarProps {
   onOpenDemo: () => void;
-  onOpenLogin?: () => void;
+  onOpenLogin?: (mode?: 'login' | 'signup') => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo, onOpenLogin }) => {
   const { language, toggleLanguage, t } = useLanguage();
+  const { user, isAuthenticated, logout } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const isHi = language === 'hi';
@@ -49,7 +54,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo, onOpenLogin }) => {
           </div>
 
           {/* Right Action Bar */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-3.5">
             {/* Language Switcher */}
             <button
               onClick={toggleLanguage}
@@ -63,24 +68,69 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo, onOpenLogin }) => {
               </span>
             </button>
 
-            {/* Login Button */}
-            {onOpenLogin && (
-              <button
-                onClick={onOpenLogin}
-                className="text-xs font-bold uppercase tracking-wider text-espresso-800 hover:text-forest transition-colors px-2 py-1.5"
-              >
-                {isHi ? 'लॉगिन' : 'Login'}
-              </button>
-            )}
+            {/* Authenticated State vs Guest State */}
+            {isAuthenticated && user ? (
+              <div className="flex items-center gap-2.5">
+                {/* User Capsule / Profile trigger */}
+                <button
+                  onClick={() => onOpenLogin?.('login')}
+                  className="flex items-center gap-2 pl-2 pr-3 py-1.5 rounded-xl border border-emerald-300 bg-emerald-50/70 hover:bg-emerald-100/70 transition-all shadow-warm-sm"
+                  title="Open Authenticated Console"
+                >
+                  <div className="w-6 h-6 rounded-full bg-forest text-white flex items-center justify-center font-serif text-xs font-bold shadow-sm">
+                    {user.avatarInitials}
+                  </div>
+                  <div className="text-left">
+                    <span className="block text-xs font-bold text-espresso-950 leading-tight">
+                      {user.name.split(' ')[0]}
+                    </span>
+                    <span className="block text-[9px] font-mono text-emerald-800 uppercase tracking-wider leading-none">
+                      {user.role === 'developer' ? 'Developer' : 'Partner'}
+                    </span>
+                  </div>
+                </button>
 
-            {/* Launch Demo CTA */}
-            <button
-              onClick={onOpenDemo}
-              className="px-5 py-2.5 rounded-lg bg-forest hover:bg-forest-light text-white font-sans font-bold text-xs uppercase tracking-wider shadow-warm-sm transition-all transform hover:scale-[1.01] active:scale-98 flex items-center gap-2"
-            >
-              <span>{t.nav.requestAccess}</span>
-              <ChevronRight className="w-3.5 h-3.5" />
-            </button>
+                {/* Quick Sign Out Button */}
+                <button
+                  onClick={logout}
+                  className="p-2 rounded-lg border border-sand-300 text-espresso-600 hover:text-rose-600 hover:bg-rose-50 transition-colors"
+                  title="Sign Out"
+                >
+                  <LogOut className="w-4 h-4" />
+                </button>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2.5">
+                {/* Login Button */}
+                {onOpenLogin && (
+                  <button
+                    onClick={() => onOpenLogin('login')}
+                    className="text-xs font-bold uppercase tracking-wider text-espresso-800 hover:text-forest transition-colors px-2 py-1.5"
+                  >
+                    {isHi ? 'लॉगिन' : 'Sign In'}
+                  </button>
+                )}
+
+                {/* Create Account / Register Button */}
+                {onOpenLogin && (
+                  <button
+                    onClick={() => onOpenLogin('signup')}
+                    className="text-xs font-bold uppercase tracking-wider text-forest hover:text-forest-dark transition-colors px-2 py-1.5 border border-forest/30 rounded-lg hover:bg-forest/5"
+                  >
+                    {isHi ? 'खाता बनाएं' : 'Sign Up'}
+                  </button>
+                )}
+
+                {/* Request Access VIP CTA */}
+                <button
+                  onClick={onOpenDemo}
+                  className="px-4 py-2 rounded-lg bg-forest hover:bg-forest-light text-white font-sans font-bold text-xs uppercase tracking-wider shadow-warm-sm transition-all transform hover:scale-[1.01] active:scale-98 flex items-center gap-1.5 ml-1"
+                >
+                  <span>{t.nav.requestAccess}</span>
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            )}
           </div>
 
           {/* Mobile Hamburger Button */}
@@ -118,27 +168,78 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo, onOpenLogin }) => {
               </a>
             );
           })}
+
           <div className="pt-3 border-t border-sand-300 space-y-2">
-            {onOpenLogin && (
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenLogin();
-                }}
-                className="w-full py-2.5 px-4 rounded-lg border border-sand-300 text-espresso-800 font-sans font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2 hover:bg-sand-200 transition-colors"
-              >
-                {isHi ? 'लॉगिन' : 'Login'}
-              </button>
+            {isAuthenticated && user ? (
+              <>
+                <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-full bg-forest text-white flex items-center justify-center font-serif text-xs font-bold">
+                      {user.avatarInitials}
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-espresso-950">{user.name}</div>
+                      <div className="text-[10px] font-mono text-emerald-800 uppercase">{user.role} Console</div>
+                    </div>
+                  </div>
+                  <ShieldCheck className="w-4 h-4 text-forest" />
+                </div>
+
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onOpenLogin?.('login');
+                  }}
+                  className="w-full py-2.5 px-4 rounded-lg bg-forest text-white font-sans font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2 shadow-warm-sm"
+                >
+                  View Workspace Portal
+                </button>
+
+                <button
+                  onClick={() => {
+                    logout();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="w-full py-2 px-4 rounded-lg border border-sand-300 text-espresso-700 font-sans font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2 hover:bg-sand-100"
+                >
+                  Sign Out
+                </button>
+              </>
+            ) : (
+              <>
+                {onOpenLogin && (
+                  <div className="grid grid-cols-2 gap-2">
+                    <button
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        onOpenLogin('login');
+                      }}
+                      className="py-2.5 px-4 rounded-lg border border-sand-300 text-espresso-800 font-sans font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2 hover:bg-sand-200 transition-colors"
+                    >
+                      {isHi ? 'साइन इन' : 'Sign In'}
+                    </button>
+                    <button
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        onOpenLogin('signup');
+                      }}
+                      className="py-2.5 px-4 rounded-lg border border-forest text-forest bg-forest/5 font-sans font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2 hover:bg-forest/10 transition-colors"
+                    >
+                      {isHi ? 'खाता बनाएं' : 'Sign Up'}
+                    </button>
+                  </div>
+                )}
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onOpenDemo();
+                  }}
+                  className="w-full py-3 px-4 rounded-lg bg-forest text-white font-sans font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2 shadow-warm-sm"
+                >
+                  {t.nav.requestAccess}
+                </button>
+              </>
             )}
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenDemo();
-              }}
-              className="w-full py-3 px-4 rounded-lg bg-forest text-white font-sans font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2 shadow-warm-sm"
-            >
-              {t.nav.requestAccess}
-            </button>
           </div>
         </div>
       )}

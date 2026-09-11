@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { LanguageProvider } from './context/LanguageContext';
+import { AuthProvider } from './context/AuthContext';
 import { Navbar } from './components/layout/Navbar';
 import { HeroSection } from './components/hero/HeroSection';
 import { MasterplanVisualizer } from './components/demo/MasterplanVisualizer';
@@ -12,21 +13,35 @@ import { DemoModal } from './components/modals/DemoModal';
 import { LoginPage } from './components/auth/LoginPage';
 
 export const AppContent: React.FC = () => {
-  const [view, setView] = useState<'landing' | 'login'>(() => {
+  const [view, setView] = useState<'landing' | 'auth'>(() => {
     if (typeof window !== 'undefined') {
-      return window.location.hash === '#login' ? 'login' : 'landing';
+      const hash = window.location.hash;
+      return (hash === '#login' || hash === '#signup') ? 'auth' : 'landing';
     }
     return 'landing';
+  });
+
+  const [authMode, setAuthMode] = useState<'login' | 'signup'>(() => {
+    if (typeof window !== 'undefined' && window.location.hash === '#signup') {
+      return 'signup';
+    }
+    return 'login';
   });
 
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
 
   useEffect(() => {
     const handleHashChange = () => {
-      if (window.location.hash === '#login') {
-        setView('login');
+      const hash = window.location.hash;
+      if (hash === '#login') {
+        setAuthMode('login');
+        setView('auth');
         window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else if (!window.location.hash || window.location.hash === '#') {
+      } else if (hash === '#signup') {
+        setAuthMode('signup');
+        setView('auth');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (!hash || hash === '#') {
         setView('landing');
       }
     };
@@ -35,15 +50,16 @@ export const AppContent: React.FC = () => {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
-  const handleOpenLogin = () => {
-    setView('login');
-    window.location.hash = 'login';
+  const handleOpenAuth = (mode: 'login' | 'signup' = 'login') => {
+    setAuthMode(mode);
+    setView('auth');
+    window.location.hash = mode;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleBackToLanding = () => {
     setView('landing');
-    if (window.location.hash === '#login') {
+    if (window.location.hash === '#login' || window.location.hash === '#signup') {
       window.history.pushState(null, '', window.location.pathname);
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -64,8 +80,8 @@ export const AppContent: React.FC = () => {
     }
   };
 
-  if (view === 'login') {
-    return <LoginPage onBack={handleBackToLanding} />;
+  if (view === 'auth') {
+    return <LoginPage onBack={handleBackToLanding} initialMode={authMode} />;
   }
 
   return (
@@ -73,7 +89,7 @@ export const AppContent: React.FC = () => {
       {/* Navigation */}
       <Navbar
         onOpenDemo={handleOpenDemo}
-        onOpenLogin={handleOpenLogin}
+        onOpenLogin={handleOpenAuth}
       />
 
       {/* Hero Section */}
@@ -109,7 +125,9 @@ export const AppContent: React.FC = () => {
 export default function App() {
   return (
     <LanguageProvider>
-      <AppContent />
+      <AuthProvider>
+        <AppContent />
+      </AuthProvider>
     </LanguageProvider>
   );
 }
