@@ -1,0 +1,75 @@
+{
+  "title": "वित्तीय",
+  "emptyOrg": "अभी तक कोई राजस्व दर्ज नहीं हुआ",
+  "tabs": {
+    "overview": "अवलोकन",
+    "payments": "भुगतान",
+    "pending": "लंबित और अतिदेय",
+    "commission": "कमीशन भुगतान"
+  },
+  "filters": {
+    "project": "प्रोजेक्ट",
+    "allProjects": "सभी प्रोजेक्ट",
+    "from": "से",
+    "to": "तक",
+    "mode": "भुगतान का तरीका",
+    "allModes": "सभी तरीके"
+  },
+  "summary": {
+    "totalRevenueAllTime": "कुल राजस्व (सभी समय)",
+    "revenueThisMonth": "इस महीने का राजस्व",
+    "revenueThisYear": "इस साल का राजस्व",
+    "pendingCollections": "लंबित वसूली",
+    "overdueInstalments": "अतिदेय किस्तें",
+    "overdueCount": "{{count}} किस्त अतिदेय",
+    "overdueCount_other": "{{count}} किस्तें अतिदेय",
+    "totalBrokerCommissionPaid": "ब्रोकर कमीशन भुगतान",
+    "scopedNote": "{{total}} में से {{scoped}} प्रोजेक्ट दिखाए जा रहे हैं"
+  },
+  "revenueTrend": {
+    "title": "राजस्व रुझान (12 महीने)"
+  },
+  "modeBreakdown": {
+    "title": "नकद बनाम डिजिटल",
+    "empty": "इस अवधि में अभी तक कोई भुगतान नहीं"
+  },
+  "payments": {
+    "empty": "अभी तक कोई भुगतान दर्ज नहीं हुआ",
+    "reversal": "रिवर्सल",
+    "bounced": "बाउंस हुआ",
+    "columns": {
+      "date": "तारीख",
+      "project": "प्रोजेक्ट",
+      "plotNumber": "प्लॉट नंबर",
+      "buyerName": "खरीदार का नाम",
+      "instalmentNo": "किस्त #",
+      "amount": "राशि",
+      "mode": "माध्यम",
+      "reference": "संदर्भ",
+      "recordedBy": "दर्ज किया गया"
+    }
+  },
+  "pending": {
+    "title": "लंबित",
+    "overdueTitle": "अतिदेय",
+    "generateDemandLetters": "मांग पत्र बनाएं",
+    "empty": "कुछ भी लंबित नहीं — बढ़िया काम",
+    "overdueEmpty": "कोई अतिदेय किस्त नहीं",
+    "recordPayment": "भुगतान दर्ज करें",
+    "sendReminder": "रिमाइंडर भेजें",
+    "reminderDisabled": "रिमाइंडर बंद",
+    "columns": {
+      "buyer": "खरीदार",
+      "project": "प्रोजेक्ट",
+      "plot": "प्लॉट",
+      "amountDue": "देय राशि",
+      "dueDate": "देय तारीख",
+      "daysOverdue": "अतिदेय दिन",
+      "status": "स्थिति",
+      "actions": "कार्रवाई"
+    }
+  },
+  "commission": {
+    "notBuilt": "ब्रोकर कमीशन ट्रैकिंग अभी उपलब्ध नहीं है"
+  }
+}

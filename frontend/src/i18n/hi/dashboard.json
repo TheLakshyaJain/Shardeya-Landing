@@ -1,0 +1,29 @@
+{
+  "title": "डैशबोर्ड",
+  "updatedJustNow": "अभी अपडेट किया गया",
+  "updatedMinutesAgo": "{{count}} मिनट पहले अपडेट किया गया",
+  "updatedMinutesAgo_other": "{{count}} मिनट पहले अपडेट किया गया",
+  "scopedNote": "{{total}} में से {{scoped}} प्रोजेक्ट दिखाए जा रहे हैं",
+  "cards": {
+    "totalProjects": "कुल प्रोजेक्ट",
+    "totalPlots": "कुल प्लॉट",
+    "availablePlots": "उपलब्ध प्लॉट",
+    "soldPlots": "बिके प्लॉट",
+    "reservedPlots": "आरक्षित प्लॉट",
+    "activeLeads": "सक्रिय लीड",
+    "followUpsToday": "आज के फॉलो-अप",
+    "instalmentsDueMonth": "इस महीने देय किस्तें",
+    "totalRevenue": "कुल राजस्व",
+    "dealsClosedMonth": "इस महीने बंद डील"
+  },
+  "alerts": {
+    "OVERDUE_INSTALMENTS": "{{count}} किस्तें अतिदेय — {{amount}}"
+  },
+  "onboarding": {
+    "title": "Shardeya में आपका स्वागत है",
+    "subtitle": "तीन चरणों में शुरू करें",
+    "step1": "अपना पहला प्रोजेक्ट बनाएं",
+    "step2": "अपने प्रोजेक्ट में प्लॉट जोड़ें",
+    "step3": "अपनी पहली लीड जोड़ें"
+  }
+}

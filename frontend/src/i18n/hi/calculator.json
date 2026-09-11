@@ -1,0 +1,73 @@
+{
+  "pageTitle": "कैलकुलेटर",
+  "tabs": {
+    "plotSize": "प्लॉट का आकार",
+    "brokerage": "दलाली",
+    "stampDuty": "स्टांप ड्यूटी"
+  },
+  "plotSize": {
+    "length": "लंबाई",
+    "width": "चौड़ाई",
+    "unit": "इकाई",
+    "calculate": "गणना करें",
+    "results": {
+      "sqft": "वर्ग फुट",
+      "sqm": "वर्ग मीटर",
+      "sqyd": "वर्ग गज",
+      "bigha": "बीघा",
+      "gunta": "गुंटा",
+      "dismil": "डिसमिल"
+    }
+  },
+  "brokerage": {
+    "dealValue": "सौदा राशि",
+    "brokeragePct": "दलाली %",
+    "ownerSharePct": "मालिक का हिस्सा % (वैकल्पिक)",
+    "buyerSharePct": "खरीदार का हिस्सा % (वैकल्पिक)",
+    "calculate": "गणना करें",
+    "results": {
+      "total": "कुल दलाली",
+      "ownerShare": "मालिक का हिस्सा",
+      "buyerShare": "खरीदार का हिस्सा",
+      "gst": "GST (18%)",
+      "netPlusGst": "GST सहित कुल"
+    },
+    "mismatchNote": "मालिक + खरीदार का हिस्सा दलाली % से मेल नहीं खाता। यह ठीक है — वास्तविक सौदों में अक्सर प्रत्येक पक्ष से अलग-अलग शुल्क लिया जाता है।"
+  },
+  "stampDuty": {
+    "state": "राज्य",
+    "propertyType": "संपत्ति प्रकार",
+    "transactionType": "लेनदेन प्रकार",
+    "value": "संपत्ति मूल्य",
+    "buyerGender": "खरीदार",
+    "calculate": "गणना करें",
+    "propertyTypes": {
+      "RESIDENTIAL": "आवासीय",
+      "COMMERCIAL": "व्यावसायिक",
+      "AGRICULTURAL": "कृषि"
+    },
+    "transactionTypes": {
+      "SALE": "बिक्री",
+      "GIFT": "उपहार",
+      "MORTGAGE": "बंधक"
+    },
+    "genders": {
+      "MALE": "पुरुष",
+      "FEMALE": "महिला",
+      "JOINT": "संयुक्त",
+      "ANY": "लागू नहीं"
+    },
+    "results": {
+      "stampDuty": "स्टांप ड्यूटी",
+      "registrationCharges": "पंजीकरण शुल्क",
+      "totalGovernmentCharges": "कुल सरकारी शुल्क"
+    },
+    "disclaimer": "दरें सांकेतिक हैं, {{date}} से प्रभावी। कृपया इस आंकड़े पर भरोसा करने से पहले अपने स्थानीय सब-रजिस्ट्रार से पुष्टि करें।",
+    "notFound": "इस राज्य की दरें अपडेट की जा रही हैं। कृपया अपने स्थानीय सब-रजिस्ट्रार से जांच करें।"
+  },
+  "share": {
+    "copy": "कॉपी करें",
+    "copied": "कॉपी हो गया!",
+    "whatsapp": "WhatsApp पर साझा करें"
+  }
+}

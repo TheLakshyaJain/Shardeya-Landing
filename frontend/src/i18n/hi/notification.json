@@ -1,0 +1,25 @@
+{
+  "bell": {
+    "label": "सूचनाएं",
+    "title": "सूचनाएं",
+    "markAllRead": "सभी पढ़ी हुई चिह्नित करें",
+    "empty": "अभी तक कोई सूचना नहीं"
+  },
+  "plotSold": "प्लॉट {{plotNumber}} {{buyerName}} को बेचा गया",
+  "saleCancelled": "प्लॉट {{plotNumber}} की बिक्री रद्द कर दी गई",
+  "paymentRecorded": "{{amount}} का भुगतान दर्ज किया गया (रसीद {{receiptNo}})",
+  "chequeBounced": "चेक {{receiptNo}} बाउंस हो गया",
+  "instalmentOverdue": "किस्त \"{{label}}\" अब अतिदेय है",
+  "instalmentDueToday": "प्लॉट {{plotNumber}} की ₹{{amount}} की किस्त आज देय है",
+  "commissionDue": "{{brokerName}} को प्लॉट {{plotNumber}} के लिए ₹{{amount}} कमीशन देय है",
+  "leadCreated": "नई लीड जोड़ी गई: {{name}}",
+  "leadAssigned": "आपको लीड सौंपी गई: {{name}}",
+  "followupDue": "आज फॉलो-अप देय है: {{name}}",
+  "leadPlotSold": "{{name}} की रुचि वाला प्लॉट किसी और को बेच दिया गया",
+  "dealClosed": "डील बंद हुई: {{name}}",
+  "staffAdded": "{{name}} को {{role}} के रूप में जोड़ा गया",
+  "roleChanged": "आपकी भूमिका बदलकर {{role}} कर दी गई",
+  "staffDeactivated": "एक टीम सदस्य को निष्क्रिय किया गया",
+  "inviteAccepted": "{{name}} ने अपना आमंत्रण स्वीकार किया",
+  "brokerCommissionPaid": "{{name}} के लिए {{amount}} का कमीशन भुगतान दर्ज किया गया"
+}

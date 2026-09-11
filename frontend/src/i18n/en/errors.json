@@ -1,0 +1,418 @@
+{
+  "generic": "Something went wrong. Please try again.",
+  "internal": "Something went wrong. Please try again.",
+  "notFound": "We couldn't find what you were looking for.",
+  "name": {
+    "required": "Please enter your full name.",
+    "invalid": "Enter a valid name (letters, spaces, and . ' - only)."
+  },
+  "mobile": {
+    "length": "Enter a valid 10-digit mobile number."
+  },
+  "email": {
+    "invalid": "Enter a valid email address."
+  },
+  "password": {
+    "weak": "Password must be at least 8 characters, with a letter and a number.",
+    "mismatch": "Passwords don't match.",
+    "sameAsOld": "New password must be different from your current password."
+  },
+  "role": {
+    "required": "Please choose whether you're a builder or a broker.",
+    "notFound": "That role could not be found."
+  },
+  "city": {
+    "required": "Please enter your city."
+  },
+  "terms": {
+    "required": "Please accept the Terms of Service to continue."
+  },
+  "otp": {
+    "invalid": "That code isn't right. Please check and try again.",
+    "expired": "This code has expired. Request a new one.",
+    "maxAttempts": "Too many incorrect attempts. Please request a new code.",
+    "rateLimitedIp": "Too many attempts from this device. Please try again later.",
+    "rateLimitedRecipient": "Too many codes requested. Please try again later.",
+    "resendTooSoon": "Please wait a little before requesting another code."
+  },
+  "whatsappOptin": {
+    "noMobile": "Add a mobile number to your profile before enabling WhatsApp reminders."
+  },
+  "notification": {
+    "unknownTypeCode": "That notification type isn't recognised. Please refresh the page and try again."
+  },
+  "auth": {
+    "identifierRequired": "Enter your mobile number or email.",
+    "passwordRequired": "Enter your password.",
+    "invalidCredentials": "That mobile/email or password isn't right.",
+    "accountLocked": "Your account is temporarily locked after too many failed attempts. Please try again later or reset your password.",
+    "refreshInvalid": "Your session is no longer valid. Please log in again.",
+    "refreshExpired": "Your session has expired. Please log in again.",
+    "refreshReused": "We detected unusual activity on your session. Please log in again.",
+    "mobileRegistered": "An account with this mobile number already exists.",
+    "emailRegistered": "An account with this email already exists.",
+    "resetTokenInvalid": "This reset link or code is invalid or has expired.",
+    "inviteTokenInvalid": "This invite link is invalid or has expired.",
+    "currentPasswordRequired": "Enter your current password.",
+    "currentPasswordInvalid": "Your current password isn't right.",
+    "missingToken": "Please log in to continue.",
+    "tokenInvalid": "Your session is no longer valid. Please log in again.",
+    "tokenExpired": "Your session has expired. Please log in again.",
+    "notFound": "We couldn't find that account.",
+    "otpNoEmailOnFile": "This account doesn't have an email on file, so we can't send a code. Please log in with your password instead."
+  },
+  "language": {
+    "invalid": "Please choose a supported language."
+  },
+  "permission": {
+    "denied": "You don't have permission to do that."
+  },
+  "project": {
+    "nameRequired": "Please enter a project name.",
+    "nameInvalid": "Project name must be 2-150 characters.",
+    "nameTaken": "You already have a project with this name.",
+    "typeRequired": "Please choose a project type.",
+    "addressRequired": "Please enter the project address.",
+    "addressInvalid": "Address must be 5-500 characters.",
+    "localityRequired": "Please enter the locality.",
+    "localityInvalid": "Locality must be 2-150 characters.",
+    "cityRequired": "Please enter the city.",
+    "cityInvalid": "City must be 2-100 characters.",
+    "stateRequired": "Please choose a state.",
+    "stateInvalid": "Enter a valid 2-letter state code.",
+    "pincodeInvalid": "Enter a valid 6-digit PIN code.",
+    "mapsUrlInvalid": "Enter a valid Google Maps link (starting with https://).",
+    "areaRequired": "Please enter the total area.",
+    "areaInvalid": "Enter a valid area.",
+    "areaUnitRequired": "Please choose an area unit.",
+    "plotCountRequired": "Please enter the number of plots.",
+    "plotCountInvalid": "Enter a plot count between 1 and 100,000.",
+    "descriptionInvalid": "Description can be at most 5,000 characters.",
+    "approvalsInvalid": "One or more approval entries are invalid.",
+    "reraInvalid": "RERA number can be at most 60 characters.",
+    "statusRequired": "Please choose a status.",
+    "mediaRoleRequired": "Please choose what this photo/document is for.",
+    "quotaExceeded": "You've reached your plan's project limit ({{used}}/{{limit}}). Upgrade to add more."
+  },
+  "grid": {
+    "dimensionsRequired": "Please enter the grid rows and columns.",
+    "dimensionsInvalid": "Rows and columns must be between 1 and 500."
+  },
+  "plot": {
+    "numberRequired": "Please enter a plot number.",
+    "numberInvalid": "Plot number must be 1-30 characters.",
+    "numberTaken": "This plot number is already used in this project.",
+    "sizeRequired": "Please enter the plot size.",
+    "sizeInvalid": "Enter a valid plot size.",
+    "sizeUnitRequired": "Please choose a size unit.",
+    "facingInvalid": "Please choose a valid facing.",
+    "priceRequired": "Please enter the price.",
+    "priceInvalid": "Enter a valid price.",
+    "remarksInvalid": "Remarks can be at most 2,000 characters.",
+    "positionRequired": "Please choose a position on the grid.",
+    "positionInvalid": "Enter a valid row/column.",
+    "positionOutOfBounds": "That position is outside the grid.",
+    "cellOccupied": "That grid cell is already taken by another plot.",
+    "soldNotDirect": "A plot can only be marked Sold by recording a sale.",
+    "editBlockedSold": "This plot has been sold and can no longer be edited.",
+    "reservedForRequired": "Please enter who this plot is reserved for.",
+    "statusRequired": "Please choose a status.",
+    "statusInvalid": "Please choose a valid status.",
+    "quotaExceeded": "You've reached your plan's plot limit for this project ({{used}}/{{limit}}). Upgrade to add more.",
+    "declaredCountExceeded": "This project's declared plot count ({{declared}}) has been reached ({{current}} already added). Edit the project to increase the number of plots.",
+    "quickCreate": {
+      "rangesRequired": "Add at least one range.",
+      "sharedPropertiesRequired": "Please fill in the shared plot details.",
+      "prefixTooLong": "Prefix can be at most 10 characters.",
+      "startRequired": "Please enter a starting number.",
+      "startInvalid": "Starting number must be 1 or more.",
+      "endRequired": "Please enter an ending number.",
+      "endBeforeStart": "Ending number must be the same as or after the starting number.",
+      "padWidthInvalid": "Zero-padding must be between 0 and 6 digits.",
+      "tooMany": "That's too many plots for one submission (max 5,000). Split it into smaller ranges."
+    }
+  },
+  "media": {
+    "filenameRequired": "A filename is required.",
+    "mimeTypeRequired": "A file type is required.",
+    "sizeInvalid": "Enter a valid file size.",
+    "purposeRequired": "A purpose is required for this upload.",
+    "idRequired": "Please choose a file first.",
+    "tooLarge": "This file is too large (max 10 MB).",
+    "unrecognizedType": "This file type isn't supported.",
+    "processingFailed": "We couldn't process this file. Please try a different one.",
+    "sensitiveRequiresAuditedEndpoint": "This file can only be viewed through the audited reveal action.",
+    "notSensitive": "This file isn't a sensitive document."
+  },
+  "import": {
+    "mediaRequired": "Please upload a filled-in template first.",
+    "tooManyRows": "This file has too many rows to import at once.",
+    "duplicateInFile": "This plot number appears more than once in the file.",
+    "emptyFile": "This file doesn't have any rows to import.",
+    "unreadableFile": "We couldn't read this file. Please use the provided template.",
+    "hasInvalidRows": "Fix the rows with errors before committing, or choose to skip them.",
+    "bulkUploadRequiresUpgrade": "Importing from Excel needs a Pro or Premium plan. Try Quick Create instead — it's available on every plan."
+  },
+  "area": {
+    "unitNotFound": "That measurement unit isn't available."
+  },
+  "calc": {
+    "dimensionRequired": "Please enter both length and width.",
+    "dimensionInvalid": "Enter valid length and width values.",
+    "dealValueRequired": "Please enter the deal value.",
+    "dealValueInvalid": "Enter a valid deal value.",
+    "brokeragePctRequired": "Please enter the brokerage percentage.",
+    "brokeragePctInvalid": "Brokerage percentage must be between 0 and 100.",
+    "sharePctInvalid": "Share percentage must be between 0 and 100.",
+    "stateCodeRequired": "Please choose a state.",
+    "stateCodeInvalid": "Enter a valid 2-letter state code.",
+    "propertyTypeRequired": "Please choose a property type.",
+    "transactionTypeRequired": "Please choose a transaction type.",
+    "valueRequired": "Please enter the property value.",
+    "valueInvalid": "Enter a valid property value.",
+    "buyerGenderRequired": "Please choose the buyer's gender.",
+    "stampDutyRateNotFound": "Rates for this state are being updated. Please check with your local sub-registrar."
+  },
+  "sale": {
+    "buyerNameRequired": "Please enter the buyer's name.",
+    "buyerNameInvalid": "Buyer name must be 2-120 characters.",
+    "buyerMobileRequired": "Please enter the buyer's mobile number.",
+    "buyerMobileInvalid": "Enter a valid 10-digit mobile number.",
+    "purchaseDateRequired": "Please choose the purchase date.",
+    "purchaseDateInvalid": "Purchase date must be between 10 years ago and today.",
+    "dealValueRequired": "Please enter the deal value.",
+    "dealValueInvalid": "Enter a valid deal value.",
+    "paymentTypeRequired": "Please choose a payment type.",
+    "scheduleRequired": "Please add at least one instalment.",
+    "scheduleExceedsDealValue": "The instalment schedule adds up to more than the deal value.",
+    "plotAlreadySold": "This plot already has an active sale.",
+    "notFullyPaid": "This sale isn't fully paid yet.",
+    "alreadyCancelled": "This sale is already cancelled.",
+    "cancelReasonRequired": "Please enter a reason for cancelling.",
+    "cancelReasonInvalid": "Reason must be 5-500 characters.",
+    "commissionAmountRequired": "This broker has no commission rate configured. Please enter a commission amount manually."
+  },
+  "schedule": {
+    "labelInvalid": "Label can be at most 80 characters.",
+    "amountRequired": "Please enter an amount.",
+    "amountInvalid": "Enter a valid amount.",
+    "dueDateRequired": "Please choose a due date.",
+    "waiveReasonRequired": "Please enter a reason for waiving this instalment.",
+    "waiveReasonInvalid": "Reason must be 5-500 characters.",
+    "hasAllocations": "This instalment already has payments allocated — reverse the payment first.",
+    "waiveAdminOnly": "Only the org Admin can waive an instalment."
+  },
+  "payment": {
+    "amountRequired": "Please enter an amount.",
+    "paidOnRequired": "Please choose the payment date.",
+    "modeRequired": "Please choose a payment mode.",
+    "referenceInvalid": "Reference must be 2-120 characters.",
+    "referenceRequired": "Reference is required for non-cash payments.",
+    "paidOnInFuture": "Payment date cannot be in the future.",
+    "paidOnTooEarly": "Payment date is too far before the sale date.",
+    "reverseReasonRequired": "Please enter a reason for reversing this payment.",
+    "reverseReasonInvalid": "Reason must be 5-500 characters.",
+    "chequeStatusRequired": "Please choose a cheque status.",
+    "notChequePayment": "This payment isn't a cheque payment.",
+    "alreadyReversed": "This payment has already been reversed.",
+    "cannotReverseReversal": "A reversal entry can't be reversed or have its cheque status changed.",
+    "scheduleIdRequired": "Please choose an instalment to allocate to.",
+    "allocationAmountRequired": "Please enter an allocation amount.",
+    "allocationAmountInvalid": "Enter a valid allocation amount.",
+    "allocationsExceedAmount": "Allocations add up to more than the payment amount.",
+    "scheduleNotInSale": "That instalment doesn't belong to this sale."
+  },
+  "document": {
+    "typeRequired": "Please choose a document type.",
+    "labelInvalid": "Label can be at most 120 characters.",
+    "mediaRequired": "Please upload a file first.",
+    "labelRequiredForOther": "Please enter a label for this document.",
+    "legalDocsNotEnabled": "This document type isn't available on your plan.",
+    "bulkOnlyDemandLetter": "Bulk generation is only available for demand letters.",
+    "bulkGenerationRequiresFull": "Bulk generation requires the Premium plan.",
+    "saleCancelled": "This sale was cancelled — an allotment letter can't be generated for it.",
+    "noOverdueInstalment": "This sale has no overdue instalments.",
+    "noOverdueEntitiesInBatch": "None of the selected sales have an overdue instalment.",
+    "noActiveTemplate": "No active template found for this document type and language."
+  },
+  "documentTemplate": {
+    "unknownVariable": "This template uses a variable that isn't recognised: {{variable}}",
+    "noSystemDefault": "No system default template exists for this document type and language.",
+    "systemDefaultReadOnly": "System default templates can't be edited directly — clone it first.",
+    "invalidDocType": "That document type isn't valid.",
+    "invalidLanguage": "That language isn't supported.",
+    "customTemplatesRequireFull": "Custom templates require the Premium plan."
+  },
+  "report": {
+    "exportNotPermitted": "You don't have permission to export this report.",
+    "exportNotEnabled": "Exporting isn't available on your plan.",
+    "unsupportedFormat": "That export format isn't supported for this report.",
+    "invalidFilter": "One of the filter values isn't valid."
+  },
+  "stats": {
+    "analyticsTierRequired": "This chart isn't available on your plan."
+  },
+  "team": {
+    "fullNameRequired": "Enter the team member's full name.",
+    "fullNameInvalid": "Full name must be 2-100 characters.",
+    "mobileRequired": "Enter a 10-digit mobile number.",
+    "mobileInvalid": "Enter a valid 10-digit Indian mobile number.",
+    "roleRequired": "Choose a role.",
+    "roleInvalid": "That role isn't valid.",
+    "mobileRegistered": "This mobile number is already registered on Shardeya.",
+    "emailRegistered": "This email is already registered on Shardeya.",
+    "quotaExceeded": "You've reached your plan's team member limit. Upgrade to add more.",
+    "cannotEditOwner": "The account owner's role and access can't be changed here.",
+    "cannotDeactivateOwner": "The account owner can't be deactivated.",
+    "cannotRemoveOwner": "The account owner can't be removed.",
+    "notInactive": "This member isn't currently inactive.",
+    "notInvited": "This member's invite has already been accepted.",
+    "reassignmentRequired": "This person has assigned leads — choose who should take them over, or leave them unassigned.",
+    "reassigneeInvalid": "Choose an active team member to reassign to.",
+    "emailRequiredForReset": "This team member has no email on file — add one before sending a reset link."
+  },
+  "customer": {
+    "fullNameRequired": "Enter the lead's full name.",
+    "fullNameInvalid": "Full name must be 2-120 characters.",
+    "mobileRequired": "Enter a 10-digit mobile number.",
+    "mobileInvalid": "Enter a valid 10-digit Indian mobile number.",
+    "budgetRequired": "Enter a budget.",
+    "budgetInvalid": "Enter a valid budget amount.",
+    "budgetRangeInvalid": "Maximum budget must be at least the minimum.",
+    "sourceRequired": "Choose a source.",
+    "statusRequired": "Choose a status.",
+    "assigneeRequired": "Choose someone to assign this lead to.",
+    "assigneeInvalid": "Choose an active team member who can handle leads.",
+    "bulkAssignEmpty": "Select at least one lead to assign.",
+    "duplicateMobile": "A lead with this number already exists: {{name}} ({{status}}).",
+    "plotNotFound": "That plot couldn't be found.",
+    "plotProjectMismatch": "That plot doesn't belong to the selected project.",
+    "noLeadAccess": "You don't have access to the lead pipeline."
+  },
+  "interaction": {
+    "occurredOnRequired": "Choose a date.",
+    "occurredOnFuture": "This date can't be in the future.",
+    "typeRequired": "Choose a follow-up type.",
+    "remarksRequired": "Enter what happened.",
+    "remarksInvalid": "Remarks can be at most 5,000 characters.",
+    "amendmentWindowExpired": "This entry can no longer be edited (the 15-minute window has passed).",
+    "amendmentNotOwner": "Only the person who logged this entry can edit it."
+  },
+  "calendar": {
+    "titleRequired": "Enter an event title.",
+    "titleInvalid": "Title must be 2-150 characters.",
+    "dateRequired": "Choose a date.",
+    "rescheduleReasonRequired": "Enter a reason for rescheduling.",
+    "autoEventNotEditable": "This event is generated automatically — edit the source record instead."
+  },
+  "financial": {
+    "dateRangeInvalid": "The from date must be before the to date."
+  },
+  "tracker": {
+    "rangeInvalid": "Choose a valid range.",
+    "newDateRequired": "Choose a new date.",
+    "reasonInvalid": "Reason must be 5-500 characters.",
+    "remarksRequired": "Enter remarks.",
+    "remarksInvalid": "Remarks must be 1-5000 characters.",
+    "scheduleIdsRequired": "Select at least one instalment.",
+    "bulkRemindTooMany": "You can remind at most 200 buyers at once.",
+    "reminderDisabled": "Reminders are turned off for this instalment.",
+    "reminderAlreadySentToday": "A reminder was already sent for this instalment within the last 24 hours.",
+    "buyerNotOptedIn": "This buyer hasn't consented to WhatsApp reminders. Enable it from the sale detail page first.",
+    "noLeadAccess": "You don't have access to the lead pipeline."
+  },
+  "deal": {
+    "statusInvalid": "Status must be COMPLETED or CANCELLED.",
+    "noAccess": "You don't have access to deals history."
+  },
+  "broker": {
+    "fullNameRequired": "Please enter the broker's full name.",
+    "fullNameInvalid": "Full name must be 2-120 characters.",
+    "mobileRequired": "Please enter the broker's mobile number.",
+    "mobileInvalid": "Enter a valid 10-digit mobile number.",
+    "emailInvalid": "Enter a valid email address.",
+    "cityAreaInvalid": "City/area can be at most 150 characters.",
+    "reraNumberInvalid": "RERA number can be at most 60 characters.",
+    "firmNameInvalid": "Firm name can be at most 150 characters.",
+    "commissionTypeRequired": "Please choose a commission type.",
+    "commissionPctRequired": "Please enter the commission percentage.",
+    "commissionPctInvalid": "Commission percentage must be between 0 and 20.",
+    "commissionFixedRequired": "Please enter the fixed commission amount.",
+    "commissionFixedInvalid": "Commission amount must be greater than 0 and at most 1 crore.",
+    "ifscInvalid": "Enter a valid IFSC code.",
+    "upiInvalid": "Enter a valid UPI ID.",
+    "duplicateMobile": "A broker with this mobile number already exists.",
+    "quotaExceeded": "You've reached your plan's broker limit.",
+    "outstandingBalance": "This broker has unpaid commission. Settle or write off first.",
+    "adminOnly": "Only an Admin can do this.",
+    "commissionTypeFixedRetired": "Fixed commission is no longer available for new brokers -- choose Percentage or Designation.",
+    "selfUpline": "A broker cannot be their own upline.",
+    "uplineNotFound": "The selected upline broker could not be found.",
+    "uplineNotDesignation": "The upline must be a Designation-based broker.",
+    "uplineWouldCreateCycle": "This would create a cycle -- the selected upline is already below this broker in the network.",
+    "uplineNotAllowedForPercentage": "Only Designation-based brokers can have an upline."
+  },
+  "designation": {
+    "designationIdRequired": "Please choose a designation.",
+    "reasonRequired": "Please enter a reason.",
+    "reasonInvalid": "Reason must be 5-500 characters.",
+    "adminOnly": "Only an Admin can do this."
+  },
+  "brokerTier": {
+    "nameRequired": "Please enter a tier name.",
+    "nameInvalid": "Tier name must be 2-40 characters.",
+    "nameDuplicate": "A tier with this name already exists.",
+    "minDealsRequired": "Please enter the minimum deals for this tier.",
+    "minDealsInvalid": "Minimum deals must be 0 or more.",
+    "bonusValueInvalid": "Enter a valid bonus value.",
+    "rangeOverlap": "This deal range overlaps with an existing tier.",
+    "tierIdRequired": "Please choose a tier.",
+    "reasonRequired": "Please enter a reason.",
+    "reasonInvalid": "Reason must be 5-500 characters.",
+    "adminOnly": "Only an Admin can do this."
+  },
+  "commissionConfig": {
+    "scopeRequired": "Please choose a scope.",
+    "typeRequired": "Please choose a commission type.",
+    "rateRequired": "Please enter a rate.",
+    "rateInvalid": "Enter a valid rate.",
+    "effectiveFromRequired": "Please choose an effective-from date.",
+    "dateRangeInvalid": "Effective-to date can't be before effective-from date.",
+    "scopeTargetMismatch": "The selected project/plot doesn't match this scope.",
+    "dealValueRequired": "Please enter a deal value.",
+    "dealValueInvalid": "Enter a valid deal value.",
+    "noneConfigured": "This broker has no commission rate configured for this deal.",
+    "adminOnly": "Only an Admin can do this."
+  },
+  "commissionPayment": {
+    "amountRequired": "Please enter a payment amount.",
+    "amountInvalid": "Enter a valid payment amount.",
+    "paidOnRequired": "Please choose a payment date.",
+    "paidOnInFuture": "Payment date can't be in the future.",
+    "modeRequired": "Please choose a payment mode.",
+    "exceedsBalance": "This amount is more than the balance due (₹{{balanceDue}}). Confirm to record it anyway.",
+    "ledgerEntryCancelled": "This commission entry is cancelled -- payments can't be recorded against it.",
+    "cannotReverseReversal": "A reversal can't itself be reversed.",
+    "alreadyReversed": "This payment has already been reversed.",
+    "reasonRequired": "Please enter a reason for reversing this payment.",
+    "reasonInvalid": "Reason must be 5-500 characters."
+  },
+  "brokerCommissionPayment": {
+    "amountRequired": "Please enter a payment amount.",
+    "amountInvalid": "Enter a valid payment amount.",
+    "paidOnRequired": "Please choose a payment date.",
+    "paidOnInFuture": "Payment date can't be in the future.",
+    "modeRequired": "Please choose a payment mode.",
+    "notDesignationBroker": "This action is only available for network (designation) brokers.",
+    "exceedsDue": "This amount is more than the Commission Due (₹{{due}}). A payout can never exceed what's been released by customer collection.",
+    "cannotReverseReversal": "A reversal can't itself be reversed.",
+    "alreadyReversed": "This payment has already been reversed.",
+    "reasonRequired": "Please enter a reason for reversing this payment.",
+    "reasonInvalid": "Reason must be 5-500 characters."
+  },
+  "brokerInteraction": {
+    "occurredOnRequired": "Please choose a date.",
+    "remarksRequired": "Please enter a note.",
+    "typeInvalid": "Type can be at most 20 characters."
+  }
+}

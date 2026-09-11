@@ -1,0 +1,73 @@
+{
+  "pageTitle": "Calculators",
+  "tabs": {
+    "plotSize": "Plot Size",
+    "brokerage": "Brokerage",
+    "stampDuty": "Stamp Duty"
+  },
+  "plotSize": {
+    "length": "Length",
+    "width": "Width",
+    "unit": "Unit",
+    "calculate": "Calculate",
+    "results": {
+      "sqft": "Sq Ft",
+      "sqm": "Sq M",
+      "sqyd": "Sq Yd (Gaj)",
+      "bigha": "Bigha",
+      "gunta": "Gunta",
+      "dismil": "Dismil"
+    }
+  },
+  "brokerage": {
+    "dealValue": "Deal Value",
+    "brokeragePct": "Brokerage %",
+    "ownerSharePct": "Owner Share % (optional)",
+    "buyerSharePct": "Buyer Share % (optional)",
+    "calculate": "Calculate",
+    "results": {
+      "total": "Total Brokerage",
+      "ownerShare": "Owner Share",
+      "buyerShare": "Buyer Share",
+      "gst": "GST (18%)",
+      "netPlusGst": "Total incl. GST"
+    },
+    "mismatchNote": "Owner + Buyer share doesn't add up to the brokerage %. That's fine — real deals often charge each side independently."
+  },
+  "stampDuty": {
+    "state": "State",
+    "propertyType": "Property Type",
+    "transactionType": "Transaction Type",
+    "value": "Property Value",
+    "buyerGender": "Buyer",
+    "calculate": "Calculate",
+    "propertyTypes": {
+      "RESIDENTIAL": "Residential",
+      "COMMERCIAL": "Commercial",
+      "AGRICULTURAL": "Agricultural"
+    },
+    "transactionTypes": {
+      "SALE": "Sale",
+      "GIFT": "Gift",
+      "MORTGAGE": "Mortgage"
+    },
+    "genders": {
+      "MALE": "Male",
+      "FEMALE": "Female",
+      "JOINT": "Joint",
+      "ANY": "Not Applicable"
+    },
+    "results": {
+      "stampDuty": "Stamp Duty",
+      "registrationCharges": "Registration Charges",
+      "totalGovernmentCharges": "Total Government Charges"
+    },
+    "disclaimer": "Rates are indicative, effective from {{date}}. Please confirm with your local sub-registrar before relying on this figure.",
+    "notFound": "Rates for this state are being updated. Please check with your local sub-registrar."
+  },
+  "share": {
+    "copy": "Copy",
+    "copied": "Copied!",
+    "whatsapp": "Share on WhatsApp"
+  }
+}

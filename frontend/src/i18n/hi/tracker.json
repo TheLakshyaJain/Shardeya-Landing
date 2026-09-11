@@ -1,0 +1,52 @@
+{
+  "title": "ट्रैकर",
+  "noAccess": "आपके पास ट्रैकर तक पहुंच नहीं है।",
+  "loadMore": "और लोड करें",
+  "tabs": {
+    "followUps": "फॉलो-अप",
+    "collections": "वसूली"
+  },
+  "range": {
+    "today": "आज",
+    "week": "इस सप्ताह",
+    "overdue": "अतिदेय",
+    "all": "सभी"
+  },
+  "actions": {
+    "call": "कॉल करें",
+    "whatsapp": "व्हाट्सएप"
+  },
+  "followUp": {
+    "empty": "कुछ भी देय नहीं — बढ़िया काम",
+    "logFollowUp": "फॉलो-अप लॉग करें",
+    "markDone": "पूर्ण चिह्नित करें",
+    "columns": {
+      "date": "फॉलो-अप तारीख",
+      "customer": "ग्राहक",
+      "project": "रुचि का प्रोजेक्ट",
+      "assignedTo": "किसे सौंपा गया",
+      "status": "स्थिति",
+      "lastRemark": "अंतिम टिप्पणी",
+      "actions": "कार्रवाई"
+    }
+  },
+  "collection": {
+    "empty": "कुछ भी देय नहीं — बढ़िया काम",
+    "recordPayment": "भुगतान दर्ज करें",
+    "columns": {
+      "dueDate": "देय तारीख",
+      "project": "प्रोजेक्ट",
+      "plot": "प्लॉट नंबर",
+      "buyer": "खरीदार",
+      "amountDue": "देय राशि",
+      "daysOverdue": "अतिदेय दिन",
+      "totalBalance": "कुल शेष",
+      "actions": "कार्रवाई"
+    }
+  },
+  "quickLog": {
+    "title": "फॉलो-अप लॉग करें",
+    "submit": "सहेजें",
+    "markDoneRemark": "ट्रैकर से पूर्ण चिह्नित किया गया"
+  }
+}

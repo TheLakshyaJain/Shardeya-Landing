@@ -1,0 +1,111 @@
+{
+  "list": {
+    "title": "Team",
+    "addMember": "Add Team Member",
+    "columns": {
+      "name": "Name",
+      "contact": "Mobile / Email",
+      "role": "Role",
+      "status": "Status",
+      "dateAdded": "Date Added",
+      "actions": "Actions"
+    },
+    "quota": "{{used}} of {{limit}} team members used",
+    "empty": "No team members yet"
+  },
+  "status": {
+    "INVITED": "Invited",
+    "ACTIVE": "Active",
+    "INACTIVE": "Inactive",
+    "REMOVED": "Removed"
+  },
+  "inviteStatus": {
+    "PENDING": "Invite pending",
+    "ACCEPTED": "Invite accepted",
+    "EXPIRED": "Invite expired"
+  },
+  "role": {
+    "BUILDER_ADMIN": "Admin",
+    "MANAGER": "Manager",
+    "SALES_EXECUTIVE": "Sales Executive",
+    "ACCOUNTS_STAFF": "Accounts Staff",
+    "VIEW_ONLY": "View Only"
+  },
+  "form": {
+    "createTitle": "Add Team Member",
+    "fullName": "Full Name",
+    "mobile": "Mobile Number",
+    "email": "Email (optional)",
+    "role": "Role",
+    "projectAccess": "Project Access",
+    "allProjects": "All projects",
+    "scopedProjects": "Specific projects",
+    "sendInvite": "Send invite now",
+    "submit": "Add Member",
+    "submitting": "Adding...",
+    "permissionPreview": {
+      "title": "This role can:",
+      "DATA_VIEW_ALL": "View all data",
+      "DATA_VIEW_OWN": "View own leads only",
+      "DATA_CREATE": "Create leads",
+      "DATA_EDIT_ALL": "Edit all data",
+      "DATA_EDIT_OWN": "Edit own leads only",
+      "DATA_DELETE": "Delete data",
+      "FINANCIAL_VIEW": "View financials",
+      "FINANCIAL_RECORD_PAYMENT": "Record payments",
+      "FINANCIAL_EDIT": "Edit/reverse payments",
+      "TEAM_VIEW": "View team roster",
+      "TEAM_MANAGE": "Manage team",
+      "LEAD_ASSIGN": "Assign leads",
+      "PROJECT_CREATE": "Create projects",
+      "PROJECT_EDIT": "Edit projects",
+      "PROJECT_DELETE": "Delete projects",
+      "PLOT_CREATE": "Create plots",
+      "PLOT_EDIT": "Edit plots",
+      "PLOT_DELETE": "Delete plots",
+      "PLOT_BULK_UPLOAD": "Bulk upload plots",
+      "BROKER_VIEW": "View brokers",
+      "BROKER_MANAGE": "Manage brokers",
+      "BROKER_COMMISSION_PAY": "Pay broker commissions",
+      "REPORT_VIEW_ALL": "View all reports",
+      "REPORT_VIEW_OWN": "View own reports only",
+      "REPORT_FINANCIAL": "View financial reports",
+      "DOCUMENT_GENERATE": "Generate documents",
+      "DOCUMENT_TEMPLATE_EDIT": "Edit document templates",
+      "SENSITIVE_VIEW": "View sensitive documents",
+      "EXPORT_DATA": "Export data",
+      "IMPORT_DATA": "Import data",
+      "SETTINGS_MANAGE": "Manage organization settings",
+      "SUBSCRIPTION_MANAGE": "Manage subscription",
+      "noFinancialAccess": "No financial access at all"
+    }
+  },
+  "actions": {
+    "editRole": "Edit Role",
+    "deactivate": "Deactivate",
+    "reactivate": "Reactivate",
+    "remove": "Remove",
+    "resendInvite": "Resend Invite",
+    "resetPassword": "Reset Password"
+  },
+  "deactivate": {
+    "title": "Deactivate {{name}}?",
+    "description": "This revokes their login and access immediately. Historical attribution is retained.",
+    "reason": "Reason (optional)",
+    "reassignTitle": "This person has {{count}} assigned lead(s)",
+    "reassignPrompt": "Choose who should take over these leads, or leave them unassigned.",
+    "reassignTo": "Reassign to",
+    "leaveUnassigned": "Leave unassigned",
+    "confirm": "Deactivate"
+  },
+  "acceptInvite": {
+    "title": "Set your password",
+    "description": "You've been added to a Shardeya organization. Set a password to activate your account.",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "submit": "Set Password & Continue",
+    "submitting": "Setting up...",
+    "success": "Password set. You can now log in.",
+    "goToLogin": "Go to Login"
+  }
+}

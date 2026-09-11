@@ -1,0 +1,92 @@
+{
+  "list": {
+    "title": "लीड",
+    "addLead": "लीड जोड़ें",
+    "searchPlaceholder": "नाम या मोबाइल खोजें...",
+    "empty": "अभी तक कोई लीड नहीं",
+    "columns": {
+      "name": "नाम",
+      "contact": "संपर्क",
+      "budget": "बजट",
+      "project": "प्रोजेक्ट",
+      "status": "स्थिति",
+      "assignedTo": "किसे सौंपा गया",
+      "followUp": "फॉलो-अप तारीख",
+      "source": "स्रोत",
+      "actions": "कार्रवाई"
+    },
+    "tabs": { "all": "सभी", "mine": "मेरे", "unassigned": "अनअसाइन्ड" },
+    "noLeadAccess": "आपके पास लीड पाइपलाइन तक पहुंच नहीं है।"
+  },
+  "status": {
+    "INTERESTED": "रुचि रखते हैं",
+    "SITE_VISIT_SCHEDULED": "साइट विज़िट निर्धारित",
+    "SITE_VISIT_DONE": "साइट विज़िट पूर्ण",
+    "FOLLOWING_UP": "फॉलो-अप जारी",
+    "DEAL_CLOSED": "डील बंद",
+    "LOST": "खो गया"
+  },
+  "source": {
+    "REFERRAL": "रेफरल",
+    "FACEBOOK": "फेसबुक",
+    "INSTAGRAM": "इंस्टाग्राम",
+    "WALK_IN": "वॉक-इन",
+    "COLD_CALL": "कोल्ड कॉल",
+    "WEBSITE": "वेबसाइट",
+    "BROKER": "ब्रोकर",
+    "EXHIBITION": "प्रदर्शनी",
+    "SOCIAL_MEDIA": "सोशल मीडिया",
+    "OTHER": "अन्य"
+  },
+  "form": {
+    "createTitle": "लीड जोड़ें",
+    "editTitle": "लीड संपादित करें",
+    "fullName": "पूरा नाम",
+    "mobile": "मोबाइल नंबर",
+    "email": "ईमेल",
+    "budgetMin": "न्यूनतम बजट",
+    "budgetMax": "अधिकतम बजट",
+    "source": "स्रोत",
+    "project": "रुचि का प्रोजेक्ट",
+    "plot": "रुचि का प्लॉट",
+    "followUpDate": "फॉलो-अप तारीख",
+    "siteVisitDate": "साइट विज़िट तारीख",
+    "remarks": "टिप्पणी",
+    "submit": "लीड सहेजें",
+    "submitting": "सहेजा जा रहा है...",
+    "duplicateFound": "इस नंबर से पहले से एक लीड मौजूद है: {{name}} ({{status}})",
+    "openExisting": "मौजूदा खोलें",
+    "createAnyway": "फिर भी बनाएं"
+  },
+  "detail": {
+    "important": "महत्वपूर्ण",
+    "assignTo": "असाइन करें",
+    "unassigned": "अनअसाइन्ड",
+    "interactions": "फॉलो-अप इतिहास",
+    "addInteraction": "+ फॉलो-अप लॉग करें"
+  },
+  "interaction": {
+    "type": {
+      "CALL": "कॉल", "VISIT": "विज़िट", "WHATSAPP": "व्हाट्सएप", "MEETING": "मीटिंग", "EMAIL": "ईमेल", "SMS": "एसएमएस", "NOTE": "नोट"
+    },
+    "result": {
+      "POSITIVE": "सकारात्मक", "NEUTRAL": "तटस्थ", "NEGATIVE": "नकारात्मक", "NOT_INTERESTED": "रुचि नहीं",
+      "NEXT_SCHEDULED": "अगला निर्धारित", "NO_FURTHER": "आगे फॉलो-अप नहीं"
+    },
+    "occurredOn": "तारीख",
+    "typeLabel": "प्रकार",
+    "remarks": "टिप्पणी",
+    "nextFollowUpDate": "अगली फॉलो-अप तारीख",
+    "resultLabel": "परिणाम",
+    "submit": "फॉलो-अप लॉग करें",
+    "amend": "संपादित करें",
+    "amendedNote": "संशोधित",
+    "amendWindowExpired": "इस प्रविष्टि को अब संपादित नहीं किया जा सकता (15 मिनट की समय सीमा समाप्त)"
+  },
+  "bulkAssign": {
+    "selectedCount": "{{count}} चयनित",
+    "assignTo": "असाइन करें...",
+    "apply": "चयनित असाइन करें"
+  },
+  "unassignedBanner": "{{count}} लीड अनअसाइन्ड हैं"
+}

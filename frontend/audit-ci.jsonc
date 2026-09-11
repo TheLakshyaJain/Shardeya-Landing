@@ -1,0 +1,8 @@
+{
+  // CI dependency-audit gate (00-ARCHITECTURE.md §7). GHSA-qwww-vcr4-c8h2 is a CSRF
+  // bypass in react-router's RSC/Framework mode with server Actions — we use plain
+  // client-side data-router mode only, so it does not apply. Re-check on every
+  // react-router-dom bump; remove the allowlist entry once a patched release exists.
+  "high": true,
+  "allowlist": ["GHSA-qwww-vcr4-c8h2"]
+}

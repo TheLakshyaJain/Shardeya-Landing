@@ -1,0 +1,109 @@
+{
+  "wizard": {
+    "title": "Mark Plot as Sold",
+    "steps": {
+      "buyer": "Buyer",
+      "deal": "Deal Terms",
+      "payment": "Payment Plan",
+      "broker": "Broker",
+      "review": "Review"
+    },
+    "submit": "Confirm Sale",
+    "submitting": "Creating sale..."
+  },
+  "form": {
+    "fields": {
+      "buyerName": "Buyer Name",
+      "buyerMobile": "Buyer Mobile",
+      "buyerEmail": "Buyer Email",
+      "govIdType": "ID Type",
+      "govIdNumber": "ID Number",
+      "purchaseDate": "Purchase Date",
+      "dealValue": "Deal Value",
+      "paymentType": "Payment Type"
+    },
+    "paymentType": {
+      "LUMP_SUM": "Lump Sum",
+      "INSTALMENT": "Instalment"
+    }
+  },
+  "govId": {
+    "types": {
+      "AADHAAR": "Aadhaar",
+      "PAN": "PAN",
+      "PASSPORT": "Passport",
+      "VOTER_ID": "Voter ID",
+      "DL": "Driving Licence"
+    },
+    "masked": "XXXX XXXX {{last4}}",
+    "reveal": "Reveal",
+    "hide": "Hide",
+    "viewScan": "View scan",
+    "reason": "Reason for viewing (optional)",
+    "auditedNotice": "Viewing this ID is recorded in the audit log."
+  },
+  "schedule": {
+    "addRow": "Add instalment",
+    "fullPaymentLabel": "Full Payment",
+    "total": "Schedule total",
+    "reconciliationMatch": "{{amount}} / {{dealValue}} ✓",
+    "reconciliationUnder": "{{amount}} / {{dealValue}} — {{remaining}} unscheduled",
+    "reconciliationOver": "{{amount}} / {{dealValue}} — exceeds deal value by {{excess}}"
+  },
+  "review": {
+    "title": "Review Sale",
+    "confirm": "Everything looks correct"
+  },
+  "detail": {
+    "status": "Status",
+    "dealValue": "Deal Value",
+    "totalPaid": "Total Paid",
+    "balanceDue": "Balance Due",
+    "buyer": "Buyer",
+    "purchaseDate": "Purchase Date",
+    "broker": "Broker",
+    "handledBy": "Handled By",
+    "markAsSold": "Mark as Sold",
+    "editSale": "Edit Sale Details",
+    "cancelSale": "Cancel Sale",
+    "markComplete": "Mark Complete",
+    "completeSale": "Mark Completed"
+  },
+  "cancel": {
+    "title": "Cancel Sale",
+    "reason": "Reason for cancellation",
+    "refundHandling": "Refund handling (optional note)",
+    "confirm": "Cancel Sale",
+    "consequences": {
+      "title": "This will:",
+      "plotAvailable": "Return the plot to Available",
+      "scheduleWaived": "Waive all unpaid instalments",
+      "paymentsRetained": "Keep all recorded payments as history (no refund is processed automatically)"
+    }
+  },
+  "documents": {
+    "title": "Documents",
+    "slots": {
+      "SALE_AGREEMENT": "Sale Agreement",
+      "REGISTRY_DEED": "Registry / Deed",
+      "PLOT_MAP": "Plot Map",
+      "BUYER_ID_PROOF": "Buyer ID Proof",
+      "OTHER": "Other"
+    },
+    "addOther": "Add another document",
+    "label": "Label",
+    "upload": "Upload",
+    "sensitiveNotice": "This document is stored separately and access is audited."
+  },
+  "legalDocuments": {
+    "title": "Legal Documents"
+  },
+  "whatsappOptIn": {
+    "consentCheckbox": "Buyer has agreed to receive payment reminders on WhatsApp.",
+    "detailLabel": "WhatsApp payment reminders",
+    "toggleOn": "Enable",
+    "toggleOff": "Disable",
+    "optedInHint": "The buyer has consented to WhatsApp reminders.",
+    "notOptedInHint": "The buyer hasn't consented to WhatsApp reminders yet."
+  }
+}

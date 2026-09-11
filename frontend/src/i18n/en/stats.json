@@ -1,0 +1,79 @@
+{
+  "title": "Stats & Analysis",
+  "description": "Sales, revenue, inventory, leads, and staff performance in one view.",
+  "filters": {
+    "project": "Project",
+    "allProjects": "All Projects",
+    "preset": "Date range",
+    "presetPlaceholder": "Choose a preset",
+    "presets": {
+      "THIS_MONTH": "This Month",
+      "LAST_MONTH": "Last Month",
+      "THIS_QUARTER": "This Quarter",
+      "THIS_FY": "This Financial Year",
+      "LAST_12_MONTHS": "Last 12 Months"
+    },
+    "from": "From",
+    "to": "To"
+  },
+  "kpi": {
+    "conversionRate": "Conversion Rate",
+    "avgDealValue": "Avg. Deal Value",
+    "avgDaysToClose": "Avg. Days to Close",
+    "days_one": "{{count}} day",
+    "days_other": "{{count}} days",
+    "collectionEfficiency": "Collection Efficiency",
+    "asOf": "Data as of {{time}}"
+  },
+  "empty": {
+    "noData": "No data yet for these filters.",
+    "monthlySalesHint": "Sales will appear here once a plot is sold.",
+    "plotStatusHint": "Add plots to a project to see this chart.",
+    "funnelHint": "Add leads to see the conversion funnel.",
+    "topBrokersHint": "Attribute a sale to a broker to see rankings.",
+    "overdueTrendHint": "No overdue instalments in this range — good news."
+  },
+  "charts": {
+    "monthlySales": { "title": "Monthly Sales" },
+    "monthlyRevenue": { "title": "Monthly Revenue" },
+    "plotStatus": { "title": "Plot Status", "total": "Total" },
+    "leadSource": { "title": "Leads by Source", "total": "Total" },
+    "conversionFunnel": { "title": "Conversion Funnel" },
+    "topBrokers": { "title": "Top Brokers" },
+    "revenueByProject": { "title": "Revenue by Project" },
+    "collectionVsTarget": { "title": "Collection vs Target", "actual": "Actual", "target": "Target" },
+    "overdueTrend": { "title": "Overdue Trend" },
+    "staffPerformance": {
+      "title": "Staff Performance",
+      "columns": {
+        "staff": "Staff",
+        "leadsHandled": "Leads Handled",
+        "dealsClosed": "Deals Closed",
+        "followUpsLogged": "Follow-ups Logged",
+        "paymentsRecorded": "Payments Recorded"
+      }
+    }
+  },
+  "plotStatus": {
+    "AVAILABLE": "Available",
+    "RESERVED": "Reserved",
+    "SOLD": "Sold"
+  },
+  "leadSource": {
+    "REFERRAL": "Referral",
+    "FACEBOOK": "Facebook",
+    "INSTAGRAM": "Instagram",
+    "WALK_IN": "Walk-in",
+    "COLD_CALL": "Cold Call",
+    "WEBSITE": "Website",
+    "BROKER": "Broker",
+    "EXHIBITION": "Exhibition",
+    "SOCIAL_MEDIA": "Social Media",
+    "OTHER": "Other"
+  },
+  "funnelStage": {
+    "INTERESTED": "Interested",
+    "SITE_VISIT": "Site Visit",
+    "DEAL_CLOSED": "Deal Closed"
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "summary": {
+    "title": "भुगतान सारांश",
+    "dealValue": "कुल राशि",
+    "totalPaid": "अब तक भुगतान की गई राशि",
+    "totalWaived": "माफ की गई राशि",
+    "balanceDue": "शेष राशि"
+  },
+  "schedule": {
+    "title": "किस्त अनुसूची",
+    "columns": {
+      "sequence": "#",
+      "label": "लेबल",
+      "amount": "अपेक्षित राशि",
+      "dueDate": "देय तिथि",
+      "status": "स्थिति",
+      "allocated": "आवंटित",
+      "actions": "कार्रवाई"
+    },
+    "status": {
+      "PENDING": "लंबित",
+      "PARTIALLY_PAID": "आंशिक भुगतान",
+      "PAID": "भुगतान हो गया",
+      "OVERDUE": "अतिदेय",
+      "WAIVED": "माफ किया गया"
+    },
+    "overdueDays": "{{count}} दिन अतिदेय",
+    "waive": "माफ करें",
+    "waiveReason": "माफी का कारण",
+    "addRow": "किस्त जोड़ें",
+    "delete": "हटाएं",
+    "deleteBlocked": "हटाया नहीं जा सकता — इस किस्त में पहले से भुगतान आवंटित है"
+  },
+  "addPayment": {
+    "title": "भुगतान दर्ज करें",
+    "amount": "राशि",
+    "paidOn": "भुगतान की तारीख",
+    "mode": "भुगतान का तरीका",
+    "reference": "संदर्भ (चेक नं. / UTR)",
+    "remarks": "टिप्पणी",
+    "allocationPreview": "आवंटन पूर्वावलोकन",
+    "allocationPreviewEmpty": "यह कैसे आवंटित होगा यह देखने के लिए राशि दर्ज करें",
+    "advance": "अग्रिम (अनावंटित): {{amount}}",
+    "submit": "भुगतान दर्ज करें",
+    "submitting": "दर्ज किया जा रहा है..."
+  },
+  "mode": {
+    "CASH": "नकद",
+    "CHEQUE": "चेक",
+    "BANK_TRANSFER": "बैंक ट्रांसफर",
+    "UPI": "यूपीआई",
+    "DD": "डिमांड ड्राफ्ट"
+  },
+  "history": {
+    "title": "भुगतान इतिहास",
+    "columns": {
+      "receiptNo": "रसीद नंबर",
+      "amount": "राशि",
+      "date": "तारीख",
+      "mode": "तरीका",
+      "reference": "संदर्भ",
+      "receivedBy": "प्राप्तकर्ता",
+      "remarks": "टिप्पणी",
+      "actions": "कार्रवाई"
+    },
+    "reversalOf": "{{receiptNo}} का रिवर्सल",
+    "bouncedReversalOf": "चेक {{receiptNo}} बाउंस हुआ",
+    "empty": "अभी तक कोई भुगतान दर्ज नहीं हुआ",
+    "downloadReceipt": "रसीद डाउनलोड करें"
+  },
+  "cheque": {
+    "status": {
+      "PENDING": "लंबित",
+      "CLEARED": "क्लियर हो गया",
+      "BOUNCED": "बाउंस हो गया"
+    },
+    "markCleared": "क्लियर चिह्नित करें",
+    "markBounced": "बाउंस चिह्नित करें"
+  },
+  "reverse": {
+    "title": "भुगतान रिवर्स करें",
+    "reason": "रिवर्सल का कारण",
+    "confirm": "भुगतान रिवर्स करें"
+  }
+}

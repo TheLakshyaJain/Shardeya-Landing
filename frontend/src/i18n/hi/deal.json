@@ -1,0 +1,60 @@
+{
+  "title": "डील इतिहास",
+  "empty": "अभी तक कोई पूर्ण या रद्द डील नहीं",
+  "summaryStrip": "{{count}} पूर्ण डील, मूल्य {{value}} · {{cancelled}} रद्द",
+  "status": {
+    "COMPLETED": "पूर्ण",
+    "CANCELLED": "रद्द"
+  },
+  "filters": {
+    "status": "स्थिति",
+    "allStatuses": "सभी स्थितियां",
+    "project": "प्रोजेक्ट",
+    "allProjects": "सभी प्रोजेक्ट",
+    "search": "खोजें",
+    "searchPlaceholder": "खरीदार का नाम, मोबाइल, प्लॉट..."
+  },
+  "columns": {
+    "date": "तारीख",
+    "project": "प्रोजेक्ट",
+    "plotNumber": "प्लॉट नंबर",
+    "plotSize": "प्लॉट आकार",
+    "buyer": "खरीदार",
+    "dealValue": "डील मूल्य",
+    "collected": "कुल एकत्रित",
+    "balance": "शेष",
+    "status": "स्थिति",
+    "handledBy": "संभाला गया"
+  },
+  "detail": {
+    "project": "प्रोजेक्ट",
+    "plotSize": "प्लॉट आकार",
+    "buyerMobile": "खरीदार मोबाइल",
+    "buyerEmail": "खरीदार ईमेल",
+    "handledBy": "संभाला गया",
+    "formerStaff": "पूर्व स्टाफ",
+    "dealValue": "डील मूल्य",
+    "totalCollected": "कुल एकत्रित",
+    "balance": "शेष",
+    "balanceNonZero": "पूर्णता पर गैर-शून्य",
+    "cancellationReason": "रद्दीकरण का कारण",
+    "documents": "दस्तावेज़",
+    "documentsIncomplete": "दस्तावेज़ अधूरे हैं",
+    "timeline": "समयरेखा"
+  },
+  "documentType": {
+    "SALE_AGREEMENT": "बिक्री समझौता",
+    "REGISTRY_DEED": "रजिस्ट्री विलेख",
+    "PLOT_MAP": "प्लॉट मानचित्र",
+    "BUYER_ID_PROOF": "खरीदार पहचान प्रमाण",
+    "OTHER": "अन्य"
+  },
+  "timeline": {
+    "empty": "अभी तक कोई समयरेखा घटना नहीं",
+    "booked": "बिक्री बुक की गई",
+    "payment": "भुगतान दर्ज किया गया: {{amount}}",
+    "interaction": "फॉलो-अप ({{type}})",
+    "completed": "डील पूर्ण हुई",
+    "cancelled": "डील रद्द की गई"
+  }
+}

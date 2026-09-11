@@ -1,0 +1,29 @@
+{
+  "title": "Dashboard",
+  "updatedJustNow": "Updated just now",
+  "updatedMinutesAgo": "Updated {{count}} min ago",
+  "updatedMinutesAgo_other": "Updated {{count}} min ago",
+  "scopedNote": "Showing {{scoped}} of {{total}} projects",
+  "cards": {
+    "totalProjects": "Total Projects",
+    "totalPlots": "Total Plots",
+    "availablePlots": "Available Plots",
+    "soldPlots": "Sold Plots",
+    "reservedPlots": "Reserved Plots",
+    "activeLeads": "Active Leads",
+    "followUpsToday": "Follow-ups Today",
+    "instalmentsDueMonth": "Instalments Due This Month",
+    "totalRevenue": "Total Revenue",
+    "dealsClosedMonth": "Deals Closed This Month"
+  },
+  "alerts": {
+    "OVERDUE_INSTALMENTS": "{{count}} instalments overdue — {{amount}}"
+  },
+  "onboarding": {
+    "title": "Welcome to Shardeya",
+    "subtitle": "Get started in three steps",
+    "step1": "Create your first project",
+    "step2": "Add plots to your project",
+    "step3": "Add your first lead"
+  }
+}

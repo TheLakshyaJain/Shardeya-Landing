@@ -1,0 +1,85 @@
+{
+  "summary": {
+    "title": "Payment Summary",
+    "dealValue": "Total Amount",
+    "totalPaid": "Amount Paid So Far",
+    "totalWaived": "Waived",
+    "balanceDue": "Balance Remaining"
+  },
+  "schedule": {
+    "title": "Instalment Schedule",
+    "columns": {
+      "sequence": "#",
+      "label": "Label",
+      "amount": "Expected Amount",
+      "dueDate": "Due Date",
+      "status": "Status",
+      "allocated": "Allocated",
+      "actions": "Actions"
+    },
+    "status": {
+      "PENDING": "Pending",
+      "PARTIALLY_PAID": "Partially Paid",
+      "PAID": "Paid",
+      "OVERDUE": "Overdue",
+      "WAIVED": "Waived"
+    },
+    "overdueDays": "{{count}} days overdue",
+    "waive": "Waive",
+    "waiveReason": "Reason for waiver",
+    "addRow": "Add instalment",
+    "delete": "Delete",
+    "deleteBlocked": "Cannot delete — this instalment already has payments allocated"
+  },
+  "addPayment": {
+    "title": "Record Payment",
+    "amount": "Amount",
+    "paidOn": "Paid On",
+    "mode": "Payment Mode",
+    "reference": "Reference (cheque no. / UTR)",
+    "remarks": "Remarks",
+    "allocationPreview": "Allocation preview",
+    "allocationPreviewEmpty": "Enter an amount to see how this will be allocated",
+    "advance": "Advance (unallocated): {{amount}}",
+    "submit": "Record Payment",
+    "submitting": "Recording..."
+  },
+  "mode": {
+    "CASH": "Cash",
+    "CHEQUE": "Cheque",
+    "BANK_TRANSFER": "Bank Transfer",
+    "UPI": "UPI",
+    "DD": "Demand Draft"
+  },
+  "history": {
+    "title": "Payment History",
+    "columns": {
+      "receiptNo": "Receipt No.",
+      "amount": "Amount",
+      "date": "Date",
+      "mode": "Mode",
+      "reference": "Reference",
+      "receivedBy": "Received By",
+      "remarks": "Remarks",
+      "actions": "Actions"
+    },
+    "reversalOf": "Reversal of {{receiptNo}}",
+    "bouncedReversalOf": "Cheque {{receiptNo}} bounced",
+    "empty": "No payments recorded yet",
+    "downloadReceipt": "Download receipt"
+  },
+  "cheque": {
+    "status": {
+      "PENDING": "Pending",
+      "CLEARED": "Cleared",
+      "BOUNCED": "Bounced"
+    },
+    "markCleared": "Mark Cleared",
+    "markBounced": "Mark Bounced"
+  },
+  "reverse": {
+    "title": "Reverse Payment",
+    "reason": "Reason for reversal",
+    "confirm": "Reverse Payment"
+  }
+}

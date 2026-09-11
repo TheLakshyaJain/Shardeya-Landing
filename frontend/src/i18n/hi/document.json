@@ -1,0 +1,56 @@
+{
+  "docType": {
+    "ALLOTMENT_LETTER": "आवंटन पत्र",
+    "PAYMENT_RECEIPT": "भुगतान रसीद",
+    "DEMAND_LETTER": "मांग पत्र",
+    "BOOKING_CONFIRMATION": "बुकिंग पुष्टि"
+  },
+  "templates": {
+    "title": "दस्तावेज़ टेम्पलेट",
+    "description": "लाइव डेटा से बनाए गए कानूनी दस्तावेज़ों का लेटरहेड, शब्दांकन और लेआउट संपादित करें।",
+    "systemDefault": "सिस्टम डिफ़ॉल्ट",
+    "active": "सक्रिय",
+    "cloneToEdit": "संपादन के लिए क्लोन करें",
+    "edit": "संपादित करें",
+    "back": "टेम्पलेट पर वापस जाएं",
+    "editTitle": "संपादन: {{name}}",
+    "save": "सहेजें",
+    "activate": "सक्रिय करें",
+    "fields": {
+      "name": "टेम्पलेट का नाम",
+      "header": "हेडर",
+      "body": "मुख्य भाग",
+      "footer": "फुटर"
+    },
+    "preview": {
+      "sampleEntityId": "एक वास्तविक रिकॉर्ड के विरुद्ध पूर्वावलोकन करें",
+      "sampleEntityIdHint": "पूर्वावलोकन के लिए एक सेल आईडी पेस्ट करें",
+      "run": "पूर्वावलोकन"
+    },
+    "palette": {
+      "title": "वेरिएबल",
+      "hint": "{{field}} फ़ील्ड में डालने के लिए एक वेरिएबल पर क्लिक करें।",
+      "fields": "फ़ील्ड",
+      "loopHint": "केवल दोहराई जाने वाली {{collection}} पंक्ति के अंदर"
+    }
+  },
+  "generateButton": {
+    "language": "भाषा",
+    "generating": "बनाया जा रहा है…",
+    "docType": {
+      "ALLOTMENT_LETTER": "आवंटन पत्र बनाएं",
+      "PAYMENT_RECEIPT": "रसीद बनाएं",
+      "DEMAND_LETTER": "मांग पत्र बनाएं",
+      "BOOKING_CONFIRMATION": "बुकिंग पुष्टि बनाएं"
+    }
+  },
+  "list": {
+    "empty": "अभी तक कोई दस्तावेज़ नहीं बनाया गया।"
+  },
+  "bulkGenerate": {
+    "title": "मांग पत्र बनाएं ({{count}} विलंबित)",
+    "cancel": "रद्द करें",
+    "confirm": "बनाएं ({{count}})",
+    "generating": "बनाया जा रहा है…"
+  }
+}

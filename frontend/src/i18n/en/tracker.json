@@ -1,0 +1,52 @@
+{
+  "title": "Tracker",
+  "noAccess": "You don't have access to the tracker.",
+  "loadMore": "Load more",
+  "tabs": {
+    "followUps": "Follow-ups",
+    "collections": "Collections"
+  },
+  "range": {
+    "today": "Today",
+    "week": "This Week",
+    "overdue": "Overdue",
+    "all": "All"
+  },
+  "actions": {
+    "call": "Call",
+    "whatsapp": "WhatsApp"
+  },
+  "followUp": {
+    "empty": "Nothing due — nice work",
+    "logFollowUp": "Log Follow-up",
+    "markDone": "Mark Done",
+    "columns": {
+      "date": "Follow-up Date",
+      "customer": "Customer",
+      "project": "Project Interested",
+      "assignedTo": "Assigned To",
+      "status": "Status",
+      "lastRemark": "Last Remark",
+      "actions": "Actions"
+    }
+  },
+  "collection": {
+    "empty": "Nothing due — nice work",
+    "recordPayment": "Record Payment",
+    "columns": {
+      "dueDate": "Due Date",
+      "project": "Project",
+      "plot": "Plot Number",
+      "buyer": "Buyer",
+      "amountDue": "Amount Due",
+      "daysOverdue": "Days Overdue",
+      "totalBalance": "Total Balance",
+      "actions": "Actions"
+    }
+  },
+  "quickLog": {
+    "title": "Log Follow-up",
+    "submit": "Save",
+    "markDoneRemark": "Marked done from Tracker"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "title": "Ops",
+  "subtitle": "Internal-only: recent message delivery and server errors. Not a full admin console.",
+  "tabs": {
+    "deliveries": "Message Deliveries",
+    "errors": "Errors"
+  },
+  "deliveries": {
+    "statusFilter": "Filter by status",
+    "statusAll": "All statuses",
+    "status": {
+      "QUEUED": "Queued",
+      "SENT": "Sent",
+      "DELIVERED": "Delivered",
+      "READ": "Read",
+      "FAILED": "Failed"
+    },
+    "empty": "No message deliveries yet."
+  },
+  "errors": {
+    "empty": "No server errors recorded. That's a good sign.",
+    "platformLevel": "Platform-wide"
+  }
+}

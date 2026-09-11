@@ -1,0 +1,100 @@
+{
+  "list": {
+    "title": "प्रोजेक्ट",
+    "newProject": "नया प्रोजेक्ट",
+    "searchPlaceholder": "प्रोजेक्ट खोजें...",
+    "empty": {
+      "title": "अभी तक कोई प्रोजेक्ट नहीं",
+      "description": "अपना प्लॉट ग्रिड बनाना शुरू करने के लिए अपना पहला प्रोजेक्ट बनाएं।"
+    },
+    "loadMore": "और लोड करें"
+  },
+  "status": {
+    "UPCOMING": "आगामी",
+    "ACTIVE": "सक्रिय",
+    "COMPLETED": "पूर्ण"
+  },
+  "type": {
+    "RESIDENTIAL_PLOT_COLONY": "आवासीय प्लॉट कॉलोनी",
+    "APARTMENT": "अपार्टमेंट",
+    "VILLA": "विला",
+    "COMMERCIAL": "वाणिज्यिक",
+    "MIXED_USE": "मिश्रित उपयोग"
+  },
+  "card": {
+    "plotsSold": "{{total}} में से {{sold}} प्लॉट बिके",
+    "noPlots": "अभी तक कोई प्लॉट नहीं जोड़ा गया"
+  },
+  "form": {
+    "createTitle": "नया प्रोजेक्ट",
+    "editTitle": "प्रोजेक्ट संपादित करें",
+    "stepLabel": "चरण {{current}} / {{total}}",
+    "steps": {
+      "basics": "मूल जानकारी",
+      "location": "स्थान",
+      "area": "क्षेत्रफल और प्लॉट",
+      "media": "फ़ोटो और दस्तावेज़",
+      "review": "समीक्षा"
+    },
+    "fields": {
+      "name": "प्रोजेक्ट का नाम",
+      "projectType": "प्रोजेक्ट प्रकार",
+      "status": "स्थिति",
+      "address": "पता",
+      "locality": "इलाका",
+      "city": "शहर",
+      "stateCode": "राज्य",
+      "pincode": "पिन कोड",
+      "totalArea": "कुल क्षेत्रफल",
+      "declaredPlotCount": "प्लॉट की संख्या",
+      "launchDate": "लॉन्च तिथि",
+      "expectedCompletionDate": "अपेक्षित पूर्णता तिथि",
+      "description": "विवरण",
+      "reraNumber": "RERA नंबर"
+    },
+    "placeholders": {
+      "name": "उदा. सनराइज़ मीडोज़",
+      "address": "मकान/प्लॉट नंबर, गली, क्षेत्र",
+      "locality": "उदा. वैशाली नगर",
+      "city": "उदा. जयपुर",
+      "stateCode": "राज्य चुनें",
+      "pincode": "6-अंकों का पिन कोड",
+      "description": "खरीदारों को इस प्रोजेक्ट के बारे में बताएं",
+      "reraNumber": "उदा. RJ/2024/1234"
+    },
+    "reviewTitle": "अपने प्रोजेक्ट की समीक्षा करें",
+    "reviewHint": "इस प्रोजेक्ट को बनाने से पहले नीचे दिए गए विवरण की जांच करें।",
+    "submit": "प्रोजेक्ट बनाएं",
+    "submitting": "बनाया जा रहा है...",
+    "saveChanges": "परिवर्तन सहेजें",
+    "savingChanges": "सहेजा जा रहा है...",
+    "coverPhoto": "कवर फ़ोटो",
+    "layoutPlan": "लेआउट प्लान",
+    "brochure": "ब्रोशर"
+  },
+  "detail": {
+    "editProject": "प्रोजेक्ट संपादित करें",
+    "backToProjects": "प्रोजेक्ट पर वापस जाएं",
+    "tabs": {
+      "overview": "अवलोकन",
+      "grid": "प्लॉट ग्रिड",
+      "plots": "प्लॉट सूची",
+      "documents": "दस्तावेज़"
+    },
+    "plotCounts": {
+      "total": "कुल",
+      "available": "उपलब्ध",
+      "reserved": "आरक्षित",
+      "sold": "बिका"
+    },
+    "declaredVsActual": "{{count}} घोषित प्लॉट अभी तक ग्रिड में नहीं जोड़े गए",
+    "deleteConfirmTitle": "इस प्रोजेक्ट को हटाएं?",
+    "deleteConfirmDescription": "यह प्रोजेक्ट को आपकी सूची से छुपा देगा। इसे बाद में पुनर्स्थापित किया जा सकता है।",
+    "restoreConfirm": "इस प्रोजेक्ट को पुनर्स्थापित करें?",
+    "notFound": "यह प्रोजेक्ट नहीं मिल सका।",
+    "addPlot": "प्लॉट जोड़ें",
+    "addPlots": "प्लॉट जोड़ें",
+    "gridLayout": "ग्रिड लेआउट",
+    "configureGrid": "ग्रिड कॉन्फ़िगर करें"
+  }
+}

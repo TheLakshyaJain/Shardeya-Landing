@@ -1,0 +1,311 @@
+{
+  "list": {
+    "title": "Brokers",
+    "addBroker": "Add Broker",
+    "empty": "No brokers yet",
+    "search": "Search by name or mobile",
+    "quotaReached": "You've reached your plan's broker limit.",
+    "columns": {
+      "name": "Name",
+      "mobile": "Mobile",
+      "city": "City/Area",
+      "tier": "Tier",
+      "dealsClosed": "Deals Closed",
+      "commissionPaid": "Commission Paid",
+      "commissionDue": "Commission Due",
+      "status": "Status"
+    }
+  },
+  "status": {
+    "ACTIVE": "Active",
+    "INACTIVE": "Inactive",
+    "BLOCKED": "Blocked"
+  },
+  "network": {
+    "title": "Broker Network",
+    "empty": "No designation-based brokers yet",
+    "loadError": "Could not load the network",
+    "rate": "Rate",
+    "perSqft": "/sq.ft.",
+    "personalSales": "Personal Sales",
+    "teamSales": "Team Sales"
+  },
+  "form": {
+    "createTitle": "Add Broker",
+    "editTitle": "Edit Broker",
+    "fullName": "Full Name",
+    "mobile": "Mobile Number",
+    "email": "Email",
+    "cityArea": "City/Area",
+    "reraNumber": "RERA Number",
+    "firmName": "Firm Name",
+    "commissionType": "Commission Type",
+    "commissionTypePercentage": "Percentage",
+    "commissionTypeFixed": "Fixed Amount",
+    "commissionTypeDesignation": "Designation (Network)",
+    "commissionPct": "Commission %",
+    "commissionFixed": "Commission Amount",
+    "uplineBroker": "Upline Broker",
+    "uplineNone": "None (top-level)",
+    "designationStartNote": "New broker starts at Business Executive (₹160/sq.ft.), 0 sales.",
+    "perProjectRatesEnabled": "Allow per-project rates",
+    "bankAccountName": "Bank Account Holder Name",
+    "bankAccountNumber": "Bank Account Number",
+    "ifsc": "IFSC Code",
+    "upiId": "UPI ID",
+    "notes": "Notes",
+    "submit": "Save Broker",
+    "submitting": "Saving..."
+  },
+  "detail": {
+    "tabs": {
+      "overview": "Overview",
+      "commissionConfig": "Commission Config",
+      "deals": "Deals",
+      "ledger": "Ledger",
+      "network": "Network",
+      "notes": "Notes"
+    },
+    "deactivate": "Deactivate",
+    "reactivate": "Reactivate",
+    "block": "Block",
+    "delete": "Delete",
+    "bankDetails": "Bank Details",
+    "viewBankDetails": "View Bank Details",
+    "tierProgress": "{{tierName}} — {{remaining}} more deals to reach {{nextTierName}}",
+    "tierMax": "Top tier reached"
+  },
+  "performance": {
+    "title": "Performance",
+    "totalDeals": "Total Deals",
+    "completed": "Completed",
+    "active": "Active",
+    "cancelled": "Cancelled",
+    "revenueGenerated": "Revenue Generated",
+    "commissionEarned": "Commission Earned",
+    "commissionPaid": "Commission Paid",
+    "commissionDue": "Commission Due",
+    "commissionReleased": "Commission Released",
+    "conversionRate": "Conversion Rate"
+  },
+  "deals": {
+    "empty": "No deals attributed to this broker yet",
+    "columns": {
+      "project": "Project",
+      "plot": "Plot",
+      "buyer": "Buyer",
+      "date": "Date",
+      "dealValue": "Deal Value",
+      "status": "Status",
+      "commission": "Commission"
+    }
+  },
+  "commissionConfig": {
+    "title": "Commission Configuration",
+    "addConfig": "Add Rate",
+    "empty": "No commission rates configured — using the broker's default rate",
+    "scope": "Scope",
+    "scopeGlobal": "Global (all projects)",
+    "scopeProject": "Per Project",
+    "scopePlot": "Per Plot",
+    "project": "Project",
+    "plot": "Plot",
+    "commissionType": "Type",
+    "rateValue": "Rate",
+    "effectiveFrom": "Effective From",
+    "effectiveTo": "Effective To (optional)",
+    "submit": "Save Rate",
+    "columns": {
+      "scope": "Scope",
+      "target": "Target",
+      "type": "Type",
+      "rate": "Rate",
+      "effectiveFrom": "Effective From",
+      "actions": "Actions"
+    },
+    "preview": {
+      "title": "Commission Preview",
+      "dealValue": "Deal Value",
+      "calculate": "Calculate",
+      "base": "Base Commission",
+      "tierBonus": "Tier Bonus ({{tierName}})",
+      "total": "Total Commission",
+      "appliedScope": "Applied rule: {{scope}}",
+      "usedDefault": "Using the broker's own default rate",
+      "noneConfigured": "This broker has no commission rate configured for this deal."
+    }
+  },
+  "tier": {
+    "pageTitle": "Broker Tiers",
+    "addTier": "Add Tier",
+    "editTitle": "Edit Tier",
+    "createTitle": "Add Tier",
+    "name": "Name",
+    "nameHi": "Name (Hindi)",
+    "minDeals": "Minimum Deals",
+    "maxDeals": "Maximum Deals (leave blank for unlimited)",
+    "bonusType": "Bonus Type",
+    "bonusTypePct": "Percentage of Commission",
+    "bonusTypeFixed": "Fixed Amount",
+    "bonusTypeNone": "No Bonus",
+    "bonusValue": "Bonus Value",
+    "perksDescription": "Perks Description",
+    "submit": "Save Tier",
+    "delete": "Delete",
+    "override": "Manually Override Tier",
+    "overrideTier": "New Tier",
+    "overrideReason": "Reason",
+    "recalculate": "Recalculate All Brokers",
+    "columns": {
+      "name": "Name",
+      "dealsRange": "Deals Range",
+      "bonus": "Bonus",
+      "actions": "Actions"
+    }
+  },
+  "commissionTree": {
+    "empty": "No commission tree entries yet",
+    "level": "level {{level}}",
+    "needsRecovery": "Recover {{amount}} — this booking was cancelled after commission was released",
+    "columns": {
+      "date": "Date",
+      "project": "Project",
+      "plot": "Plot",
+      "buyer": "Buyer",
+      "type": "Type",
+      "total": "Total",
+      "released": "Released",
+      "due": "Due",
+      "status": "Status"
+    },
+    "type": {
+      "SELLING_BROKER": "Selling Broker",
+      "UPLINE_DIFFERENTIAL": "Upline Differential",
+      "NETWORK_SAME_SLAB_BONUS": "Same-Slab Bonus"
+    },
+    "status": {
+      "PENDING": "Pending",
+      "PARTIALLY_RELEASED": "Partially Released",
+      "FULLY_RELEASED": "Fully Released",
+      "CANCELLED": "Cancelled"
+    }
+  },
+  "ledger": {
+    "title": "Commission Ledger",
+    "orgWideTitle": "Commission Ledger (All Brokers)",
+    "empty": "No commission ledger entries yet",
+    "recordPayment": "Record Payment",
+    "reverse": "Reverse",
+    "needsRecovery": "Recover ₹{{amount}} from {{brokerName}}",
+    "columns": {
+      "dealDate": "Deal Date",
+      "broker": "Broker",
+      "project": "Project",
+      "plot": "Plot",
+      "buyer": "Buyer",
+      "dealValue": "Deal Value",
+      "commission": "Commission Earned",
+      "status": "Status",
+      "amountPaid": "Amount Paid",
+      "balanceDue": "Balance Due",
+      "actions": "Actions"
+    },
+    "status": {
+      "PENDING": "Pending",
+      "PARTIALLY_PAID": "Partially Paid",
+      "PAID": "Paid",
+      "CANCELLED": "Cancelled"
+    }
+  },
+  "payment": {
+    "recordTitle": "Record Commission Payment",
+    "amount": "Amount",
+    "paidOn": "Paid On",
+    "mode": "Payment Mode",
+    "reference": "Reference",
+    "remarks": "Remarks",
+    "submit": "Record Payment",
+    "submitting": "Recording...",
+    "confirmOverpayment": "This amount exceeds the balance due. Record anyway.",
+    "reverseTitle": "Reverse Payment",
+    "reverseReason": "Reason",
+    "reverseSubmit": "Reverse Payment"
+  },
+  "brokerPayment": {
+    "recordButton": "Record Payment",
+    "recordTitle": "Record Commission Payment",
+    "due": "Commission Due",
+    "exceedsDue": "This amount is more than the Commission Due (₹{{due}}). A payout can never exceed what's been released by customer collection.",
+    "historyTitle": "Payment History",
+    "historyEmpty": "No commission payments recorded yet",
+    "reversed": "Reversed"
+  },
+  "notes": {
+    "title": "Notes & Follow-ups",
+    "addNote": "Add Note",
+    "empty": "No notes yet",
+    "occurredOn": "Date",
+    "type": "Type",
+    "remarks": "Note",
+    "nextFollowUpDate": "Next Follow-up Date (optional)",
+    "submit": "Save Note"
+  },
+  "saleWizard": {
+    "notInSystem": "No brokers registered yet. Add one from the Brokers page first.",
+    "selectBroker": "Select Broker",
+    "noBroker": "No Broker",
+    "commissionPreview": "Estimated commission: {{amount}}",
+    "manualCommissionRequired": "This broker has no commission rate configured — enter an amount manually",
+    "manualCommissionAmount": "Commission Amount"
+  },
+  "designation": {
+    "changeDesignation": "Change Designation",
+    "clearOverride": "Clear Override",
+    "overriddenBadge": "Manually Overridden",
+    "overriddenNote": "This broker's designation is manually set and will not change automatically until the override is cleared.",
+    "overrideDialog": {
+      "title": "Change Designation",
+      "designation": "New Designation",
+      "reason": "Reason",
+      "reasonPlaceholder": "Why is this being changed manually?",
+      "submit": "Save"
+    },
+    "nextDesignation": "{{remaining}} more team sale(s) to {{designationName}} (₹{{rate}}/sq.ft.)",
+    "atTopDesignation": "Top designation reached",
+    "upline": "Upline",
+    "noUpline": "No upline (top of the network)",
+    "directDownline": "Direct Downline",
+    "totalDownline": "Total Downline",
+    "downlineTree": "Downline Tree",
+    "noDownline": "No downline yet",
+    "history": {
+      "title": "Promotion History",
+      "empty": "No designation changes yet",
+      "changeType": {
+        "AUTOMATIC": "Automatic",
+        "MANUAL": "Manual",
+        "CANCELLATION_REVERSAL": "Cancellation Reversal"
+      },
+      "changedFromTo": "{{from}} → {{to}} (₹{{rate}}/sq.ft.)",
+      "firstDesignation": "Assigned {{to}} (₹{{rate}}/sq.ft.)",
+      "by": "by {{name}}"
+    },
+    "summary": {
+      "personalEarned": "Personal Commission Earned",
+      "teamEarned": "Team Commission Earned",
+      "released": "Released",
+      "pending": "Pending",
+      "breakdown": "By Type",
+      "sellingBroker": "Selling Broker",
+      "uplineDifferential": "Upline Differential",
+      "sameSlabBonus": "Same-Slab Bonus"
+    },
+    "networkSummary": {
+      "title": "Network Commission Summary",
+      "totalBrokers": "Designation Brokers",
+      "totalEarned": "Total Earned",
+      "totalReleased": "Total Released",
+      "totalPending": "Total Pending"
+    }
+  }
+}

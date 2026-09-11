@@ -1,0 +1,79 @@
+{
+  "title": "आँकड़े और विश्लेषण",
+  "description": "बिक्री, राजस्व, इन्वेंटरी, लीड और स्टाफ प्रदर्शन एक ही जगह पर।",
+  "filters": {
+    "project": "प्रोजेक्ट",
+    "allProjects": "सभी प्रोजेक्ट",
+    "preset": "तारीख सीमा",
+    "presetPlaceholder": "एक प्रीसेट चुनें",
+    "presets": {
+      "THIS_MONTH": "इस महीने",
+      "LAST_MONTH": "पिछले महीने",
+      "THIS_QUARTER": "इस तिमाही",
+      "THIS_FY": "इस वित्तीय वर्ष",
+      "LAST_12_MONTHS": "पिछले 12 महीने"
+    },
+    "from": "से",
+    "to": "तक"
+  },
+  "kpi": {
+    "conversionRate": "रूपांतरण दर",
+    "avgDealValue": "औसत सौदा राशि",
+    "avgDaysToClose": "बंद होने में औसत दिन",
+    "days_one": "{{count}} दिन",
+    "days_other": "{{count}} दिन",
+    "collectionEfficiency": "वसूली दक्षता",
+    "asOf": "डेटा {{time}} तक का"
+  },
+  "empty": {
+    "noData": "इन फ़िल्टर के लिए अभी कोई डेटा नहीं है।",
+    "monthlySalesHint": "प्लॉट बिकने पर बिक्री यहाँ दिखाई देगी।",
+    "plotStatusHint": "यह चार्ट देखने के लिए प्रोजेक्ट में प्लॉट जोड़ें।",
+    "funnelHint": "रूपांतरण फ़नल देखने के लिए लीड जोड़ें।",
+    "topBrokersHint": "रैंकिंग देखने के लिए किसी बिक्री को ब्रोकर से जोड़ें।",
+    "overdueTrendHint": "इस सीमा में कोई विलंबित किस्त नहीं — अच्छी खबर।"
+  },
+  "charts": {
+    "monthlySales": { "title": "मासिक बिक्री" },
+    "monthlyRevenue": { "title": "मासिक राजस्व" },
+    "plotStatus": { "title": "प्लॉट स्थिति", "total": "कुल" },
+    "leadSource": { "title": "स्रोत अनुसार लीड", "total": "कुल" },
+    "conversionFunnel": { "title": "रूपांतरण फ़नल" },
+    "topBrokers": { "title": "शीर्ष ब्रोकर" },
+    "revenueByProject": { "title": "प्रोजेक्ट अनुसार राजस्व" },
+    "collectionVsTarget": { "title": "वसूली बनाम लक्ष्य", "actual": "वास्तविक", "target": "लक्ष्य" },
+    "overdueTrend": { "title": "विलंब रुझान" },
+    "staffPerformance": {
+      "title": "स्टाफ प्रदर्शन",
+      "columns": {
+        "staff": "स्टाफ",
+        "leadsHandled": "संभाली गई लीड",
+        "dealsClosed": "बंद किए गए सौदे",
+        "followUpsLogged": "दर्ज फॉलो-अप",
+        "paymentsRecorded": "दर्ज भुगतान"
+      }
+    }
+  },
+  "plotStatus": {
+    "AVAILABLE": "उपलब्ध",
+    "RESERVED": "आरक्षित",
+    "SOLD": "बिका"
+  },
+  "leadSource": {
+    "REFERRAL": "रेफ़रल",
+    "FACEBOOK": "फेसबुक",
+    "INSTAGRAM": "इंस्टाग्राम",
+    "WALK_IN": "वॉक-इन",
+    "COLD_CALL": "कोल्ड कॉल",
+    "WEBSITE": "वेबसाइट",
+    "BROKER": "ब्रोकर",
+    "EXHIBITION": "प्रदर्शनी",
+    "SOCIAL_MEDIA": "सोशल मीडिया",
+    "OTHER": "अन्य"
+  },
+  "funnelStage": {
+    "INTERESTED": "रुचि",
+    "SITE_VISIT": "साइट विज़िट",
+    "DEAL_CLOSED": "सौदा बंद"
+  }
+}

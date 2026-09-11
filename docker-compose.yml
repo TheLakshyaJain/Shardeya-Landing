@@ -1,0 +1,107 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${DB_NAME:-shardeya}
+      POSTGRES_USER: ${DB_USER:-shardeya}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-shardeya}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-shardeya}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  minio:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-shardeya}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-shardeya123}
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    ports:
+      - "1025:1025" # SMTP
+      - "8025:8025" # Web UI
+
+  whatsapp-stub:
+    build: ./infra/whatsapp-stub
+    ports:
+      - "4001:4001"
+
+  backend:
+    build: ./backend
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: ${DB_NAME:-shardeya}
+      # Migration role (owns the schema; matches the Postgres bootstrap superuser).
+      DB_USER: ${DB_USER:-shardeya}
+      DB_PASSWORD: ${DB_PASSWORD:-shardeya}
+      # Runtime role (non-owner, non-superuser — required for RLS to apply).
+      APP_DB_USER: ${APP_DB_USER:-shardeya_app}
+      APP_DB_PASSWORD: ${APP_DB_PASSWORD:-shardeya_app}
+      # BYPASSRLS role used only by the pre-auth mobile/email login lookup.
+      AUTH_LOOKUP_DB_USER: ${AUTH_LOOKUP_DB_USER:-shardeya_authlookup}
+      AUTH_LOOKUP_DB_PASSWORD: ${AUTH_LOOKUP_DB_PASSWORD:-shardeya_authlookup}
+      # BYPASSRLS role used only by StatsRefreshJob's cross-org materialized
+      # view refresh (no tenant context to bind for a cross-org sweep).
+      STATS_REFRESH_DB_USER: ${STATS_REFRESH_DB_USER:-shardeya_statsrefresh}
+      STATS_REFRESH_DB_PASSWORD: ${STATS_REFRESH_DB_PASSWORD:-shardeya_statsrefresh}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      SMTP_HOST: mailhog
+      SMTP_PORT: 1025
+      WHATSAPP_STUB_URL: http://whatsapp-stub:4001
+      # S3_ENDPOINT: the backend's OWN in-container SDK calls (MediaService
+      # reads/writes) need the compose-network hostname. S3_PUBLIC_ENDPOINT:
+      # presigned URLs are fetched by the browser on the HOST, which can
+      # only reach MinIO via its published host port -- these must diverge
+      # for a fully containerized backend, or every in-container S3 call
+      # (upload completion, document PDF storage) fails with "Connection
+      # refused" trying to reach localhost:9000 from inside the container.
+      # Found live while verifying M7's document generation against a
+      # from-scratch docker-compose stack (see CLAUDE.md).
+      S3_ENDPOINT: http://minio:9000
+      S3_PUBLIC_ENDPOINT: http://localhost:9000
+      JWT_SECRET: ${JWT_SECRET:-dev-only-jwt-secret-do-not-use-in-production-change-me-32bytes+}
+      GOV_ID_ENCRYPTION_KEY: ${GOV_ID_ENCRYPTION_KEY:-dev-only-gov-id-encryption-key-change-me-in-any-real-env}
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      whatsapp-stub:
+        condition: service_started
+      mailhog:
+        condition: service_started
+
+volumes:
+  postgres_data:
+  minio_data:

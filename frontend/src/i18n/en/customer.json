@@ -1,0 +1,92 @@
+{
+  "list": {
+    "title": "Leads",
+    "addLead": "Add Lead",
+    "searchPlaceholder": "Search name or mobile...",
+    "empty": "No leads yet",
+    "columns": {
+      "name": "Name",
+      "contact": "Contact",
+      "budget": "Budget",
+      "project": "Project",
+      "status": "Status",
+      "assignedTo": "Assigned To",
+      "followUp": "Follow-up Date",
+      "source": "Source",
+      "actions": "Actions"
+    },
+    "tabs": { "all": "All", "mine": "Mine", "unassigned": "Unassigned" },
+    "noLeadAccess": "You don't have access to the lead pipeline."
+  },
+  "status": {
+    "INTERESTED": "Interested",
+    "SITE_VISIT_SCHEDULED": "Site Visit Scheduled",
+    "SITE_VISIT_DONE": "Site Visit Done",
+    "FOLLOWING_UP": "Following Up",
+    "DEAL_CLOSED": "Deal Closed",
+    "LOST": "Lost"
+  },
+  "source": {
+    "REFERRAL": "Referral",
+    "FACEBOOK": "Facebook",
+    "INSTAGRAM": "Instagram",
+    "WALK_IN": "Walk-in",
+    "COLD_CALL": "Cold Call",
+    "WEBSITE": "Website",
+    "BROKER": "Broker",
+    "EXHIBITION": "Exhibition",
+    "SOCIAL_MEDIA": "Social Media",
+    "OTHER": "Other"
+  },
+  "form": {
+    "createTitle": "Add Lead",
+    "editTitle": "Edit Lead",
+    "fullName": "Full Name",
+    "mobile": "Mobile Number",
+    "email": "Email",
+    "budgetMin": "Budget Min",
+    "budgetMax": "Budget Max",
+    "source": "Source",
+    "project": "Project Interested In",
+    "plot": "Plot Interested In",
+    "followUpDate": "Follow-up Date",
+    "siteVisitDate": "Site Visit Date",
+    "remarks": "Remarks",
+    "submit": "Save Lead",
+    "submitting": "Saving...",
+    "duplicateFound": "A lead with this number already exists: {{name}} ({{status}})",
+    "openExisting": "Open Existing",
+    "createAnyway": "Create Anyway"
+  },
+  "detail": {
+    "important": "Important",
+    "assignTo": "Assign To",
+    "unassigned": "Unassigned",
+    "interactions": "Follow-up History",
+    "addInteraction": "+ Log Follow-up"
+  },
+  "interaction": {
+    "type": {
+      "CALL": "Call", "VISIT": "Visit", "WHATSAPP": "WhatsApp", "MEETING": "Meeting", "EMAIL": "Email", "SMS": "SMS", "NOTE": "Note"
+    },
+    "result": {
+      "POSITIVE": "Positive", "NEUTRAL": "Neutral", "NEGATIVE": "Negative", "NOT_INTERESTED": "Not Interested",
+      "NEXT_SCHEDULED": "Next Scheduled", "NO_FURTHER": "No Further Follow-up"
+    },
+    "occurredOn": "Date",
+    "typeLabel": "Type",
+    "remarks": "Remarks",
+    "nextFollowUpDate": "Next Follow-up Date",
+    "resultLabel": "Result",
+    "submit": "Log Follow-up",
+    "amend": "Edit",
+    "amendedNote": "Amended",
+    "amendWindowExpired": "This entry can no longer be edited (15-minute window has passed)"
+  },
+  "bulkAssign": {
+    "selectedCount": "{{count}} selected",
+    "assignTo": "Assign to...",
+    "apply": "Assign Selected"
+  },
+  "unassignedBanner": "{{count}} leads are unassigned"
+}

@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.3.4</version>
+    <relativePath/>
+  </parent>
+
+  <groupId>com.shardeya</groupId>
+  <artifactId>shardeya-backend</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <name>shardeya-backend</name>
+  <description>Shardeya multi-tenant real estate SaaS backend</description>
+
+  <properties>
+    <java.version>21</java.version>
+    <archunit.version>1.3.0</archunit.version>
+    <jjwt.version>0.12.6</jjwt.version>
+    <poi.version>5.3.0</poi.version>
+    <aws-sdk.version>2.28.29</aws-sdk.version>
+    <flying-saucer.version>9.4.0</flying-saucer.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-validation</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-database-postgresql</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+      <version>2.6.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-redis</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-mail</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-aop</artifactId>
+    </dependency>
+    <!-- Argon2id only — deliberately NOT spring-boot-starter-security. We run our
+         own JWT filter (TenantContextFilter) and our own @RequiresPermission AOP
+         engine per CLAUDE.md, not Spring Security's filter chain / method security,
+         so pulling in the full starter would just mean fighting its autoconfigured
+         defaults (e.g. a default permit-nothing chain) for no benefit. -->
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-crypto</artifactId>
+    </dependency>
+    <!-- spring-security-crypto's Argon2 support delegates to BouncyCastle but
+         marks it optional upstream (expects the consumer to add it) — without
+         this, Argon2PasswordEncoder compiles and even wires up fine, then
+         throws NoClassDefFoundError the first time it's actually invoked
+         (signup's password hashing). Only surfaced via a real HTTP call in
+         AuthFlowIntegrationTest, not at compile time or context startup. -->
+    <dependency>
+      <groupId>org.bouncycastle</groupId>
+      <artifactId>bcprov-jdk18on</artifactId>
+      <version>1.80</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt-api</artifactId>
+      <version>${jjwt.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt-impl</artifactId>
+      <version>${jjwt.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt-jackson</artifactId>
+      <version>${jjwt.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+
+    <!-- M2: bulk plot import template generation + streaming parse (CLAUDE.md
+         stack reference: "Apache POI SXSSF (Excel streaming)"). poi-ooxml
+         pulls in SXSSF (streaming writer) and XSSF (reader) for .xlsx. -->
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi</artifactId>
+      <version>${poi.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-ooxml</artifactId>
+      <version>${poi.version}</version>
+    </dependency>
+
+    <!-- M2: media upload — pre-signed PUT/GET against MinIO locally (S3-compatible,
+         CLAUDE.md Infrastructure). AWS SDK v2's S3 client works unmodified against
+         MinIO via endpointOverride + path-style access. -->
+    <dependency>
+      <groupId>software.amazon.awssdk</groupId>
+      <artifactId>s3</artifactId>
+      <version>${aws-sdk.version}</version>
+    </dependency>
+
+    <!-- M7: first PDF rendering in this codebase (CLAUDE.md stack reference:
+         "OpenPDF / Flying Saucer (HTML -> PDF)", never previously added,
+         see M3/M6 notes on receipt/broker-statement PDFs being deferred
+         until this milestone). flying-saucer-pdf-openpdf pulls in OpenPDF
+         itself transitively; PdfRenderer embeds a real Devanagari-capable
+         TTF (src/main/resources/fonts) via ITextFontResolver so Hindi
+         documents render actual conjuncts, not boxes. -->
+    <dependency>
+      <groupId>org.xhtmlrenderer</groupId>
+      <artifactId>flying-saucer-pdf-openpdf</artifactId>
+      <version>${flying-saucer.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <!-- TestRestTemplate defaults to the JDK's own HttpURLConnection-based
+         SimpleClientHttpRequestFactory when nothing better is on the
+         classpath, and that client has a long-standing, still-unfixed quirk:
+         it can't read the response body of a 401 to a POST whose body it
+         streamed, throwing HttpRetryException("cannot retry due to server
+         authentication, in streaming mode") instead of just handing back the
+         401 — real HTTP clients (browsers, mobile apps, curl) don't have this
+         problem. Spring Boot's RestTemplateBuilder auto-prefers Apache
+         HttpClient over the JDK default whenever it's present, so adding it
+         here (test-only) is the whole fix — AuthFlowIntegrationTest legitimately
+         needs to see 401s (wrong password, refresh-token reuse detection).
+         Caught only once AuthFlowIntegrationTest's actual RLS/datasource bugs
+         were fixed and login started returning real responses instead of
+         failing before ever reaching this JDK behavior. -->
+    <dependency>
+      <groupId>org.apache.httpcomponents.client5</groupId>
+      <artifactId>httpclient5</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.tngtech.archunit</groupId>
+      <artifactId>archunit-junit5</artifactId>
+      <version>${archunit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-testcontainers</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>postgresql</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.testcontainers</groupId>
+        <artifactId>testcontainers-bom</artifactId>
+        <version>1.21.3</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+      <!-- Testcontainers' bundled docker-java client defaults to API version 1.32
+           when it can't be pinned another way, and current Docker Engine versions
+           (unlike older ones) hard-reject any client version below their
+           MinAPIVersion instead of negotiating — so tests fail with "client
+           version 1.32 is too old" against a real, working daemon. Also disables
+           Ryuk (the container-cleanup sidecar): it needs to bind-mount the docker
+           socket into itself, which breaks under colima because the socket path
+           is a macOS host path, not one that exists inside colima's Linux VM.
+           Harmless to leave both set for real Docker (CI) too. See CLAUDE.md
+           "Milestone 1" notes if this needs revisiting. -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <argLine>-Dapi.version=1.41</argLine>
+          <environmentVariables>
+            <TESTCONTAINERS_RYUK_DISABLED>true</TESTCONTAINERS_RYUK_DISABLED>
+          </environmentVariables>
+        </configuration>
+      </plugin>
+      <!-- CI-only: `mvn flyway:validate` dry-runs migrations against a throwaway
+           Postgres service container (00-ARCHITECTURE.md §7 CI gate). Not used at
+           application runtime — Spring Boot's own Flyway auto-configuration owns
+           that. Connection info is supplied by CI via -D system properties. -->
+      <plugin>
+        <groupId>org.flywaydb</groupId>
+        <artifactId>flyway-maven-plugin</artifactId>
+        <configuration>
+          <locations>
+            <location>classpath:db/migration</location>
+          </locations>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-database-postgresql</artifactId>
+            <version>${flyway.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
+</project>

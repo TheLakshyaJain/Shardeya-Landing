@@ -1,0 +1,134 @@
+{
+  "app": {
+    "name": "Shardeya"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "projects": "Projects",
+    "leads": "Leads",
+    "calendar": "Calendar",
+    "tracker": "Tracker",
+    "financials": "Financials",
+    "deals": "Deals History",
+    "team": "Team",
+    "brokers": "Brokers",
+    "calculators": "Calculators",
+    "reports": "Reports",
+    "documentTemplates": "Document Templates",
+    "stats": "Stats & Analysis",
+    "design": "Design System",
+    "builder": "Builder",
+    "broker": "Broker",
+    "mainNav": "Main navigation",
+    "openMenu": "Open menu"
+  },
+  "language": {
+    "label": "Language",
+    "en": "English",
+    "hi": "हिन्दी"
+  },
+  "actions": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "edit": "Edit",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "create": "Create",
+    "add": "Add",
+    "remove": "Remove",
+    "upload": "Upload",
+    "download": "Download",
+    "search": "Search",
+    "filter": "Filters",
+    "clearFilters": "Clear filters",
+    "apply": "Apply",
+    "retry": "Retry",
+    "close": "Close",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password"
+  },
+  "emptyState": {
+    "genericTitle": "Nothing here yet",
+    "genericDescription": "Data you add will show up here."
+  },
+  "entitlement": {
+    "quotaExceeded": "You've used {{used}} of {{limit}} on your current plan. Upgrade to add more."
+  },
+  "unit": {
+    "selectPlaceholder": "Unit"
+  },
+  "placeholder": {
+    "comingSoon": "This screen is coming in a later milestone."
+  },
+  "error": {
+    "internal": "Something went wrong. Please try again.",
+    "notFound": "We couldn't find what you were looking for."
+  },
+  "design": {
+    "title": "Design System",
+    "subtitle": "Shardeya component variants — colours, typography, spacing, primitives.",
+    "backHome": "Back home",
+    "sections": {
+      "colorTokens": "Colour tokens",
+      "typography": "Typography scale",
+      "spacing": "Spacing scale",
+      "buttons": "Buttons",
+      "badges": "Badges",
+      "inputs": "Inputs",
+      "dialog": "Dialog",
+      "toast": "Toast",
+      "card": "Card",
+      "table": "Table",
+      "emptyState": "Empty state",
+      "skeleton": "Skeleton"
+    },
+    "typographySamples": {
+      "h3xl": "Heading 3xl",
+      "h2xl": "Heading 2xl",
+      "hxl": "Heading xl",
+      "hlg": "Heading lg",
+      "bodyBase": "Body base",
+      "bodySmMuted": "Body sm / muted",
+      "captionXs": "Caption xs"
+    },
+    "input": {
+      "textPlaceholder": "Text input",
+      "selectPlaceholder": "Select an option",
+      "optionA": "Option A",
+      "optionB": "Option B",
+      "textareaPlaceholder": "Textarea"
+    },
+    "dialog": {
+      "trigger": "Open dialog",
+      "title": "Confirm action",
+      "description": "This is a sample dialog for the design system page."
+    },
+    "toast": {
+      "defaultLabel": "Default",
+      "successLabel": "Success",
+      "errorLabel": "Error",
+      "defaultMessage": "Default notification",
+      "successMessage": "Payment recorded",
+      "errorMessage": "Something went wrong"
+    },
+    "card": {
+      "title": "Project Sunrise Meadows",
+      "description": "42 of 120 plots sold",
+      "status": "Active"
+    },
+    "table": {
+      "plot": "Plot",
+      "status": "Status",
+      "area": "Area (sqft)",
+      "sold": "Sold",
+      "available": "Available"
+    },
+    "emptyState": {
+      "title": "No plots yet",
+      "description": "Upload a plot list to get started."
+    }
+  }
+}

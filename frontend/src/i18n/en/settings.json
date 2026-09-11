@@ -1,0 +1,67 @@
+{
+  "notifications": {
+    "title": "Notification settings",
+    "subtitle": "Choose how you want to be notified for each type of event. Some events can't be turned off in-app.",
+    "columns": {
+      "type": "Event",
+      "inApp": "In-app",
+      "whatsapp": "WhatsApp",
+      "sms": "SMS",
+      "email": "Email"
+    },
+    "mandatoryHint": "Always on for security and payment confirmations",
+    "save": "Save changes",
+    "saved": "Notification preferences saved",
+    "loadError": "Couldn't load your notification preferences.",
+    "categories": {
+      "SALE": "Sales",
+      "PAYMENT": "Payments",
+      "LEAD": "Leads",
+      "TEAM": "Team",
+      "BROKER": "Brokers",
+      "DOCUMENT": "Documents"
+    },
+    "types": {
+      "PLOT_SOLD": "Plot marked sold",
+      "SALE_CANCELLED": "Sale cancelled",
+      "PAYMENT_RECORDED": "Payment recorded",
+      "CHEQUE_BOUNCED": "Cheque bounced",
+      "INSTALMENT_OVERDUE": "Instalment overdue",
+      "INSTALMENT_DUE_TODAY": "Instalment due today",
+      "LEAD_CREATED": "New lead added",
+      "LEAD_ASSIGNED": "Lead assigned to you",
+      "FOLLOWUP_DUE": "Follow-up due today",
+      "LEAD_PLOT_SOLD": "Interested plot sold to someone else",
+      "LEAD_DEAL_CLOSED": "Deal closed",
+      "STAFF_ADDED": "Staff added or role changed",
+      "STAFF_DEACTIVATED": "Staff deactivated",
+      "INVITE_ACCEPTED": "Staff invite accepted",
+      "COMMISSION_DUE": "Broker commission due",
+      "BROKER_TIER_UPGRADED": "Broker tier upgraded",
+      "COMMISSION_PAYMENT_RECORDED": "Commission payment recorded",
+      "BROKER_ADDED": "New broker added",
+      "COMMISSION_OVERDUE": "Commission payment overdue",
+      "DOCUMENT_GENERATED": "Document generated",
+      "BULK_GENERATION_COMPLETE": "Bulk document generation complete",
+      "DOCUMENT_GENERATION_FAILED": "Document generation failed",
+      "TEMPLATE_ACTIVATED": "Document template activated"
+    }
+  },
+  "whatsapp": {
+    "title": "WhatsApp reminders",
+    "description": "Opt in to receive instalment, overdue, and follow-up reminders on WhatsApp, in addition to the in-app bell.",
+    "mobileLabel": "Your number",
+    "statusOptedIn": "WhatsApp reminders are on for {{mobile}}",
+    "statusOptedOut": "WhatsApp reminders are off",
+    "enable": "Enable WhatsApp reminders",
+    "disable": "Turn off WhatsApp reminders",
+    "disabled": "WhatsApp reminders turned off",
+    "noMobileHint": "Add a mobile number to your profile to enable WhatsApp reminders.",
+    "otp": {
+      "title": "Confirm your WhatsApp number",
+      "subtitle": "Enter the 6-digit code sent to {{mobile}}",
+      "submit": "Confirm",
+      "confirmed": "WhatsApp reminders are on"
+    }
+  }
+}

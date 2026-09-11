@@ -1,0 +1,60 @@
+{
+  "title": "Deals History",
+  "empty": "No completed or cancelled deals yet",
+  "summaryStrip": "{{count}} completed deals worth {{value}} · {{cancelled}} cancelled",
+  "status": {
+    "COMPLETED": "Completed",
+    "CANCELLED": "Cancelled"
+  },
+  "filters": {
+    "status": "Status",
+    "allStatuses": "All Statuses",
+    "project": "Project",
+    "allProjects": "All Projects",
+    "search": "Search",
+    "searchPlaceholder": "Buyer name, mobile, plot..."
+  },
+  "columns": {
+    "date": "Date",
+    "project": "Project",
+    "plotNumber": "Plot Number",
+    "plotSize": "Plot Size",
+    "buyer": "Buyer",
+    "dealValue": "Deal Value",
+    "collected": "Total Collected",
+    "balance": "Balance",
+    "status": "Status",
+    "handledBy": "Handled By"
+  },
+  "detail": {
+    "project": "Project",
+    "plotSize": "Plot Size",
+    "buyerMobile": "Buyer Mobile",
+    "buyerEmail": "Buyer Email",
+    "handledBy": "Handled By",
+    "formerStaff": "former staff",
+    "dealValue": "Deal Value",
+    "totalCollected": "Total Collected",
+    "balance": "Balance",
+    "balanceNonZero": "Non-zero on completion",
+    "cancellationReason": "Cancellation Reason",
+    "documents": "Documents",
+    "documentsIncomplete": "Documents incomplete",
+    "timeline": "Timeline"
+  },
+  "documentType": {
+    "SALE_AGREEMENT": "Sale Agreement",
+    "REGISTRY_DEED": "Registry Deed",
+    "PLOT_MAP": "Plot Map",
+    "BUYER_ID_PROOF": "Buyer ID Proof",
+    "OTHER": "Other"
+  },
+  "timeline": {
+    "empty": "No timeline events yet",
+    "booked": "Sale booked",
+    "payment": "Payment recorded: {{amount}}",
+    "interaction": "Follow-up ({{type}})",
+    "completed": "Deal completed",
+    "cancelled": "Deal cancelled"
+  }
+}

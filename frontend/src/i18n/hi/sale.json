@@ -1,0 +1,109 @@
+{
+  "wizard": {
+    "title": "प्लॉट को बिका हुआ चिह्नित करें",
+    "steps": {
+      "buyer": "खरीदार",
+      "deal": "सौदे की शर्तें",
+      "payment": "भुगतान योजना",
+      "broker": "ब्रोकर",
+      "review": "समीक्षा"
+    },
+    "submit": "बिक्री की पुष्टि करें",
+    "submitting": "बिक्री बनाई जा रही है..."
+  },
+  "form": {
+    "fields": {
+      "buyerName": "खरीदार का नाम",
+      "buyerMobile": "खरीदार का मोबाइल",
+      "buyerEmail": "खरीदार का ईमेल",
+      "govIdType": "आईडी प्रकार",
+      "govIdNumber": "आईडी नंबर",
+      "purchaseDate": "खरीद की तारीख",
+      "dealValue": "सौदे की राशि",
+      "paymentType": "भुगतान प्रकार"
+    },
+    "paymentType": {
+      "LUMP_SUM": "एकमुश्त",
+      "INSTALMENT": "किस्तों में"
+    }
+  },
+  "govId": {
+    "types": {
+      "AADHAAR": "आधार",
+      "PAN": "पैन",
+      "PASSPORT": "पासपोर्ट",
+      "VOTER_ID": "वोटर आईडी",
+      "DL": "ड्राइविंग लाइसेंस"
+    },
+    "masked": "XXXX XXXX {{last4}}",
+    "reveal": "दिखाएं",
+    "hide": "छुपाएं",
+    "viewScan": "स्कैन देखें",
+    "reason": "देखने का कारण (वैकल्पिक)",
+    "auditedNotice": "यह आईडी देखना ऑडिट लॉग में दर्ज होता है।"
+  },
+  "schedule": {
+    "addRow": "किस्त जोड़ें",
+    "fullPaymentLabel": "पूर्ण भुगतान",
+    "total": "अनुसूची कुल",
+    "reconciliationMatch": "{{amount}} / {{dealValue}} ✓",
+    "reconciliationUnder": "{{amount}} / {{dealValue}} — {{remaining}} अनिर्धारित",
+    "reconciliationOver": "{{amount}} / {{dealValue}} — सौदे की राशि से {{excess}} अधिक"
+  },
+  "review": {
+    "title": "बिक्री की समीक्षा करें",
+    "confirm": "सब कुछ सही है"
+  },
+  "detail": {
+    "status": "स्थिति",
+    "dealValue": "सौदे की राशि",
+    "totalPaid": "कुल भुगतान",
+    "balanceDue": "शेष राशि",
+    "buyer": "खरीदार",
+    "purchaseDate": "खरीद की तारीख",
+    "broker": "ब्रोकर",
+    "handledBy": "संभाला गया",
+    "markAsSold": "बिका हुआ चिह्नित करें",
+    "editSale": "बिक्री विवरण संपादित करें",
+    "cancelSale": "बिक्री रद्द करें",
+    "markComplete": "पूर्ण चिह्नित करें",
+    "completeSale": "पूर्ण चिह्नित करें"
+  },
+  "cancel": {
+    "title": "बिक्री रद्द करें",
+    "reason": "रद्द करने का कारण",
+    "refundHandling": "रिफंड नोट (वैकल्पिक)",
+    "confirm": "बिक्री रद्द करें",
+    "consequences": {
+      "title": "इससे:",
+      "plotAvailable": "प्लॉट फिर से उपलब्ध हो जाएगा",
+      "scheduleWaived": "सभी अवैतनिक किस्तें माफ हो जाएंगी",
+      "paymentsRetained": "सभी दर्ज भुगतान इतिहास के रूप में सुरक्षित रहेंगे (कोई रिफंड स्वतः नहीं होगा)"
+    }
+  },
+  "documents": {
+    "title": "दस्तावेज़",
+    "slots": {
+      "SALE_AGREEMENT": "बिक्री समझौता",
+      "REGISTRY_DEED": "रजिस्ट्री / विलेख",
+      "PLOT_MAP": "प्लॉट मानचित्र",
+      "BUYER_ID_PROOF": "खरीदार पहचान प्रमाण",
+      "OTHER": "अन्य"
+    },
+    "addOther": "एक और दस्तावेज़ जोड़ें",
+    "label": "लेबल",
+    "upload": "अपलोड करें",
+    "sensitiveNotice": "यह दस्तावेज़ अलग से संग्रहीत है और पहुंच ऑडिट की जाती है।"
+  },
+  "legalDocuments": {
+    "title": "कानूनी दस्तावेज़"
+  },
+  "whatsappOptIn": {
+    "consentCheckbox": "खरीदार ने WhatsApp पर भुगतान रिमाइंडर प्राप्त करने पर सहमति दी है।",
+    "detailLabel": "WhatsApp भुगतान रिमाइंडर",
+    "toggleOn": "सक्षम करें",
+    "toggleOff": "अक्षम करें",
+    "optedInHint": "खरीदार ने WhatsApp रिमाइंडर के लिए सहमति दी है।",
+    "notOptedInHint": "खरीदार ने अभी तक WhatsApp रिमाइंडर के लिए सहमति नहीं दी है।"
+  }
+}

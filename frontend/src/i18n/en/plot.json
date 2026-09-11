@@ -1,0 +1,140 @@
+{
+  "status": {
+    "AVAILABLE": "Available",
+    "RESERVED": "Reserved",
+    "SOLD": "Sold"
+  },
+  "facing": {
+    "N": "North",
+    "S": "South",
+    "E": "East",
+    "W": "West",
+    "NE": "North-East",
+    "NW": "North-West",
+    "SE": "South-East",
+    "SW": "South-West"
+  },
+  "form": {
+    "createTitle": "Add Plot",
+    "editTitle": "Edit Plot",
+    "fields": {
+      "plotNumber": "Plot Number",
+      "status": "Status",
+      "reservedFor": "Reserved For",
+      "reservedUntil": "Reserved Until",
+      "sizeValue": "Size",
+      "sizeUnit": "Unit",
+      "facing": "Facing",
+      "price": "Price",
+      "pricePerUnit": "Price per Sq. Ft.",
+      "remarks": "Remarks",
+      "gridRow": "Row",
+      "gridCol": "Column"
+    },
+    "placeholders": {
+      "plotNumber": "e.g. A-12",
+      "reservedFor": "Buyer/customer name",
+      "remarks": "Any additional notes about this plot"
+    },
+    "flags": {
+      "isGarden": "Garden facing",
+      "isCorner": "Corner plot",
+      "isHot": "Hot / featured"
+    },
+    "soldReadOnlyNote": "A plot is only marked Sold by recording a sale — this isn't editable here.",
+    "submit": "Add Plot",
+    "submitting": "Adding...",
+    "saveChanges": "Save Changes",
+    "savingChanges": "Saving...",
+    "placeOnGrid": "Place on Grid",
+    "unplacedNote": "This plot won't appear on the grid until you give it a position."
+  },
+  "detail": {
+    "drawerTitle": "Plot {{number}}",
+    "deleteConfirmTitle": "Delete plot {{number}}?",
+    "deleteConfirmDescription": "This hides the plot from your project. It can be restored later.",
+    "notFound": "This plot could not be found."
+  },
+  "filter": {
+    "title": "Filters",
+    "status": "Status",
+    "facing": "Facing",
+    "sizeRange": "Size (sqft)",
+    "priceRange": "Price (₹)",
+    "hotOnly": "Hot only",
+    "cornerOnly": "Corner only",
+    "gardenOnly": "Garden facing only",
+    "searchPlaceholder": "Search plot number...",
+    "clearAll": "Clear all",
+    "resultsCount": "{{count}} plots",
+    "min": "Min",
+    "max": "Max",
+    "allStatuses": "All statuses",
+    "allFacings": "All facings"
+  },
+  "grid": {
+    "legendTitle": "Legend",
+    "blocked": "Blocked",
+    "unplacedTitle": "Unplaced Plots",
+    "unplacedEmpty": "Every plot has a position on the grid.",
+    "unplacedCount": "{{count}} plots need a position",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "resetView": "Reset view",
+    "loading": "Loading grid...",
+    "empty": "Configure the grid layout to start placing plots.",
+    "notConfigured": "This project's grid hasn't been sized yet.",
+    "dragHint": "Drag an unplaced plot onto an open cell to place it."
+  },
+  "stats": {
+    "totalPlots": "Total Plots",
+    "available": "Available",
+    "reserved": "Reserved",
+    "sold": "Sold",
+    "totalValue": "Total Value",
+    "availableValue": "Available Value",
+    "reservedValue": "Reserved Value",
+    "soldValue": "Sold Value"
+  },
+  "bulk": {
+    "selectedCount": "{{count}} selected",
+    "updatePrice": "Update price per sqft",
+    "updateStatus": "Update status",
+    "apply": "Apply to selected",
+    "clearSelection": "Clear selection"
+  },
+  "addPlotsPage": {
+    "title": "Add Plots"
+  },
+  "quickCreate": {
+    "range": {
+      "prefix": "Prefix",
+      "separator": "Separator",
+      "start": "Start #",
+      "end": "End #",
+      "padWidth": "Zero-pad"
+    },
+    "addAnotherRange": "Add another range",
+    "autoPlace": "Automatically place these plots on the grid",
+    "sharedProperties": {
+      "title": "Shared details for every plot in this batch"
+    },
+    "preview": {
+      "loading": "Checking for collisions...",
+      "summary": "This will create {{count}} plots:",
+      "quotaWarning": "This would exceed your plan's plot limit for this project ({{used}}/{{limit}}). Upgrade or shrink the range.",
+      "declaredCountWarning": "This would exceed the project's declared plot count ({{declared}}, {{current}} already added). Edit the project to increase it, or shrink the range.",
+      "collisionWarning": "{{count}} of these plot numbers already exist or repeat within this request — fix the range before creating.",
+      "collidesWithExisting": "A plot with this number already exists in this project.",
+      "collidesWithinRequest": "This number appears more than once across your ranges."
+    },
+    "create": "Create Plots",
+    "creating": "Creating...",
+    "summary": {
+      "title": "{{count}} plots created",
+      "unplaced": "{{count}} plots didn't fit on the grid and are waiting in the unplaced tray.",
+      "createMore": "Create More",
+      "viewGrid": "View Grid"
+    }
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "list": {
+    "title": "Projects",
+    "newProject": "New Project",
+    "searchPlaceholder": "Search projects...",
+    "empty": {
+      "title": "No projects yet",
+      "description": "Create your first project to start building your plot grid."
+    },
+    "loadMore": "Load more"
+  },
+  "status": {
+    "UPCOMING": "Upcoming",
+    "ACTIVE": "Active",
+    "COMPLETED": "Completed"
+  },
+  "type": {
+    "RESIDENTIAL_PLOT_COLONY": "Residential Plot Colony",
+    "APARTMENT": "Apartment",
+    "VILLA": "Villa",
+    "COMMERCIAL": "Commercial",
+    "MIXED_USE": "Mixed Use"
+  },
+  "card": {
+    "plotsSold": "{{sold}} of {{total}} plots sold",
+    "noPlots": "No plots added yet"
+  },
+  "form": {
+    "createTitle": "New Project",
+    "editTitle": "Edit Project",
+    "stepLabel": "Step {{current}} of {{total}}",
+    "steps": {
+      "basics": "Basics",
+      "location": "Location",
+      "area": "Area & Plots",
+      "media": "Photos & Documents",
+      "review": "Review"
+    },
+    "fields": {
+      "name": "Project Name",
+      "projectType": "Project Type",
+      "status": "Status",
+      "address": "Address",
+      "locality": "Locality",
+      "city": "City",
+      "stateCode": "State",
+      "pincode": "PIN Code",
+      "totalArea": "Total Area",
+      "declaredPlotCount": "Number of Plots",
+      "launchDate": "Launch Date",
+      "expectedCompletionDate": "Expected Completion Date",
+      "description": "Description",
+      "reraNumber": "RERA Number"
+    },
+    "placeholders": {
+      "name": "e.g. Sunrise Meadows",
+      "address": "House/plot no., street, area",
+      "locality": "e.g. Vaishali Nagar",
+      "city": "e.g. Jaipur",
+      "stateCode": "Select state",
+      "pincode": "6-digit PIN code",
+      "description": "Tell buyers about this project",
+      "reraNumber": "e.g. RJ/2024/1234"
+    },
+    "reviewTitle": "Review your project",
+    "reviewHint": "Check the details below before creating this project.",
+    "submit": "Create Project",
+    "submitting": "Creating...",
+    "saveChanges": "Save Changes",
+    "savingChanges": "Saving...",
+    "coverPhoto": "Cover Photo",
+    "layoutPlan": "Layout Plan",
+    "brochure": "Brochure"
+  },
+  "detail": {
+    "editProject": "Edit Project",
+    "backToProjects": "Back to Projects",
+    "tabs": {
+      "overview": "Overview",
+      "grid": "Plot Grid",
+      "plots": "Plots List",
+      "documents": "Documents"
+    },
+    "plotCounts": {
+      "total": "Total",
+      "available": "Available",
+      "reserved": "Reserved",
+      "sold": "Sold"
+    },
+    "declaredVsActual": "{{count}} declared plots not yet added to the grid",
+    "deleteConfirmTitle": "Delete this project?",
+    "deleteConfirmDescription": "This hides the project from your list. It can be restored later.",
+    "restoreConfirm": "Restore this project?",
+    "notFound": "This project could not be found.",
+    "addPlot": "Add Plot",
+    "addPlots": "Add Plots",
+    "gridLayout": "Grid Layout",
+    "configureGrid": "Configure Grid"
+  }
+}

@@ -1,0 +1,11 @@
+-- 06-BROKER-NETWORK-ENGINE.md §0: new brokers get PERCENTAGE or
+-- DESIGNATION only -- FIXED is retired for new brokers, but existing
+-- FIXED brokers (M6) must keep working unchanged, so the enum value
+-- itself is never removed, only blocked at create-time (application
+-- validation, BrokerPartnerService).
+--
+-- ADD VALUE kept in its own migration, never combined with a migration
+-- that USES the new value in the same transaction -- Postgres forbids
+-- using a freshly-added enum value inside the same transaction that
+-- added it.
+ALTER TYPE broker_commission_type ADD VALUE 'DESIGNATION';

@@ -1,0 +1,125 @@
+spring:
+  application:
+    name: shardeya-backend
+  datasource:
+    # Runtime role: NOT the table owner, NOT a superuser, so Row-Level Security
+    # actually constrains it (see V0_005__create_app_runtime_role.sql). Never
+    # point this at DB_USER/the Flyway credentials below.
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:shardeya}
+    username: ${APP_DB_USER:shardeya_app}
+    password: ${APP_DB_PASSWORD:shardeya_app}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: false
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: false
+    # Migration role: owns the schema (DDL/GRANT privileges). Deliberately
+    # separate from spring.datasource.* above.
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:shardeya}
+    user: ${DB_USER:shardeya}
+    password: ${DB_PASSWORD:shardeya}
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+  mail:
+    host: ${SMTP_HOST:localhost}
+    port: ${SMTP_PORT:1025}
+    # Blank by default -- MailHog (local dev/tests) needs no credentials at
+    # all. A real provider (GoDaddy Workspace Email, SES, SendGrid, ...) is
+    # a config-only swap: set SMTP_USERNAME/SMTP_PASSWORD and flip
+    # SMTP_AUTH/SMTP_STARTTLS to true via env vars -- never commit real
+    # credentials into this file.
+    username: ${SMTP_USERNAME:}
+    password: ${SMTP_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: ${SMTP_AUTH:false}
+          starttls:
+            enable: ${SMTP_STARTTLS:false}
+
+server:
+  port: ${SERVER_PORT:8080}
+
+shardeya-auth-lookup-datasource:
+  # BYPASSRLS role used by exactly one code path — AuthLookupRepository's
+  # pre-authentication mobile/email resolution. See
+  # V1_009__create_auth_lookup_role.sql for why this exists.
+  url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:shardeya}
+  username: ${AUTH_LOOKUP_DB_USER:shardeya_authlookup}
+  password: ${AUTH_LOOKUP_DB_PASSWORD:shardeya_authlookup}
+
+shardeya-stats-refresh-datasource:
+  # BYPASSRLS role used by exactly one code path — StatsRefreshJob's
+  # cross-org materialized view refresh, which has no tenant context to
+  # bind. See V7_013__create_stats_refresh_role.sql for why this exists.
+  url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:shardeya}
+  username: ${STATS_REFRESH_DB_USER:shardeya_statsrefresh}
+  password: ${STATS_REFRESH_DB_PASSWORD:shardeya_statsrefresh}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: never
+
+springdoc:
+  api-docs:
+    path: /api/v1/openapi
+  swagger-ui:
+    path: /api/v1/docs
+
+shardeya:
+  api:
+    base-path: /api/v1
+  jwt:
+    # Dev-only default. No production deployment story exists yet (out of
+    # scope per project direction) — override via JWT_SECRET when one does.
+    secret: ${JWT_SECRET:dev-only-jwt-secret-do-not-use-in-production-change-me-32bytes+}
+  media:
+    # MinIO locally (docker-compose's `minio` service) — S3-compatible, so the
+    # AWS SDK v2 S3 client works unmodified via endpoint-override + path-style
+    # access. No production bucket/credentials exist yet (out of scope).
+    s3:
+      endpoint: ${S3_ENDPOINT:http://localhost:9000}
+      # See MediaProperties.publicEndpoint's own javadoc -- only diverges
+      # from `endpoint` when the backend itself runs inside docker-compose
+      # (which sets both S3_ENDPOINT and S3_PUBLIC_ENDPOINT explicitly);
+      # unset here falls back to MediaProperties.getPublicEndpoint()'s own
+      # "use endpoint" default, correct for the plain `mvn spring-boot:run`
+      # dev shape where both audiences are the same host.
+      public-endpoint: ${S3_PUBLIC_ENDPOINT:http://localhost:9000}
+      region: ${S3_REGION:us-east-1}
+      access-key: ${S3_ACCESS_KEY:shardeya}
+      secret-key: ${S3_SECRET_KEY:shardeya123}
+      bucket-standard: ${S3_BUCKET_STANDARD:shardeya-media}
+      # M3: government ID scans and other sensitive documents never share the
+      # standard bucket/pipeline (CLAUDE.md rule #6) — separate bucket, only
+      # ever reachable through the audited gov-id reveal endpoint, never the
+      # plain GET /media/{id} path.
+      bucket-sensitive: ${S3_BUCKET_SENSITIVE:shardeya-media-sensitive}
+      upload-presign-seconds: 900
+      read-presign-seconds: 3600
+  security:
+    # Dev-only default, same shape as the JWT secret above — override via
+    # GOV_ID_ENCRYPTION_KEY in any environment that matters. AES-256 needs a
+    # 32-byte key; GovIdCipher derives one from this string via SHA-256
+    # rather than requiring an already-32-byte literal, so any reasonably
+    # long secret works here without a separate base64/hex encoding step.
+    gov-id-encryption-key: ${GOV_ID_ENCRYPTION_KEY:dev-only-gov-id-encryption-key-change-me-in-any-real-env}
+  whatsapp:
+    # M5: first real caller of infra/whatsapp-stub (docker-compose has
+    # shipped it since M0, wired via WHATSAPP_STUB_URL, but nothing sent to
+    # it until B-13's tracker/follow-up-due sweep needed reminders).
+    stub:
+      url: ${WHATSAPP_STUB_URL:http://localhost:4001}

@@ -1,0 +1,25 @@
+{
+  "bell": {
+    "label": "Notifications",
+    "title": "Notifications",
+    "markAllRead": "Mark all read",
+    "empty": "No notifications yet"
+  },
+  "plotSold": "Plot {{plotNumber}} sold to {{buyerName}}",
+  "saleCancelled": "Sale for plot {{plotNumber}} was cancelled",
+  "paymentRecorded": "Payment of {{amount}} recorded (receipt {{receiptNo}})",
+  "chequeBounced": "Cheque {{receiptNo}} bounced",
+  "instalmentOverdue": "Instalment \"{{label}}\" is now overdue",
+  "instalmentDueToday": "Instalment of Rs {{amount}} for Plot {{plotNumber}} is due today",
+  "commissionDue": "Commission of Rs {{amount}} is due to {{brokerName}} for Plot {{plotNumber}}",
+  "leadCreated": "New lead added: {{name}}",
+  "leadAssigned": "Lead assigned to you: {{name}}",
+  "followupDue": "Follow-up due today: {{name}}",
+  "leadPlotSold": "{{name}}'s interested plot was sold to someone else",
+  "dealClosed": "Deal closed: {{name}}",
+  "staffAdded": "{{name}} was added as {{role}}",
+  "roleChanged": "Your role was changed to {{role}}",
+  "staffDeactivated": "A staff member was deactivated",
+  "inviteAccepted": "{{name}} accepted their invite",
+  "brokerCommissionPaid": "Commission payment of {{amount}} recorded for {{name}}"
+}

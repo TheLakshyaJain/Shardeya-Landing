@@ -1,0 +1,75 @@
+{
+  "title": "Financials",
+  "emptyOrg": "No revenue recorded yet",
+  "tabs": {
+    "overview": "Overview",
+    "payments": "Payments",
+    "pending": "Pending & Overdue",
+    "commission": "Commission Paid"
+  },
+  "filters": {
+    "project": "Project",
+    "allProjects": "All Projects",
+    "from": "From",
+    "to": "To",
+    "mode": "Payment Mode",
+    "allModes": "All Modes"
+  },
+  "summary": {
+    "totalRevenueAllTime": "Total Revenue (All Time)",
+    "revenueThisMonth": "Revenue This Month",
+    "revenueThisYear": "Revenue This Year",
+    "pendingCollections": "Pending Collections",
+    "overdueInstalments": "Overdue Instalments",
+    "overdueCount": "{{count}} instalment overdue",
+    "overdueCount_other": "{{count}} instalments overdue",
+    "totalBrokerCommissionPaid": "Broker Commission Paid",
+    "scopedNote": "Showing {{scoped}} of {{total}} projects"
+  },
+  "revenueTrend": {
+    "title": "Revenue Trend (12 months)"
+  },
+  "modeBreakdown": {
+    "title": "Cash vs Digital",
+    "empty": "No payments in this range yet"
+  },
+  "payments": {
+    "empty": "No payments recorded yet",
+    "reversal": "Reversal",
+    "bounced": "Bounced",
+    "columns": {
+      "date": "Date",
+      "project": "Project",
+      "plotNumber": "Plot Number",
+      "buyerName": "Buyer Name",
+      "instalmentNo": "Instalment #",
+      "amount": "Amount",
+      "mode": "Mode",
+      "reference": "Reference",
+      "recordedBy": "Recorded By"
+    }
+  },
+  "pending": {
+    "title": "Pending",
+    "overdueTitle": "Overdue",
+    "generateDemandLetters": "Generate Demand Letters",
+    "empty": "Nothing pending — nice work",
+    "overdueEmpty": "No overdue instalments",
+    "recordPayment": "Record Payment",
+    "sendReminder": "Send Reminder",
+    "reminderDisabled": "Reminders off",
+    "columns": {
+      "buyer": "Buyer",
+      "project": "Project",
+      "plot": "Plot",
+      "amountDue": "Amount Due",
+      "dueDate": "Due Date",
+      "daysOverdue": "Days Overdue",
+      "status": "Status",
+      "actions": "Actions"
+    }
+  },
+  "commission": {
+    "notBuilt": "Broker commission tracking isn't available yet"
+  }
+}

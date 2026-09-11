@@ -1,0 +1,56 @@
+{
+  "docType": {
+    "ALLOTMENT_LETTER": "Allotment Letter",
+    "PAYMENT_RECEIPT": "Payment Receipt",
+    "DEMAND_LETTER": "Demand Letter",
+    "BOOKING_CONFIRMATION": "Booking Confirmation"
+  },
+  "templates": {
+    "title": "Document Templates",
+    "description": "Edit the letterhead, wording, and layout of legal documents generated from live data.",
+    "systemDefault": "System default",
+    "active": "Active",
+    "cloneToEdit": "Clone to edit",
+    "edit": "Edit",
+    "back": "Back to templates",
+    "editTitle": "Editing: {{name}}",
+    "save": "Save",
+    "activate": "Activate",
+    "fields": {
+      "name": "Template name",
+      "header": "Header",
+      "body": "Body",
+      "footer": "Footer"
+    },
+    "preview": {
+      "sampleEntityId": "Preview against a real record",
+      "sampleEntityIdHint": "Paste a sale ID to preview with",
+      "run": "Preview"
+    },
+    "palette": {
+      "title": "Variables",
+      "hint": "Click a variable to insert it into the {{field}} field.",
+      "fields": "Fields",
+      "loopHint": "Only inside a repeating {{collection}} row"
+    }
+  },
+  "generateButton": {
+    "language": "Language",
+    "generating": "Generating…",
+    "docType": {
+      "ALLOTMENT_LETTER": "Generate Allotment Letter",
+      "PAYMENT_RECEIPT": "Generate Receipt",
+      "DEMAND_LETTER": "Generate Demand Letter",
+      "BOOKING_CONFIRMATION": "Generate Booking Confirmation"
+    }
+  },
+  "list": {
+    "empty": "No documents generated yet."
+  },
+  "bulkGenerate": {
+    "title": "Generate demand letters ({{count}} overdue)",
+    "cancel": "Cancel",
+    "confirm": "Generate ({{count}})",
+    "generating": "Generating…"
+  }
+}

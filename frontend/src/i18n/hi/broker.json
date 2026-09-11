@@ -1,0 +1,311 @@
+{
+  "list": {
+    "title": "दलाल",
+    "addBroker": "दलाल जोड़ें",
+    "empty": "अभी तक कोई दलाल नहीं",
+    "search": "नाम या मोबाइल से खोजें",
+    "quotaReached": "आप अपनी योजना की दलाल सीमा तक पहुंच गए हैं।",
+    "columns": {
+      "name": "नाम",
+      "mobile": "मोबाइल",
+      "city": "शहर/क्षेत्र",
+      "tier": "स्तर",
+      "dealsClosed": "पूरे किए गए सौदे",
+      "commissionPaid": "भुगतान किया गया कमीशन",
+      "commissionDue": "बकाया कमीशन",
+      "status": "स्थिति"
+    }
+  },
+  "status": {
+    "ACTIVE": "सक्रिय",
+    "INACTIVE": "निष्क्रिय",
+    "BLOCKED": "अवरुद्ध"
+  },
+  "network": {
+    "title": "दलाल नेटवर्क",
+    "empty": "अभी तक कोई पदनाम-आधारित दलाल नहीं",
+    "loadError": "नेटवर्क लोड नहीं हो सका",
+    "rate": "दर",
+    "perSqft": "/वर्ग फुट",
+    "personalSales": "व्यक्तिगत बिक्री",
+    "teamSales": "टीम बिक्री"
+  },
+  "form": {
+    "createTitle": "दलाल जोड़ें",
+    "editTitle": "दलाल संपादित करें",
+    "fullName": "पूरा नाम",
+    "mobile": "मोबाइल नंबर",
+    "email": "ईमेल",
+    "cityArea": "शहर/क्षेत्र",
+    "reraNumber": "RERA नंबर",
+    "firmName": "फर्म का नाम",
+    "commissionType": "कमीशन प्रकार",
+    "commissionTypePercentage": "प्रतिशत",
+    "commissionTypeFixed": "निश्चित राशि",
+    "commissionTypeDesignation": "पदनाम (नेटवर्क)",
+    "commissionPct": "कमीशन %",
+    "commissionFixed": "कमीशन राशि",
+    "uplineBroker": "अपलाइन दलाल",
+    "uplineNone": "कोई नहीं (शीर्ष स्तर)",
+    "designationStartNote": "नया दलाल बिज़नेस एक्ज़िक्यूटिव (₹160/वर्ग फुट) से शुरू होता है, 0 बिक्री।",
+    "perProjectRatesEnabled": "प्रति-प्रोजेक्ट दरों की अनुमति दें",
+    "bankAccountName": "बैंक खाता धारक का नाम",
+    "bankAccountNumber": "बैंक खाता संख्या",
+    "ifsc": "IFSC कोड",
+    "upiId": "UPI ID",
+    "notes": "नोट्स",
+    "submit": "दलाल सहेजें",
+    "submitting": "सहेजा जा रहा है..."
+  },
+  "detail": {
+    "tabs": {
+      "overview": "अवलोकन",
+      "commissionConfig": "कमीशन कॉन्फ़िगरेशन",
+      "deals": "सौदे",
+      "ledger": "लेजर",
+      "network": "नेटवर्क",
+      "notes": "नोट्स"
+    },
+    "deactivate": "निष्क्रिय करें",
+    "reactivate": "पुनः सक्रिय करें",
+    "block": "अवरुद्ध करें",
+    "delete": "हटाएं",
+    "bankDetails": "बैंक विवरण",
+    "viewBankDetails": "बैंक विवरण देखें",
+    "tierProgress": "{{tierName}} — {{nextTierName}} तक पहुंचने के लिए {{remaining}} और सौदे",
+    "tierMax": "शीर्ष स्तर तक पहुंच गए"
+  },
+  "performance": {
+    "title": "प्रदर्शन",
+    "totalDeals": "कुल सौदे",
+    "completed": "पूर्ण",
+    "active": "सक्रिय",
+    "cancelled": "रद्द",
+    "revenueGenerated": "उत्पन्न राजस्व",
+    "commissionEarned": "अर्जित कमीशन",
+    "commissionPaid": "भुगतान किया गया कमीशन",
+    "commissionDue": "बकाया कमीशन",
+    "commissionReleased": "जारी कमीशन",
+    "conversionRate": "रूपांतरण दर"
+  },
+  "deals": {
+    "empty": "अभी तक इस दलाल से कोई सौदा जुड़ा नहीं है",
+    "columns": {
+      "project": "प्रोजेक्ट",
+      "plot": "प्लॉट",
+      "buyer": "खरीदार",
+      "date": "तिथि",
+      "dealValue": "सौदा राशि",
+      "status": "स्थिति",
+      "commission": "कमीशन"
+    }
+  },
+  "commissionConfig": {
+    "title": "कमीशन कॉन्फ़िगरेशन",
+    "addConfig": "दर जोड़ें",
+    "empty": "कोई कमीशन दर कॉन्फ़िगर नहीं है — दलाल की डिफ़ॉल्ट दर का उपयोग किया जा रहा है",
+    "scope": "दायरा",
+    "scopeGlobal": "वैश्विक (सभी प्रोजेक्ट)",
+    "scopeProject": "प्रति प्रोजेक्ट",
+    "scopePlot": "प्रति प्लॉट",
+    "project": "प्रोजेक्ट",
+    "plot": "प्लॉट",
+    "commissionType": "प्रकार",
+    "rateValue": "दर",
+    "effectiveFrom": "प्रभावी से",
+    "effectiveTo": "प्रभावी तक (वैकल्पिक)",
+    "submit": "दर सहेजें",
+    "columns": {
+      "scope": "दायरा",
+      "target": "लक्ष्य",
+      "type": "प्रकार",
+      "rate": "दर",
+      "effectiveFrom": "प्रभावी से",
+      "actions": "कार्रवाई"
+    },
+    "preview": {
+      "title": "कमीशन पूर्वावलोकन",
+      "dealValue": "सौदा राशि",
+      "calculate": "गणना करें",
+      "base": "आधार कमीशन",
+      "tierBonus": "स्तर बोनस ({{tierName}})",
+      "total": "कुल कमीशन",
+      "appliedScope": "लागू नियम: {{scope}}",
+      "usedDefault": "दलाल की अपनी डिफ़ॉल्ट दर का उपयोग किया जा रहा है",
+      "noneConfigured": "इस दलाल के लिए इस सौदे हेतु कोई कमीशन दर कॉन्फ़िगर नहीं है।"
+    }
+  },
+  "tier": {
+    "pageTitle": "दलाल स्तर",
+    "addTier": "स्तर जोड़ें",
+    "editTitle": "स्तर संपादित करें",
+    "createTitle": "स्तर जोड़ें",
+    "name": "नाम",
+    "nameHi": "नाम (हिंदी)",
+    "minDeals": "न्यूनतम सौदे",
+    "maxDeals": "अधिकतम सौदे (असीमित के लिए खाली छोड़ें)",
+    "bonusType": "बोनस प्रकार",
+    "bonusTypePct": "कमीशन का प्रतिशत",
+    "bonusTypeFixed": "निश्चित राशि",
+    "bonusTypeNone": "कोई बोनस नहीं",
+    "bonusValue": "बोनस मूल्य",
+    "perksDescription": "लाभ विवरण",
+    "submit": "स्तर सहेजें",
+    "delete": "हटाएं",
+    "override": "मैन्युअल रूप से स्तर बदलें",
+    "overrideTier": "नया स्तर",
+    "overrideReason": "कारण",
+    "recalculate": "सभी दलालों की पुनर्गणना करें",
+    "columns": {
+      "name": "नाम",
+      "dealsRange": "सौदा सीमा",
+      "bonus": "बोनस",
+      "actions": "कार्रवाई"
+    }
+  },
+  "commissionTree": {
+    "empty": "अभी तक कोई कमीशन ट्री प्रविष्टि नहीं",
+    "level": "स्तर {{level}}",
+    "needsRecovery": "{{amount}} वसूल करें — कमीशन जारी होने के बाद यह बुकिंग रद्द कर दी गई थी",
+    "columns": {
+      "date": "तिथि",
+      "project": "प्रोजेक्ट",
+      "plot": "प्लॉट",
+      "buyer": "खरीदार",
+      "type": "प्रकार",
+      "total": "कुल",
+      "released": "जारी किया गया",
+      "due": "बकाया",
+      "status": "स्थिति"
+    },
+    "type": {
+      "SELLING_BROKER": "विक्रय दलाल",
+      "UPLINE_DIFFERENTIAL": "अपलाइन अंतर",
+      "NETWORK_SAME_SLAB_BONUS": "समान-स्तर बोनस"
+    },
+    "status": {
+      "PENDING": "लंबित",
+      "PARTIALLY_RELEASED": "आंशिक रूप से जारी",
+      "FULLY_RELEASED": "पूर्ण रूप से जारी",
+      "CANCELLED": "रद्द"
+    }
+  },
+  "ledger": {
+    "title": "कमीशन लेजर",
+    "orgWideTitle": "कमीशन लेजर (सभी दलाल)",
+    "empty": "अभी तक कोई कमीशन लेजर प्रविष्टि नहीं",
+    "recordPayment": "भुगतान दर्ज करें",
+    "reverse": "रिवर्स करें",
+    "needsRecovery": "{{brokerName}} से ₹{{amount}} वसूल करें",
+    "columns": {
+      "dealDate": "सौदा तिथि",
+      "broker": "दलाल",
+      "project": "प्रोजेक्ट",
+      "plot": "प्लॉट",
+      "buyer": "खरीदार",
+      "dealValue": "सौदा राशि",
+      "commission": "अर्जित कमीशन",
+      "status": "स्थिति",
+      "amountPaid": "भुगतान की गई राशि",
+      "balanceDue": "बकाया शेष",
+      "actions": "कार्रवाई"
+    },
+    "status": {
+      "PENDING": "लंबित",
+      "PARTIALLY_PAID": "आंशिक रूप से भुगतान किया गया",
+      "PAID": "भुगतान किया गया",
+      "CANCELLED": "रद्द"
+    }
+  },
+  "payment": {
+    "recordTitle": "कमीशन भुगतान दर्ज करें",
+    "amount": "राशि",
+    "paidOn": "भुगतान तिथि",
+    "mode": "भुगतान का तरीका",
+    "reference": "संदर्भ",
+    "remarks": "टिप्पणी",
+    "submit": "भुगतान दर्ज करें",
+    "submitting": "दर्ज किया जा रहा है...",
+    "confirmOverpayment": "यह राशि बकाया शेष से अधिक है। फिर भी दर्ज करें।",
+    "reverseTitle": "भुगतान रिवर्स करें",
+    "reverseReason": "कारण",
+    "reverseSubmit": "भुगतान रिवर्स करें"
+  },
+  "brokerPayment": {
+    "recordButton": "भुगतान दर्ज करें",
+    "recordTitle": "कमीशन भुगतान दर्ज करें",
+    "due": "बकाया कमीशन",
+    "exceedsDue": "यह राशि बकाया कमीशन (₹{{due}}) से अधिक है। ग्राहक संग्रह द्वारा जारी की गई राशि से अधिक भुगतान कभी नहीं किया जा सकता।",
+    "historyTitle": "भुगतान इतिहास",
+    "historyEmpty": "अभी तक कोई कमीशन भुगतान दर्ज नहीं किया गया",
+    "reversed": "रिवर्स किया गया"
+  },
+  "notes": {
+    "title": "नोट्स और फॉलो-अप",
+    "addNote": "नोट जोड़ें",
+    "empty": "अभी तक कोई नोट नहीं",
+    "occurredOn": "तिथि",
+    "type": "प्रकार",
+    "remarks": "नोट",
+    "nextFollowUpDate": "अगली फॉलो-अप तिथि (वैकल्पिक)",
+    "submit": "नोट सहेजें"
+  },
+  "saleWizard": {
+    "notInSystem": "अभी तक कोई दलाल पंजीकृत नहीं है। पहले Brokers पेज से एक जोड़ें।",
+    "selectBroker": "दलाल चुनें",
+    "noBroker": "कोई दलाल नहीं",
+    "commissionPreview": "अनुमानित कमीशन: {{amount}}",
+    "manualCommissionRequired": "इस दलाल के लिए कोई कमीशन दर कॉन्फ़िगर नहीं है — मैन्युअल रूप से राशि दर्ज करें",
+    "manualCommissionAmount": "कमीशन राशि"
+  },
+  "designation": {
+    "changeDesignation": "पदनाम बदलें",
+    "clearOverride": "ओवरराइड हटाएं",
+    "overriddenBadge": "मैन्युअल रूप से सेट",
+    "overriddenNote": "इस दलाल का पदनाम मैन्युअल रूप से सेट किया गया है और ओवरराइड हटाए जाने तक स्वचालित रूप से नहीं बदलेगा।",
+    "overrideDialog": {
+      "title": "पदनाम बदलें",
+      "designation": "नया पदनाम",
+      "reason": "कारण",
+      "reasonPlaceholder": "इसे मैन्युअल रूप से क्यों बदला जा रहा है?",
+      "submit": "सहेजें"
+    },
+    "nextDesignation": "{{designationName}} (₹{{rate}}/वर्ग फुट) तक पहुंचने के लिए {{remaining}} और टीम बिक्री",
+    "atTopDesignation": "शीर्ष पदनाम तक पहुंच गए",
+    "upline": "अपलाइन",
+    "noUpline": "कोई अपलाइन नहीं (नेटवर्क के शीर्ष पर)",
+    "directDownline": "सीधी डाउनलाइन",
+    "totalDownline": "कुल डाउनलाइन",
+    "downlineTree": "डाउनलाइन ट्री",
+    "noDownline": "अभी तक कोई डाउनलाइन नहीं",
+    "history": {
+      "title": "पदोन्नति इतिहास",
+      "empty": "अभी तक कोई पदनाम परिवर्तन नहीं",
+      "changeType": {
+        "AUTOMATIC": "स्वचालित",
+        "MANUAL": "मैन्युअल",
+        "CANCELLATION_REVERSAL": "रद्दीकरण रिवर्सल"
+      },
+      "changedFromTo": "{{from}} → {{to}} (₹{{rate}}/वर्ग फुट)",
+      "firstDesignation": "{{to}} (₹{{rate}}/वर्ग फुट) सौंपा गया",
+      "by": "{{name}} द्वारा"
+    },
+    "summary": {
+      "personalEarned": "व्यक्तिगत अर्जित कमीशन",
+      "teamEarned": "टीम अर्जित कमीशन",
+      "released": "जारी किया गया",
+      "pending": "लंबित",
+      "breakdown": "प्रकार अनुसार",
+      "sellingBroker": "विक्रय दलाल",
+      "uplineDifferential": "अपलाइन अंतर",
+      "sameSlabBonus": "समान-स्तर बोनस"
+    },
+    "networkSummary": {
+      "title": "नेटवर्क कमीशन सारांश",
+      "totalBrokers": "पदनाम दलाल",
+      "totalEarned": "कुल अर्जित",
+      "totalReleased": "कुल जारी",
+      "totalPending": "कुल लंबित"
+    }
+  }
+}

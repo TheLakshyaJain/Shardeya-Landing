@@ -1,0 +1,134 @@
+{
+  "app": {
+    "name": "शारदेय"
+  },
+  "nav": {
+    "dashboard": "डैशबोर्ड",
+    "projects": "प्रोजेक्ट",
+    "leads": "लीड",
+    "calendar": "कैलेंडर",
+    "tracker": "ट्रैकर",
+    "financials": "वित्तीय",
+    "deals": "डील इतिहास",
+    "team": "टीम",
+    "brokers": "दलाल",
+    "calculators": "कैलकुलेटर",
+    "reports": "रिपोर्ट",
+    "documentTemplates": "दस्तावेज़ टेम्पलेट",
+    "stats": "आँकड़े और विश्लेषण",
+    "design": "डिज़ाइन सिस्टम",
+    "builder": "बिल्डर",
+    "broker": "ब्रोकर",
+    "mainNav": "मुख्य नेविगेशन",
+    "openMenu": "मेनू खोलें"
+  },
+  "language": {
+    "label": "भाषा",
+    "en": "English",
+    "hi": "हिन्दी"
+  },
+  "actions": {
+    "save": "सहेजें",
+    "cancel": "रद्द करें",
+    "confirm": "पुष्टि करें",
+    "delete": "हटाएं",
+    "edit": "संपादित करें",
+    "back": "वापस",
+    "next": "अगला",
+    "previous": "पिछला",
+    "create": "बनाएं",
+    "add": "जोड़ें",
+    "remove": "हटाएं",
+    "upload": "अपलोड करें",
+    "download": "डाउनलोड करें",
+    "search": "खोजें",
+    "filter": "फ़िल्टर",
+    "clearFilters": "फ़िल्टर हटाएं",
+    "apply": "लागू करें",
+    "retry": "पुनः प्रयास करें",
+    "close": "बंद करें",
+    "showPassword": "पासवर्ड दिखाएं",
+    "hidePassword": "पासवर्ड छुपाएं"
+  },
+  "emptyState": {
+    "genericTitle": "अभी तक कुछ नहीं है",
+    "genericDescription": "आपके द्वारा जोड़ा गया डेटा यहां दिखाई देगा।"
+  },
+  "entitlement": {
+    "quotaExceeded": "आपने अपनी वर्तमान योजना में {{limit}} में से {{used}} का उपयोग किया है। अधिक जोड़ने के लिए अपग्रेड करें।"
+  },
+  "unit": {
+    "selectPlaceholder": "इकाई"
+  },
+  "placeholder": {
+    "comingSoon": "यह स्क्रीन आगामी माइलस्टोन में उपलब्ध होगी।"
+  },
+  "error": {
+    "internal": "कुछ गलत हो गया। कृपया पुनः प्रयास करें।",
+    "notFound": "हमें वह नहीं मिला जिसे आप ढूंढ रहे थे।"
+  },
+  "design": {
+    "title": "डिज़ाइन सिस्टम",
+    "subtitle": "शारदेय कॉम्पोनेंट वेरिएंट — रंग, टाइपोग्राफी, स्पेसिंग, प्रिमिटिव्स।",
+    "backHome": "होम पर वापस जाएं",
+    "sections": {
+      "colorTokens": "रंग टोकन",
+      "typography": "टाइपोग्राफी स्केल",
+      "spacing": "स्पेसिंग स्केल",
+      "buttons": "बटन",
+      "badges": "बैज",
+      "inputs": "इनपुट",
+      "dialog": "डायलॉग",
+      "toast": "टोस्ट",
+      "card": "कार्ड",
+      "table": "टेबल",
+      "emptyState": "खाली स्थिति",
+      "skeleton": "स्केलेटन"
+    },
+    "typographySamples": {
+      "h3xl": "हेडिंग 3xl",
+      "h2xl": "हेडिंग 2xl",
+      "hxl": "हेडिंग xl",
+      "hlg": "हेडिंग lg",
+      "bodyBase": "बॉडी बेस",
+      "bodySmMuted": "बॉडी sm / म्यूटेड",
+      "captionXs": "कैप्शन xs"
+    },
+    "input": {
+      "textPlaceholder": "टेक्स्ट इनपुट",
+      "selectPlaceholder": "एक विकल्प चुनें",
+      "optionA": "विकल्प A",
+      "optionB": "विकल्प B",
+      "textareaPlaceholder": "टेक्स्टएरिया"
+    },
+    "dialog": {
+      "trigger": "डायलॉग खोलें",
+      "title": "कार्रवाई की पुष्टि करें",
+      "description": "यह डिज़ाइन सिस्टम पेज के लिए एक नमूना डायलॉग है।"
+    },
+    "toast": {
+      "defaultLabel": "डिफ़ॉल्ट",
+      "successLabel": "सफलता",
+      "errorLabel": "त्रुटि",
+      "defaultMessage": "डिफ़ॉल्ट सूचना",
+      "successMessage": "भुगतान दर्ज किया गया",
+      "errorMessage": "कुछ गलत हो गया"
+    },
+    "card": {
+      "title": "प्रोजेक्ट सनराइज़ मीडोज़",
+      "description": "120 में से 42 प्लॉट बिके",
+      "status": "सक्रिय"
+    },
+    "table": {
+      "plot": "प्लॉट",
+      "status": "स्थिति",
+      "area": "क्षेत्रफल (वर्ग फुट)",
+      "sold": "बिका",
+      "available": "उपलब्ध"
+    },
+    "emptyState": {
+      "title": "अभी तक कोई प्लॉट नहीं",
+      "description": "शुरू करने के लिए प्लॉट सूची अपलोड करें।"
+    }
+  }
+}

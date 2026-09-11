@@ -1,0 +1,43 @@
+{
+  "title": "Calendar",
+  "views": { "month": "Month", "week": "Week", "day": "Day", "agenda": "Agenda" },
+  "addEvent": "Add Event",
+  "staffFilter": { "all": "All Staff", "unassigned": "Unassigned" },
+  "eventType": {
+    "FOLLOW_UP": "Follow-up",
+    "SITE_VISIT": "Site Visit",
+    "INSTALMENT_DUE": "Instalment Due",
+    "MANUAL_MEETING": "Meeting",
+    "IMPORTANT_DATE": "Important Date"
+  },
+  "legend": "Legend",
+  "agenda": {
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "overdue": "Overdue",
+    "emptyTitle": "You're all caught up",
+    "emptyDescription": "Nothing scheduled in this range."
+  },
+  "nav": {
+    "previous": "Previous 30 days",
+    "next": "Next 30 days",
+    "today": "Today",
+    "range": "{{from}} – {{to}}"
+  },
+  "form": {
+    "title": "Event Title",
+    "date": "Date",
+    "time": "Time (optional)",
+    "importantDate": "Mark as important date",
+    "assignedTo": "Assign to",
+    "notes": "Notes",
+    "submit": "Add Event",
+    "submitting": "Adding..."
+  },
+  "reschedule": {
+    "title": "Reschedule",
+    "reason": "Reason for reschedule",
+    "autoEventNote": "This is an auto-generated event and can't be rescheduled directly — edit the source record instead."
+  },
+  "complete": "Mark Done"
+}

@@ -1,0 +1,48 @@
+{
+  "wizard": {
+    "title": "Bulk Upload Plots",
+    "steps": {
+      "download": "Download Template",
+      "upload": "Upload File",
+      "preview": "Preview & Fix",
+      "commit": "Commit"
+    },
+    "download": {
+      "title": "Step 1: Download the template",
+      "description": "Download the Excel template, fill in one row per plot, and upload it back here. Dropdowns for status, facing and size unit help avoid typos.",
+      "button": "Download Template"
+    },
+    "upload": {
+      "title": "Step 2: Upload your filled-in file",
+      "description": "Choose the Excel file you filled in.",
+      "dropHint": "Drag and drop your file here, or click to choose",
+      "duplicateMode": "If a plot number already exists",
+      "duplicateModes": {
+        "SKIP": "Skip it (recommended)",
+        "UPDATE_EXISTING": "Update the existing plot",
+        "FAIL": "Stop and show an error"
+      },
+      "autoPlace": "Automatically place plots on the grid using row/column columns"
+    },
+    "preview": {
+      "title": "Step 3: Preview and fix errors",
+      "summary": "{{valid}} valid, {{invalid}} need fixing, of {{total}} total rows",
+      "rowNumber": "Row",
+      "errorsColumn": "Errors",
+      "editRow": "Edit row",
+      "onlyErrors": "Show only rows with errors",
+      "allRows": "Show all rows"
+    },
+    "commit": {
+      "title": "Step 4: Commit the import",
+      "description": "This will create plots from every valid row. Rows with errors will be skipped unless you fix them first.",
+      "skipInvalid": "Import valid rows and skip the ones with errors",
+      "button": "Commit Import",
+      "committing": "Importing...",
+      "resultTitle": "Import complete",
+      "resultSummary": "{{imported}} plots imported."
+    },
+    "cancel": "Cancel Import",
+    "cancelConfirm": "Cancel this import? Nothing will be created."
+  }
+}
