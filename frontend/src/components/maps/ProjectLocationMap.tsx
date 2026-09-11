@@ -97,12 +97,12 @@ export function ProjectLocationMap({
   }, [hasCoordinates, latitude, longitude, projectName, locality, city]);
 
   return (
-    <Card className="overflow-hidden border-border/80 shadow-xs">
+    <Card className="overflow-hidden border-border/80 shadow-xs max-w-full md:max-w-[70%]">
       <CardHeader className="flex flex-row items-center justify-between pb-3">
         <div className="space-y-1">
           <CardTitle className="flex items-center gap-2 text-base font-semibold">
             <MapPin className="size-4 text-emerald-600" />
-            Project Location & Site Map
+            Project Location
           </CardTitle>
           <CardDescription className="text-xs">
             {locality}, {city} • {address}
@@ -131,7 +131,7 @@ export function ProjectLocationMap({
       <CardContent className="p-0">
         {hasCoordinates ? (
           <div>
-            <div ref={mapContainerRef} className="h-72 w-full z-0 border-y" />
+            <div ref={mapContainerRef} className="h-[200px] w-full z-0 border-y" />
             <div className="flex flex-wrap items-center justify-between gap-3 bg-muted/40 px-4 py-2.5 text-xs">
               <div className="flex items-center gap-2 text-muted-foreground">
                 <Compass className="size-4 text-emerald-600" />

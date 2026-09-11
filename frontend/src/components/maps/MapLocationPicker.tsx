@@ -288,7 +288,7 @@ export function MapLocationPicker({
 
       {/* Interactive Leaflet Map View */}
       <div className="relative overflow-hidden rounded-lg border bg-muted">
-        <div ref={mapContainerRef} className="h-64 w-full z-0" />
+        <div ref={mapContainerRef} className="h-[180px] w-full z-0" />
 
         {!hasCoordinates && (
           <div className="pointer-events-none absolute inset-x-0 bottom-2 flex justify-center">
