@@ -10,10 +10,11 @@ import { useAuth, UserRole } from '../../context/AuthContext';
 
 interface LoginPageProps {
   onBack: () => void;
+  onEnterApp?: () => void;
   initialMode?: 'login' | 'signup';
 }
 
-export const LoginPage: React.FC<LoginPageProps> = ({ onBack, initialMode = 'login' }) => {
+export const LoginPage: React.FC<LoginPageProps> = ({ onBack, onEnterApp, initialMode = 'login' }) => {
   const { language } = useLanguage();
   const isHi = language === 'hi';
   const { user, login, signup, logout, requestPasswordReset, getLockoutStatus } = useAuth();
@@ -123,6 +124,9 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack, initialMode = 'log
       }
     } else {
       setSuccessToast(isHi ? 'प्रमाणीकरण सफल!' : 'Identity verified successfully.');
+      if (onEnterApp) {
+        setTimeout(() => onEnterApp(), 600);
+      }
     }
   };
 
@@ -178,6 +182,9 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack, initialMode = 'log
         // Fallback
       }
       setSuccessToast(isHi ? 'खाता सफलतापूर्वक बनाया गया!' : 'Enterprise account created successfully.');
+      if (onEnterApp) {
+        setTimeout(() => onEnterApp(), 800);
+      }
     }
   };
 
@@ -265,13 +272,23 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack, initialMode = 'log
                 </div>
               </div>
 
-              <div className="space-y-2 pt-2">
+              <div className="space-y-2.5 pt-2">
+                <button
+                  onClick={() => {
+                    if (onEnterApp) onEnterApp();
+                    else onBack();
+                  }}
+                  className="w-full py-3 px-4 rounded-xl bg-forest hover:bg-forest-600 text-white font-sans font-bold text-xs uppercase tracking-wider shadow-warm-sm transition-all flex items-center justify-center gap-2"
+                >
+                  <span>{isHi ? 'शारदेया प्लेटफॉर्म में प्रवेश करें' : 'Enter Shardeya Platform'}</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+
                 <button
                   onClick={onBack}
-                  className="w-full py-3 px-4 rounded-xl bg-forest hover:bg-forest-light text-white font-sans font-bold text-xs uppercase tracking-wider shadow-warm-sm transition-all flex items-center justify-center gap-2"
+                  className="w-full py-2.5 px-4 rounded-xl border border-sand-300 text-espresso-800 hover:bg-sand-100 font-sans font-semibold text-xs tracking-wider uppercase transition-all flex items-center justify-center gap-2"
                 >
-                  <span>Return to Website</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <span>{isHi ? 'वेबसाइट पर वापस जाएं' : 'Return to Website'}</span>
                 </button>
 
                 <button
@@ -279,7 +296,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack, initialMode = 'log
                     logout();
                     setSuccessToast('');
                   }}
-                  className="w-full py-2.5 px-4 rounded-xl border border-sand-300 text-espresso-700 hover:bg-sand-100 text-xs font-semibold transition-all"
+                  className="w-full py-2 px-4 rounded-xl text-espresso-600 hover:text-rose-600 hover:bg-rose-50 text-xs font-semibold transition-all"
                 >
                   Sign Out
                 </button>

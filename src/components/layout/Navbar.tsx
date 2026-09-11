@@ -9,9 +9,10 @@ import { useAuth } from '../../context/AuthContext';
 interface NavbarProps {
   onOpenDemo: () => void;
   onOpenLogin?: (mode?: 'login' | 'signup') => void;
+  onOpenApp?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo, onOpenLogin }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo, onOpenLogin, onOpenApp }) => {
   const { language, toggleLanguage, t } = useLanguage();
   const { user, isAuthenticated, logout } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -41,20 +42,24 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo, onOpenLogin }) => {
           </a>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden lg:flex items-center gap-8 font-sans">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-xs font-bold uppercase tracking-wider text-espresso-700 hover:text-forest transition-colors duration-200 py-1"
-              >
-                {link.label}
-              </a>
-            ))}
+          <div className="hidden lg:flex items-center gap-8">
+            {navLinks.map((link) => {
+              const Icon = link.icon;
+              return (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="flex items-center gap-2 text-xs font-sans font-semibold text-espresso-700 hover:text-forest transition-colors tracking-wide uppercase"
+                >
+                  <Icon className="w-3.5 h-3.5 text-espresso-400 group-hover:text-forest" />
+                  <span>{link.label}</span>
+                </a>
+              );
+            })}
           </div>
 
           {/* Right Action Bar */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-3">
             {/* Language Switcher */}
             <button
               onClick={toggleLanguage}
@@ -73,9 +78,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo, onOpenLogin }) => {
               <div className="flex items-center gap-2.5">
                 {/* User Capsule / Profile trigger */}
                 <button
-                  onClick={() => onOpenLogin?.('login')}
+                  onClick={() => onOpenApp ? onOpenApp() : onOpenLogin?.('login')}
                   className="flex items-center gap-2 pl-2 pr-3 py-1.5 rounded-xl border border-emerald-300 bg-emerald-50/70 hover:bg-emerald-100/70 transition-all shadow-warm-sm"
-                  title="Open Authenticated Console"
+                  title="Open Shardeya Platform"
                 >
                   <div className="w-6 h-6 rounded-full bg-forest text-white flex items-center justify-center font-serif text-xs font-bold shadow-sm">
                     {user.avatarInitials}
@@ -88,6 +93,15 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo, onOpenLogin }) => {
                       {user.role === 'developer' ? 'Developer' : 'Partner'}
                     </span>
                   </div>
+                </button>
+
+                {/* Open Platform Action */}
+                <button
+                  onClick={onOpenApp}
+                  className="px-3.5 py-2 rounded-lg bg-forest hover:bg-forest-600 text-white font-sans font-bold text-xs uppercase tracking-wider shadow-warm-sm transition-all flex items-center gap-1.5"
+                >
+                  <span>{isHi ? 'प्लेटफॉर्म खोलें' : 'Open Platform'}</span>
+                  <ChevronRight className="w-3.5 h-3.5" />
                 </button>
 
                 {/* Quick Sign Out Button */}
@@ -178,11 +192,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo, onOpenLogin }) => {
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);
-                    onOpenLogin?.('login');
+                    if (onOpenApp) onOpenApp();
+                    else onOpenLogin?.('login');
                   }}
                   className="w-full py-2.5 px-4 rounded-lg bg-forest text-white font-sans font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2 shadow-warm-sm"
                 >
-                  View Workspace Portal
+                  {isHi ? 'शारदेया प्लेटफॉर्म खोलें' : 'Open Shardeya Platform'}
                 </button>
 
                 <button

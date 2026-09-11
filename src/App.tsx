@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { LanguageProvider } from './context/LanguageContext';
 import { AuthProvider } from './context/AuthContext';
+import { CrmProvider } from './context/CrmContext';
 import { Navbar } from './components/layout/Navbar';
 import { HeroSection } from './components/hero/HeroSection';
 import { MasterplanVisualizer } from './components/demo/MasterplanVisualizer';
@@ -11,12 +12,15 @@ import { CoreFeaturesGrid } from './components/features/CoreFeaturesGrid';
 import { Footer } from './components/layout/Footer';
 import { DemoModal } from './components/modals/DemoModal';
 import { LoginPage } from './components/auth/LoginPage';
+import { CrmAppShell } from './components/crm/shell/CrmAppShell';
 
 export const AppContent: React.FC = () => {
-  const [view, setView] = useState<'landing' | 'auth'>(() => {
+  const [view, setView] = useState<'landing' | 'auth' | 'app'>(() => {
     if (typeof window !== 'undefined') {
       const hash = window.location.hash;
-      return (hash === '#login' || hash === '#signup') ? 'auth' : 'landing';
+      if (hash === '#app') return 'app';
+      if (hash === '#login' || hash === '#signup') return 'auth';
+      return 'landing';
     }
     return 'landing';
   });
@@ -33,7 +37,10 @@ export const AppContent: React.FC = () => {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
-      if (hash === '#login') {
+      if (hash === '#app') {
+        setView('app');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (hash === '#login') {
         setAuthMode('login');
         setView('auth');
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -57,9 +64,15 @@ export const AppContent: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleOpenApp = () => {
+    setView('app');
+    window.location.hash = 'app';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleBackToLanding = () => {
     setView('landing');
-    if (window.location.hash === '#login' || window.location.hash === '#signup') {
+    if (window.location.hash === '#login' || window.location.hash === '#signup' || window.location.hash === '#app') {
       window.history.pushState(null, '', window.location.pathname);
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -80,16 +93,30 @@ export const AppContent: React.FC = () => {
     }
   };
 
-  if (view === 'auth') {
-    return <LoginPage onBack={handleBackToLanding} initialMode={authMode} />;
+  // 1. CRM Real Estate Platform View
+  if (view === 'app') {
+    return <CrmAppShell onBackToLanding={handleBackToLanding} />;
   }
 
+  // 2. Authentication View
+  if (view === 'auth') {
+    return (
+      <LoginPage 
+        onBack={handleBackToLanding} 
+        onEnterApp={handleOpenApp} 
+        initialMode={authMode} 
+      />
+    );
+  }
+
+  // 3. Marketing Landing Page View
   return (
     <div className="min-h-screen bg-sand-100 bg-ambient-luminous text-espresso-950 selection:bg-forest/15 selection:text-forest">
       {/* Navigation */}
       <Navbar
         onOpenDemo={handleOpenDemo}
         onOpenLogin={handleOpenAuth}
+        onOpenApp={handleOpenApp}
       />
 
       {/* Hero Section */}
@@ -126,7 +153,9 @@ export default function App() {
   return (
     <LanguageProvider>
       <AuthProvider>
-        <AppContent />
+        <CrmProvider>
+          <AppContent />
+        </CrmProvider>
       </AuthProvider>
     </LanguageProvider>
   );
