@@ -3,7 +3,8 @@ import {
   ArrowLeft, ShieldCheck, Mail, Lock, 
   Eye, EyeOff, CheckCircle2, ArrowRight, Building2, 
   Users, RefreshCw, Check, AlertCircle, Sparkles,
-  KeyRound, HelpCircle, X, ShieldAlert, BadgeCheck
+  KeyRound, X, ShieldAlert, BadgeCheck, Compass,
+  Layers, ChevronRight
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { useLanguage } from '../../context/LanguageContext';
@@ -19,7 +20,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack, initialMode = 'log
   const isHi = language === 'hi';
   const { user, login, signup, logout, requestPasswordReset, getLockoutStatus } = useAuth();
 
-  // Auth Mode: Sign In vs Sign Up
+  // Mode: Sign In vs Sign Up (toggled via clean header/footer links, NOT stacked tabs)
   const [authMode, setAuthMode] = useState<'login' | 'signup'>(initialMode);
   const [role, setRole] = useState<UserRole>('developer');
 
@@ -40,20 +41,19 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack, initialMode = 'log
   const [showSignupPassword, setShowSignupPassword] = useState(false);
   const [agreeTerms, setAgreeTerms] = useState(false);
 
-  // UI & Loading States
+  // Status & Feedback States
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [successToast, setSuccessToast] = useState('');
-  
-  // Forgot Password Modal State
+
+  // Password Reset Modal
   const [showForgotModal, setShowForgotModal] = useState(false);
   const [forgotEmail, setForgotEmail] = useState('');
   const [forgotStatus, setForgotStatus] = useState<{ loading: boolean; message: string; isError: boolean } | null>(null);
 
-  // Lockout Countdown Timer
+  // Brute-force Lockout Countdown
   const [lockoutSeconds, setLockoutSeconds] = useState(0);
 
-  // Update lockout countdown if email changes
   useEffect(() => {
     if (loginEmail) {
       const status = getLockoutStatus(loginEmail);
@@ -73,14 +73,13 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack, initialMode = 'log
     return () => clearInterval(interval);
   }, [lockoutSeconds]);
 
-  // Sync mode with hash if changed externally
   useEffect(() => {
     if (initialMode) {
       setAuthMode(initialMode);
     }
   }, [initialMode]);
 
-  // Password strength calculation for Sign Up
+  // Password strength logic
   const passwordCriteria = {
     length: signupPassword.length >= 8,
     hasUpper: /[A-Z]/.test(signupPassword),
@@ -95,23 +94,24 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack, initialMode = 'log
     passwordCriteria.hasSpecial
   ].filter(Boolean).length;
 
-  const getStrengthLabel = () => {
-    if (!signupPassword) return { label: 'Empty', color: 'bg-sand-200', text: 'text-espresso-400' };
-    if (passwordScore <= 1) return { label: isHi ? 'कमजोर (असुरक्षित)' : 'Weak', color: 'bg-rose-500', text: 'text-rose-700' };
-    if (passwordScore === 2) return { label: isHi ? 'मध्यम' : 'Fair', color: 'bg-amber-500', text: 'text-amber-700' };
-    if (passwordScore === 3) return { label: isHi ? 'मजबूत' : 'Strong', color: 'bg-emerald-500', text: 'text-emerald-700' };
-    return { label: isHi ? 'उद्यम-स्तरीय सुरक्षित' : 'Enterprise Fortified', color: 'bg-forest', text: 'text-forest' };
+  const getStrengthBar = () => {
+    if (!signupPassword) return { text: '', color: 'bg-sand-200', width: 'w-0' };
+    if (passwordScore <= 1) return { text: isHi ? 'कमजोर' : 'Weak', color: 'bg-rose-500', width: 'w-1/4' };
+    if (passwordScore === 2) return { text: isHi ? 'मध्यम' : 'Fair', color: 'bg-amber-500', width: 'w-2/4' };
+    if (passwordScore === 3) return { text: isHi ? 'मजबूत' : 'Strong', color: 'bg-emerald-500', width: 'w-3/4' };
+    return { text: isHi ? 'उद्यम-स्तरीय' : 'Enterprise Secure', color: 'bg-forest', width: 'w-full' };
   };
 
-  // Quick autofill demo accounts for frictionless testing
-  const handleAutofillDemo = (targetRole: UserRole) => {
-    setRole(targetRole);
+  // Subtle Demo Autofill Helper
+  const handleAutofill = (type: 'dev' | 'broker') => {
     setAuthMode('login');
     setErrorMessage('');
-    if (targetRole === 'developer') {
+    if (type === 'dev') {
+      setRole('developer');
       setLoginEmail('director@apexdevelopers.com');
       setLoginPassword('Shardeya@2026');
     } else {
+      setRole('broker');
       setLoginEmail('partner@apexrealty.com');
       setLoginPassword('Shardeya@2026');
     }
@@ -124,7 +124,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack, initialMode = 'log
     setSuccessToast('');
 
     if (!loginEmail.trim() || !loginPassword) {
-      setErrorMessage(isHi ? 'कृपया कॉर्पोरेट ईमेल और पासवर्ड दोनों दर्ज करें।' : 'Please enter both corporate email and password.');
+      setErrorMessage(isHi ? 'कृपया ईमेल और पासवर्ड दर्ज करें।' : 'Please enter your corporate email and password.');
       return;
     }
 
@@ -133,13 +133,13 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack, initialMode = 'log
     setIsLoading(false);
 
     if (!result.success) {
-      setErrorMessage(result.error || 'Authentication failed. Please check credentials.');
+      setErrorMessage(result.error || 'Invalid credentials. Please verify and retry.');
       const status = getLockoutStatus(loginEmail);
       if (status.isLocked) {
         setLockoutSeconds(status.remainingSeconds);
       }
     } else {
-      setSuccessToast(isHi ? 'प्रमाणीकरण सफल! आपका स्वागत है।' : 'Authentication verified. Welcome to Shardeya.');
+      setSuccessToast(isHi ? 'प्रमाणीकरण सफल!' : 'Identity verified successfully.');
     }
   };
 
@@ -150,32 +150,27 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack, initialMode = 'log
     setSuccessToast('');
 
     if (!signupName.trim()) {
-      setErrorMessage(isHi ? 'कृपया अपना पूरा नाम दर्ज करें।' : 'Please enter your full legal name.');
+      setErrorMessage(isHi ? 'कृपया अपना नाम दर्ज करें।' : 'Please enter your full authorized name.');
       return;
     }
-
     if (!signupEmail.trim()) {
       setErrorMessage(isHi ? 'कृपया कॉर्पोरेट ईमेल दर्ज करें।' : 'Please enter your corporate email address.');
       return;
     }
-
     if (!signupOrg.trim()) {
-      setErrorMessage(isHi ? 'कृपया अपनी संस्था / फर्म का नाम दर्ज करें।' : 'Please enter your organization or firm name.');
+      setErrorMessage(isHi ? 'कृपया अपनी फर्म का नाम दर्ज करें।' : 'Please enter your firm or enterprise name.');
       return;
     }
-
     if (passwordScore < 3) {
-      setErrorMessage(isHi ? 'पासवर्ड सुरक्षा मानकों को पूरा करें (न्यूनतम 8 अक्षर, बड़ा अक्षर, संख्या व विशेष चिन्ह)।' : 'Please satisfy password complexity criteria (minimum 8 characters, uppercase, number & symbol).');
+      setErrorMessage(isHi ? 'पासवर्ड में न्यूनतम 8 अक्षर, एक बड़ा अक्षर, संख्या और प्रतीक होना चाहिए।' : 'Password must be at least 8 characters and include uppercase, numbers, and symbols.');
       return;
     }
-
     if (signupPassword !== signupConfirmPassword) {
-      setErrorMessage(isHi ? 'पासवर्ड और पुष्टि पासवर्ड मेल नहीं खाते।' : 'Passwords do not match. Please verify and re-type.');
+      setErrorMessage(isHi ? 'पासवर्ड मेल नहीं खाते।' : 'Passwords do not match. Please verify.');
       return;
     }
-
     if (!agreeTerms) {
-      setErrorMessage(isHi ? 'कृपया नियम एवं शर्तों और रेरा नीतियों को स्वीकार करें।' : 'Please accept the Shardeya Enterprise Terms & RERA Privacy Protocol.');
+      setErrorMessage(isHi ? 'कृपया सेवा शर्तों को स्वीकार करें।' : 'Please accept the Shardeya Enterprise Terms & RERA Privacy Protocol.');
       return;
     }
 
@@ -192,33 +187,27 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack, initialMode = 'log
     setIsLoading(false);
 
     if (!result.success) {
-      setErrorMessage(result.error || 'Account creation failed. Please check inputs.');
+      setErrorMessage(result.error || 'Failed to create account.');
     } else {
       try {
-        confetti({
-          particleCount: 80,
-          spread: 70,
-          origin: { y: 0.6 }
-        });
+        confetti({ particleCount: 70, spread: 60, origin: { y: 0.6 } });
       } catch {
-        // Safe fallback
+        // Fallback
       }
-      setSuccessToast(isHi ? 'उद्यम खाता सफलतापूर्वक बनाया गया!' : 'Enterprise account successfully provisioned!');
+      setSuccessToast(isHi ? 'खाता सफलतापूर्वक बनाया गया!' : 'Enterprise account created successfully.');
     }
   };
 
-  // Password Reset Dispatch Handler
   const handleSendReset = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!forgotEmail.trim()) {
       setForgotStatus({
         loading: false,
-        message: isHi ? 'कृपया अपना पंजीकृत कॉर्पोरेट ईमेल दर्ज करें।' : 'Please enter your registered corporate email.',
+        message: isHi ? 'कृपया ईमेल दर्ज करें।' : 'Please enter your email address.',
         isError: true,
       });
       return;
     }
-
     setForgotStatus({ loading: true, message: '', isError: false });
     const res = await requestPasswordReset(forgotEmail);
     setForgotStatus({
@@ -229,102 +218,203 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack, initialMode = 'log
   };
 
   return (
-    <div className="min-h-screen bg-sand-100 text-espresso-950 font-sans flex flex-col justify-between selection:bg-forest/15 selection:text-forest">
+    <div className="min-h-screen bg-sand-100 font-sans selection:bg-forest/15 selection:text-forest flex flex-col lg:flex-row">
       
-      {/* Enterprise Top Header */}
-      <header className="w-full bg-white/90 backdrop-blur-xl border-b border-sand-300 py-3.5 px-4 sm:px-8 shadow-warm-sm sticky top-0 z-30">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          
-          {/* Brand Logo */}
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-forest flex items-center justify-center text-white font-serif font-bold text-lg shadow-warm-sm">
+      {/* ============================================================
+          LEFT PANEL: Architectural Heritage & Editorial Brand Showcase
+         ============================================================ */}
+      <div className="lg:w-5/12 xl:w-5/12 bg-[#051F19] text-white p-8 sm:p-12 lg:p-16 flex flex-col justify-between relative overflow-hidden">
+        
+        {/* Subtle Architectural Grid Background Pattern */}
+        <div 
+          className="absolute inset-0 opacity-[0.07] pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)`,
+            backgroundSize: '40px 40px'
+          }}
+        />
+
+        {/* Ambient Emerald Radial Glow */}
+        <div className="absolute -top-32 -left-32 w-96 h-96 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+
+        {/* Brand Header */}
+        <div className="relative z-10">
+          <div className="flex items-center gap-3.5 mb-8">
+            <div className="w-10 h-10 rounded-xl bg-forest-light/20 border border-forest-light/40 flex items-center justify-center text-emerald-300 font-serif font-bold text-xl backdrop-blur-md">
               S
             </div>
             <div>
-              <span className="font-serif font-bold text-xl tracking-tight text-espresso-950 block leading-none">
-                SHARDEYA GROUP
+              <span className="font-serif font-bold text-2xl tracking-tight text-white block leading-tight">
+                SHARDEYA
               </span>
-              <span className="text-[10px] font-mono text-espresso-600 uppercase tracking-wider block mt-1">
-                Real Estate Enterprise OS • Secure Auth
+              <span className="text-[10px] font-mono tracking-widest text-emerald-400/90 uppercase block mt-0.5">
+                Real Estate Operating System
               </span>
             </div>
           </div>
+        </div>
 
-          {/* Quick Return Button */}
+        {/* Center Editorial Showcase */}
+        <div className="relative z-10 my-auto py-8">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-[11px] font-mono tracking-wider text-emerald-300 mb-6 backdrop-blur-md">
+            <Compass className="w-3.5 h-3.5" />
+            <span>ENTERPRISE PLATFORM</span>
+          </div>
+
+          <h2 className="font-serif text-3xl sm:text-4xl text-white font-normal leading-snug tracking-tight mb-6">
+            Architecting the future of Indian land parcels & development.
+          </h2>
+
+          <p className="text-sand-300/80 text-sm leading-relaxed mb-8 max-w-md font-sans">
+            A unified real estate operating system orchestrating multi-phase plotting layouts, automated demand milestones, and verified broker syndicates under strict RERA compliance.
+          </p>
+
+          {/* Floating Metric Card */}
+          <div className="p-5 rounded-2xl bg-white/[0.05] border border-white/10 backdrop-blur-md space-y-3.5 max-w-md shadow-2xl">
+            <div className="flex items-center justify-between text-xs text-sand-300/70 border-b border-white/10 pb-2.5">
+              <span className="font-mono text-[11px] uppercase tracking-wider">Active Workspace</span>
+              <span className="font-mono text-emerald-400 font-semibold">Verified RERA Escrow</span>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 pt-1">
+              <div>
+                <div className="text-[11px] text-sand-400 font-sans">Inventory Realization</div>
+                <div className="text-xl font-serif font-bold text-white mt-0.5">₹420+ Cr</div>
+              </div>
+              <div>
+                <div className="text-[11px] text-sand-400 font-sans">Broker Lead Protection</div>
+                <div className="text-xl font-serif font-bold text-emerald-400 mt-0.5">48-Hr Lock</div>
+              </div>
+            </div>
+
+            <div className="pt-2 text-[11px] text-sand-300/60 italic font-serif">
+              "Eliminated double allotments and transformed our broker syndicate payouts."
+              <span className="block text-[10px] not-italic font-sans text-sand-400 mt-1">
+                — Rajeshwar Singhania, Director, Apex Greens LLP
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer Security Badges */}
+        <div className="relative z-10 pt-6 border-t border-white/10 flex items-center justify-between text-[11px] text-sand-400 font-mono">
+          <span className="flex items-center gap-1.5">
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+            256-Bit TLS 1.3
+          </span>
+          <span>ISO 27001 Certified</span>
+          <span>RERA Compliant</span>
+        </div>
+
+      </div>
+
+      {/* ============================================================
+          RIGHT PANEL: Clean, Focused, Human-Crafted Authentication Form
+         ============================================================ */}
+      <div className="lg:w-7/12 xl:w-7/12 bg-white flex flex-col justify-between p-6 sm:p-10 lg:p-14 overflow-y-auto">
+        
+        {/* Top Action Bar */}
+        <div className="flex items-center justify-between pb-6 border-b border-sand-200/80">
           <button
             onClick={onBack}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-sand-300 bg-sand-50 hover:bg-sand-200 text-espresso-800 text-xs font-bold transition-all shadow-warm-sm group"
+            className="inline-flex items-center gap-2 text-xs font-semibold text-espresso-700 hover:text-forest transition-colors group"
           >
-            <ArrowLeft className="w-4 h-4 text-forest group-hover:-translate-x-1 transition-transform" />
+            <ArrowLeft className="w-4 h-4 text-forest transition-transform group-hover:-translate-x-1" />
             <span>{isHi ? 'वेबसाइट पर वापस जाएं' : 'Back to Website'}</span>
           </button>
+
+          {/* Clean Top Switcher (Replaces the clunky stacked tabs!) */}
+          {!user && (
+            <div className="text-xs font-sans">
+              {authMode === 'login' ? (
+                <span className="text-espresso-600">
+                  {isHi ? 'नया खाता बनाना चाहते हैं?' : "Don't have an enterprise account?"}{' '}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setAuthMode('signup');
+                      setErrorMessage('');
+                      setSuccessToast('');
+                      window.location.hash = 'signup';
+                    }}
+                    className="font-bold text-forest hover:text-forest-dark transition-colors inline-flex items-center gap-0.5 ml-1"
+                  >
+                    <span>{isHi ? 'खाता बनाएं' : 'Create workspace'}</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                </span>
+              ) : (
+                <span className="text-espresso-600">
+                  {isHi ? 'पहले से पंजीकृत हैं?' : 'Already have a workspace account?'}{' '}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setAuthMode('login');
+                      setErrorMessage('');
+                      setSuccessToast('');
+                      window.location.hash = 'login';
+                    }}
+                    className="font-bold text-forest hover:text-forest-dark transition-colors inline-flex items-center gap-0.5 ml-1"
+                  >
+                    <span>{isHi ? 'साइन इन करें' : 'Sign in'}</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                </span>
+              )}
+            </div>
+          )}
         </div>
-      </header>
 
-      {/* Main Authentication Container */}
-      <main className="flex-1 flex items-center justify-center px-4 py-8 sm:py-12">
-        <div className="w-full max-w-lg">
+        {/* Center Canvas Container */}
+        <div className="max-w-md w-full mx-auto my-auto py-8">
 
-          {/* SUCCESS STATE: Authenticated Active Session Card */}
+          {/* 1. AUTHENTICATED STATE: Prestigious Passcard */}
           {user ? (
-            <div className="bg-white rounded-2xl border border-sand-300 p-8 shadow-warm-lg text-center animate-fadeIn">
-              <div className="w-20 h-20 rounded-full bg-emerald-100 border-2 border-emerald-300 text-emerald-800 flex items-center justify-center mx-auto mb-4 font-serif font-bold text-2xl shadow-warm-sm">
+            <div className="text-center animate-fadeIn space-y-6">
+              <div className="w-20 h-20 rounded-2xl bg-emerald-50 border border-emerald-200 text-forest flex items-center justify-center mx-auto font-serif font-bold text-2xl shadow-warm-sm">
                 {user.avatarInitials}
               </div>
 
-              <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-mono font-bold mb-3">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                <span>ACTIVE ENTERPRISE SESSION</span>
+              <div>
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-mono font-bold mb-3">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>AUTHENTICATED ENTERPRISE SESSION</span>
+                </div>
+                <h2 className="font-serif font-bold text-3xl text-espresso-950">
+                  {user.name}
+                </h2>
+                <p className="text-sm text-espresso-600 font-sans mt-1">
+                  {user.designation}
+                </p>
+                <p className="text-xs font-mono text-forest font-semibold mt-0.5">
+                  {user.organization} {user.reraNumber ? `• ${user.reraNumber}` : ''}
+                </p>
               </div>
 
-              <h2 className="font-serif font-bold text-2xl sm:text-3xl text-espresso-950">
-                {user.name}
-              </h2>
-              <p className="text-sm text-espresso-700 font-sans font-medium mt-1">
-                {user.designation}
-              </p>
-              <div className="text-xs font-mono text-forest font-semibold mt-1">
-                {user.organization}
-              </div>
-
-              {user.reraNumber && (
-                <div className="mt-2 inline-block px-2.5 py-0.5 rounded bg-sand-100 border border-sand-200 text-[11px] font-mono text-espresso-600">
-                  RERA: <span className="font-bold text-espresso-800">{user.reraNumber}</span>
+              <div className="p-4 rounded-xl bg-sand-100 border border-sand-300/80 text-left text-xs space-y-2 font-sans">
+                <div className="flex justify-between text-espresso-600">
+                  <span>Corporate Identity:</span>
+                  <span className="font-mono font-semibold text-espresso-900">{user.email}</span>
                 </div>
-              )}
-
-              {/* Security Telemetry Details */}
-              <div className="mt-6 p-4 rounded-xl bg-sand-50 border border-sand-200 text-left text-xs space-y-2.5">
-                <div className="flex justify-between items-center text-espresso-600">
-                  <span>Authorized Identity:</span>
-                  <span className="font-mono font-bold text-espresso-900">{user.email}</span>
-                </div>
-                <div className="flex justify-between items-center text-espresso-600">
-                  <span>Portal Role:</span>
-                  <span className="font-bold text-espresso-900 capitalize">
-                    {user.role === 'developer' ? 'Real Estate Builder / Developer' : 'Authorized Channel Partner'}
+                <div className="flex justify-between text-espresso-600">
+                  <span>Portal Permissions:</span>
+                  <span className="font-semibold text-espresso-900 capitalize">
+                    {user.role === 'developer' ? 'Developer Console (Inventory & Demand)' : 'Channel Partner Syndicate'}
                   </span>
                 </div>
-                <div className="flex justify-between items-center text-espresso-600">
-                  <span>Session Encryption:</span>
-                  <span className="font-mono font-bold text-emerald-700 flex items-center gap-1">
-                    <ShieldCheck className="w-3.5 h-3.5 text-forest" />
-                    256-Bit TLS 1.3 • AES-GCM
-                  </span>
-                </div>
-                <div className="flex justify-between items-center text-espresso-600">
-                  <span>Session ID:</span>
-                  <span className="font-mono text-espresso-500 text-[11px]">{user.id}</span>
+                <div className="flex justify-between text-espresso-600">
+                  <span>Security Protocol:</span>
+                  <span className="font-mono text-emerald-700 font-bold">256-Bit TLS 1.3 • Verified</span>
                 </div>
               </div>
 
-              {/* Action Buttons */}
-              <div className="mt-6 space-y-3">
+              <div className="space-y-2.5 pt-2">
                 <button
                   onClick={onBack}
-                  className="w-full py-3.5 px-4 rounded-xl bg-forest hover:bg-forest-light text-white font-sans font-bold text-xs uppercase tracking-wider shadow-warm-sm transition-all flex items-center justify-center gap-2"
+                  className="w-full py-3.5 px-5 rounded-xl bg-forest hover:bg-forest-light text-white font-sans font-bold text-xs uppercase tracking-wider shadow-warm-sm transition-all flex items-center justify-center gap-2"
                 >
-                  <span>Return to Shardeya Platform</span>
+                  <span>Enter Shardeya Platform</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
 
@@ -332,158 +422,117 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack, initialMode = 'log
                   onClick={() => {
                     logout();
                     setSuccessToast('');
-                    setErrorMessage('');
                   }}
-                  className="w-full py-2.5 px-4 rounded-xl border border-sand-300 text-espresso-700 hover:bg-sand-100 text-xs font-sans font-semibold transition-all"
+                  className="w-full py-2.5 px-5 rounded-xl border border-sand-300 text-espresso-700 hover:bg-sand-100 text-xs font-semibold transition-all"
                 >
-                  Sign Out of Enterprise Session
+                  Sign Out of Session
                 </button>
               </div>
             </div>
           ) : (
-            /* UNTOUCHED AUTHENTICATION INTERFACE (Sign In / Sign Up) */
-            <div className="bg-white rounded-2xl border border-sand-300 shadow-warm-lg overflow-hidden">
+            /* 2. AUTHENTICATION FORMS */
+            <div>
               
-              {/* Primary Dual Mode Navigation: Sign In vs Sign Up */}
-              <div className="grid grid-cols-2 border-b border-sand-300 bg-sand-100/70 p-1.5 gap-1.5">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setAuthMode('login');
-                    setErrorMessage('');
-                    setSuccessToast('');
-                  }}
-                  className={`py-2.5 px-3 rounded-xl text-xs font-sans font-bold transition-all flex items-center justify-center gap-2 ${
-                    authMode === 'login'
-                      ? 'bg-white text-forest shadow-warm-sm border border-sand-300/80'
-                      : 'text-espresso-600 hover:text-espresso-950 hover:bg-white/50'
-                  }`}
-                >
-                  <KeyRound className="w-3.5 h-3.5" />
-                  <span>{isHi ? 'साइन इन (लॉगिन)' : 'Sign In'}</span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    setAuthMode('signup');
-                    setErrorMessage('');
-                    setSuccessToast('');
-                  }}
-                  className={`py-2.5 px-3 rounded-xl text-xs font-sans font-bold transition-all flex items-center justify-center gap-2 ${
-                    authMode === 'signup'
-                      ? 'bg-white text-forest shadow-warm-sm border border-sand-300/80'
-                      : 'text-espresso-600 hover:text-espresso-950 hover:bg-white/50'
-                  }`}
-                >
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>{isHi ? 'नया खाता बनाएं' : 'Create Account'}</span>
-                </button>
+              {/* Form Headline */}
+              <div className="mb-6">
+                <h1 className="font-serif font-bold text-3xl text-espresso-950 tracking-tight">
+                  {authMode === 'login'
+                    ? (isHi ? 'कार्यक्षेत्र में प्रवेश करें' : 'Sign in to Shardeya')
+                    : (isHi ? 'उद्यम खाता बनाएं' : 'Create Enterprise Account')}
+                </h1>
+                <p className="text-xs text-espresso-600 mt-1.5 leading-relaxed">
+                  {authMode === 'login'
+                    ? 'Enter your corporate credentials to access your real estate workspace.'
+                    : 'Register your development firm or registered brokerage syndicate.'}
+                </p>
               </div>
 
-              {/* Persona Switcher: Developer vs Channel Partner */}
-              <div className="grid grid-cols-2 border-b border-sand-300 bg-sand-50">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setRole('developer');
-                    setErrorMessage('');
-                  }}
-                  className={`py-3 px-4 text-xs font-sans font-bold flex items-center justify-center gap-2 transition-all border-b-2 ${
-                    role === 'developer'
-                      ? 'border-forest bg-white text-forest shadow-warm-sm'
-                      : 'border-transparent text-espresso-600 hover:text-espresso-900'
-                  }`}
-                >
-                  <Building2 className="w-4 h-4" />
-                  <span>{isHi ? 'डेवलपर कंसोल' : 'Developer Console'}</span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    setRole('broker');
-                    setErrorMessage('');
-                  }}
-                  className={`py-3 px-4 text-xs font-sans font-bold flex items-center justify-center gap-2 transition-all border-b-2 ${
-                    role === 'broker'
-                      ? 'border-forest bg-white text-forest shadow-warm-sm'
-                      : 'border-transparent text-espresso-600 hover:text-espresso-900'
-                  }`}
-                >
-                  <Users className="w-4 h-4" />
-                  <span>{isHi ? 'चैनल पार्टनर' : 'Channel Partner'}</span>
-                </button>
-              </div>
-
-              <div className="p-6 sm:p-8">
-                
-                {/* Header Information */}
-                <div className="mb-5 text-left">
-                  <h1 className="font-serif font-bold text-2xl text-espresso-950">
-                    {authMode === 'login'
-                      ? (role === 'developer' ? (isHi ? 'डेवलपर लॉगिन' : 'Sign in to Developer Console') : (isHi ? 'चैनल पार्टनर लॉगिन' : 'Sign in to Partner Portal'))
-                      : (role === 'developer' ? (isHi ? 'डेवलपर खाता बनाएं' : 'Create Developer Account') : (isHi ? 'चैनल पार्टनर खाता बनाएं' : 'Create Channel Partner Account'))}
-                  </h1>
-                  <p className="text-xs text-espresso-600 mt-1">
-                    {role === 'developer'
-                      ? 'Access plot inventory, unit allotments, demand milestones, and RERA compliance.'
-                      : 'Track lead lock protection, buyer site visits, and instant brokerage payouts.'}
-                  </p>
+              {/* Status Alert Banners */}
+              {errorMessage && (
+                <div className="mb-5 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-start gap-2.5 animate-fadeIn">
+                  <AlertCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+                  <span>{errorMessage}</span>
                 </div>
+              )}
 
-                {/* Status Banners */}
-                {errorMessage && (
-                  <div className="mb-4 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs font-sans text-left flex items-start gap-2 animate-fadeIn">
-                    <AlertCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
-                    <span>{errorMessage}</span>
+              {successToast && (
+                <div className="mb-5 p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-start gap-2.5 animate-fadeIn">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <span>{successToast}</span>
+                </div>
+              )}
+
+              {lockoutSeconds > 0 && (
+                <div className="mb-5 p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs flex items-start gap-2.5 animate-fadeIn">
+                  <ShieldAlert className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-bold">Security Lockout Active:</span> Too many failed attempts. Please wait <span className="font-mono font-bold text-amber-800">{lockoutSeconds}s</span> before retrying.
                   </div>
-                )}
+                </div>
+              )}
 
-                {successToast && (
-                  <div className="mb-4 p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-sans text-left flex items-start gap-2 animate-fadeIn">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                    <span>{successToast}</span>
+              {/* ========================================================
+                  SIGN IN: Clean Segmented Role Switcher + Email & Password
+                 ======================================================== */}
+              {authMode === 'login' && (
+                <div>
+                  {/* Subtle, refined segmented selector for Developer vs Channel Partner */}
+                  <div className="mb-6 p-1 bg-sand-100 rounded-xl border border-sand-200/80 flex gap-1">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setRole('developer');
+                        setErrorMessage('');
+                      }}
+                      className={`flex-1 py-2.5 px-3 rounded-lg text-xs font-sans font-semibold transition-all flex items-center justify-center gap-2 ${
+                        role === 'developer'
+                          ? 'bg-white text-espresso-950 shadow-warm-sm border border-sand-300/70 font-bold'
+                          : 'text-espresso-600 hover:text-espresso-900'
+                      }`}
+                    >
+                      <Building2 className={`w-3.5 h-3.5 ${role === 'developer' ? 'text-forest' : 'text-espresso-400'}`} />
+                      <span>{isHi ? 'डेवलपर कंसोल' : 'Developer Console'}</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setRole('broker');
+                        setErrorMessage('');
+                      }}
+                      className={`flex-1 py-2.5 px-3 rounded-lg text-xs font-sans font-semibold transition-all flex items-center justify-center gap-2 ${
+                        role === 'broker'
+                          ? 'bg-white text-espresso-950 shadow-warm-sm border border-sand-300/70 font-bold'
+                          : 'text-espresso-600 hover:text-espresso-900'
+                      }`}
+                    >
+                      <Users className={`w-3.5 h-3.5 ${role === 'broker' ? 'text-forest' : 'text-espresso-400'}`} />
+                      <span>{isHi ? 'चैनल पार्टनर' : 'Channel Partner'}</span>
+                    </button>
                   </div>
-                )}
 
-                {lockoutSeconds > 0 && (
-                  <div className="mb-4 p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-sans text-left flex items-start gap-2 animate-fadeIn">
-                    <ShieldAlert className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                  {/* Sign In Form */}
+                  <form onSubmit={handleSignIn} className="space-y-4">
                     <div>
-                      <span className="font-bold">Workstation Lockout Active:</span> Excessive failed attempts detected. Retrying is locked for <span className="font-mono font-bold text-amber-800">{lockoutSeconds} seconds</span>.
-                    </div>
-                  </div>
-                )}
-
-                {/* ========================================================
-                    MODE 1: SIGN IN FORM (Email & Password ONLY)
-                   ======================================================== */}
-                {authMode === 'login' && (
-                  <form onSubmit={handleSignIn} className="space-y-4 text-left">
-                    
-                    {/* Corporate Email */}
-                    <div>
-                      <label className="block text-xs font-bold text-espresso-800 uppercase tracking-wider mb-1.5">
+                      <label className="block text-xs font-semibold text-espresso-800 mb-1.5">
                         Corporate Email / संस्थागत ईमेल
                       </label>
                       <div className="relative flex items-center">
-                        <Mail className="w-4 h-4 absolute left-3.5 text-espresso-500" />
+                        <Mail className="w-4 h-4 absolute left-3.5 text-espresso-400" />
                         <input
                           type="email"
                           required
                           placeholder={role === 'developer' ? 'director@apexdevelopers.com' : 'partner@apexrealty.com'}
                           value={loginEmail}
                           onChange={(e) => setLoginEmail(e.target.value)}
-                          className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-sand-300 bg-sand-50 focus:bg-white focus:border-forest text-sm font-sans text-espresso-950 focus:outline-none transition-all"
+                          className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-sand-300 bg-sand-50/50 hover:bg-white focus:bg-white focus:border-forest focus:ring-4 focus:ring-forest/10 text-sm font-sans text-espresso-950 transition-all outline-none"
                         />
                       </div>
                     </div>
 
-                    {/* Password */}
                     <div>
                       <div className="flex items-center justify-between mb-1.5">
-                        <label className="block text-xs font-bold text-espresso-800 uppercase tracking-wider">
+                        <label className="block text-xs font-semibold text-espresso-800">
                           Password / पासवर्ड
                         </label>
                         <button
@@ -499,27 +548,25 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack, initialMode = 'log
                         </button>
                       </div>
                       <div className="relative flex items-center">
-                        <Lock className="w-4 h-4 absolute left-3.5 text-espresso-500" />
+                        <Lock className="w-4 h-4 absolute left-3.5 text-espresso-400" />
                         <input
                           type={showLoginPassword ? 'text' : 'password'}
                           required
                           placeholder="••••••••••••"
                           value={loginPassword}
                           onChange={(e) => setLoginPassword(e.target.value)}
-                          className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-sand-300 bg-sand-50 focus:bg-white focus:border-forest text-sm font-sans text-espresso-950 focus:outline-none transition-all"
+                          className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-sand-300 bg-sand-50/50 hover:bg-white focus:bg-white focus:border-forest focus:ring-4 focus:ring-forest/10 text-sm font-sans text-espresso-950 transition-all outline-none"
                         />
                         <button
                           type="button"
                           onClick={() => setShowLoginPassword(!showLoginPassword)}
-                          className="absolute right-3 text-espresso-500 hover:text-espresso-800 p-1"
-                          title={showLoginPassword ? 'Hide password' : 'Show password'}
+                          className="absolute right-3 text-espresso-400 hover:text-espresso-700 p-1"
                         >
                           {showLoginPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                         </button>
                       </div>
                     </div>
 
-                    {/* Remember me */}
                     <div className="flex items-center justify-between pt-1">
                       <label className="flex items-center gap-2 cursor-pointer text-xs text-espresso-700">
                         <input
@@ -532,67 +579,105 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack, initialMode = 'log
                       </label>
                     </div>
 
-                    {/* Submit Button */}
                     <button
                       type="submit"
                       disabled={isLoading || lockoutSeconds > 0}
-                      className="w-full py-3 px-4 rounded-xl bg-forest hover:bg-forest-light disabled:opacity-50 disabled:cursor-not-allowed text-white font-sans font-bold text-xs uppercase tracking-wider shadow-warm-sm transition-all flex items-center justify-center gap-2 mt-2"
+                      className="w-full py-3.5 px-4 rounded-xl bg-forest hover:bg-forest-light disabled:opacity-50 text-white font-sans font-bold text-xs uppercase tracking-wider shadow-warm-sm hover:shadow-warm-md transition-all flex items-center justify-center gap-2 mt-2"
                     >
                       {isLoading ? (
                         <RefreshCw className="w-4 h-4 animate-spin" />
                       ) : (
                         <>
-                          <span>
-                            {role === 'developer' ? 'Sign In to Developer Console' : 'Sign In to Partner Portal'}
-                          </span>
+                          <span>Sign In to {role === 'developer' ? 'Developer Console' : 'Partner Portal'}</span>
                           <ArrowRight className="w-4 h-4" />
                         </>
                       )}
                     </button>
 
-                    {/* Quick Demo Pre-fill Pill (Frictionless Test Access) */}
-                    <div className="pt-4 border-t border-sand-200 text-center">
-                      <p className="text-[11px] text-espresso-500 mb-2">
-                        Testing the CRM prototype? Pre-fill verified demo credentials:
+                    {/* Discreet Demo Quick-Access */}
+                    <div className="pt-6 mt-4 border-t border-sand-200/80 text-center">
+                      <p className="text-[11px] text-espresso-500 font-sans mb-2">
+                        Evaluating the Shardeya platform?
                       </p>
-                      <div className="flex items-center justify-center gap-2">
+                      <div className="flex items-center justify-center gap-4 text-xs font-semibold">
                         <button
                           type="button"
-                          onClick={() => handleAutofillDemo('developer')}
-                          className={`text-[11px] font-mono px-2.5 py-1 rounded-lg border transition-all ${
-                            role === 'developer' && loginEmail === 'director@apexdevelopers.com'
-                              ? 'bg-forest/10 border-forest text-forest font-bold'
-                              : 'bg-sand-50 border-sand-300 text-espresso-700 hover:bg-sand-100'
-                          }`}
+                          onClick={() => handleAutofill('dev')}
+                          className="text-forest hover:text-forest-dark hover:underline transition-colors flex items-center gap-1"
                         >
-                          Apex Developer Demo
+                          <Building2 className="w-3.5 h-3.5" />
+                          <span>Pre-fill Apex Developer</span>
                         </button>
+                        <span className="text-sand-300">•</span>
                         <button
                           type="button"
-                          onClick={() => handleAutofillDemo('broker')}
-                          className={`text-[11px] font-mono px-2.5 py-1 rounded-lg border transition-all ${
-                            role === 'broker' && loginEmail === 'partner@apexrealty.com'
-                              ? 'bg-forest/10 border-forest text-forest font-bold'
-                              : 'bg-sand-50 border-sand-300 text-espresso-700 hover:bg-sand-100'
-                          }`}
+                          onClick={() => handleAutofill('broker')}
+                          className="text-forest hover:text-forest-dark hover:underline transition-colors flex items-center gap-1"
                         >
-                          Diamond Broker Demo
+                          <Users className="w-3.5 h-3.5" />
+                          <span>Pre-fill Diamond Broker</span>
                         </button>
                       </div>
                     </div>
                   </form>
-                )}
+                </div>
+              )}
 
-                {/* ========================================================
-                    MODE 2: SIGN UP FORM (Enterprise Registration)
-                   ======================================================== */}
-                {authMode === 'signup' && (
-                  <form onSubmit={handleSignUp} className="space-y-4 text-left animate-fadeIn">
-                    
-                    {/* Full Name */}
+              {/* ========================================================
+                  SIGN UP: Bespoke Visual Role Cards + Registration Form
+                 ======================================================== */}
+              {authMode === 'signup' && (
+                <div>
+                  
+                  {/* Bespoke Visual Role Selection Cards (Elegant, not tabs!) */}
+                  <div className="mb-6">
+                    <label className="block text-xs font-semibold text-espresso-800 mb-2">
+                      Select Organization Type / संस्था का प्रकार
+                    </label>
+                    <div className="grid grid-cols-2 gap-3">
+                      <div
+                        onClick={() => setRole('developer')}
+                        className={`p-3.5 rounded-xl border-2 cursor-pointer transition-all ${
+                          role === 'developer'
+                            ? 'border-forest bg-forest/[0.03] shadow-warm-sm'
+                            : 'border-sand-300/80 hover:border-sand-400 bg-sand-50/40'
+                        }`}
+                      >
+                        <div className="flex items-center justify-between mb-1">
+                          <Building2 className={`w-4 h-4 ${role === 'developer' ? 'text-forest' : 'text-espresso-500'}`} />
+                          {role === 'developer' && <CheckCircle2 className="w-3.5 h-3.5 text-forest" />}
+                        </div>
+                        <div className="text-xs font-bold text-espresso-950">Real Estate Developer</div>
+                        <div className="text-[10px] text-espresso-600 mt-0.5 leading-tight">
+                          Promoters, plot layouts & RERA escrow
+                        </div>
+                      </div>
+
+                      <div
+                        onClick={() => setRole('broker')}
+                        className={`p-3.5 rounded-xl border-2 cursor-pointer transition-all ${
+                          role === 'broker'
+                            ? 'border-forest bg-forest/[0.03] shadow-warm-sm'
+                            : 'border-sand-300/80 hover:border-sand-400 bg-sand-50/40'
+                        }`}
+                      >
+                        <div className="flex items-center justify-between mb-1">
+                          <Users className={`w-4 h-4 ${role === 'broker' ? 'text-forest' : 'text-espresso-500'}`} />
+                          {role === 'broker' && <CheckCircle2 className="w-3.5 h-3.5 text-forest" />}
+                        </div>
+                        <div className="text-xs font-bold text-espresso-950">Channel Partner</div>
+                        <div className="text-[10px] text-espresso-600 mt-0.5 leading-tight">
+                          Brokerages, lead lock & payouts
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Sign Up Form */}
+                  <form onSubmit={handleSignUp} className="space-y-3.5">
                     <div>
-                      <label className="block text-xs font-bold text-espresso-800 uppercase tracking-wider mb-1.5">
-                        Authorized Representative Name / पूरा नाम
+                      <label className="block text-xs font-semibold text-espresso-800 mb-1">
+                        Authorized Representative Name / नाम
                       </label>
                       <input
                         type="text"
@@ -600,144 +685,96 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack, initialMode = 'log
                         placeholder={role === 'developer' ? 'e.g. Rajeshwar Singhania' : 'e.g. Vikram Malhotra'}
                         value={signupName}
                         onChange={(e) => setSignupName(e.target.value)}
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-sand-300 bg-sand-50 focus:bg-white focus:border-forest text-sm font-sans text-espresso-950 focus:outline-none transition-all"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-sand-300 bg-sand-50/50 hover:bg-white focus:bg-white focus:border-forest focus:ring-4 focus:ring-forest/10 text-sm font-sans text-espresso-950 transition-all outline-none"
                       />
                     </div>
 
-                    {/* Corporate Email */}
                     <div>
-                      <label className="block text-xs font-bold text-espresso-800 uppercase tracking-wider mb-1.5">
-                        Corporate Email / कार्य ईमेल
+                      <label className="block text-xs font-semibold text-espresso-800 mb-1">
+                        Corporate Email Address / कार्य ईमेल
                       </label>
                       <div className="relative flex items-center">
-                        <Mail className="w-4 h-4 absolute left-3.5 text-espresso-500" />
+                        <Mail className="w-4 h-4 absolute left-3.5 text-espresso-400" />
                         <input
                           type="email"
                           required
-                          placeholder={role === 'developer' ? 'rajeshwar@apexdevelopers.com' : 'vikram@syndicaterealty.com'}
+                          placeholder={role === 'developer' ? 'director@apexdevelopers.com' : 'partner@apexrealty.com'}
                           value={signupEmail}
                           onChange={(e) => setSignupEmail(e.target.value)}
-                          className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-sand-300 bg-sand-50 focus:bg-white focus:border-forest text-sm font-sans text-espresso-950 focus:outline-none transition-all"
+                          className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-sand-300 bg-sand-50/50 hover:bg-white focus:bg-white focus:border-forest focus:ring-4 focus:ring-forest/10 text-sm font-sans text-espresso-950 transition-all outline-none"
                         />
                       </div>
                     </div>
 
-                    {/* Organization & Designation Grid */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-xs font-bold text-espresso-800 uppercase tracking-wider mb-1.5">
+                        <label className="block text-xs font-semibold text-espresso-800 mb-1">
                           {role === 'developer' ? 'Development Firm' : 'Brokerage / Syndicate'}
                         </label>
                         <input
                           type="text"
                           required
-                          placeholder={role === 'developer' ? 'Apex Realty Developers' : 'Cityline Brokerage'}
+                          placeholder={role === 'developer' ? 'Apex Realty Developers' : 'Diamond Syndicate'}
                           value={signupOrg}
                           onChange={(e) => setSignupOrg(e.target.value)}
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-sand-300 bg-sand-50 focus:bg-white focus:border-forest text-sm font-sans text-espresso-950 focus:outline-none transition-all"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-sand-300 bg-sand-50/50 hover:bg-white focus:bg-white focus:border-forest focus:ring-4 focus:ring-forest/10 text-sm font-sans text-espresso-950 transition-all outline-none"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-xs font-bold text-espresso-800 uppercase tracking-wider mb-1.5">
-                          Designation (Optional)
+                        <label className="block text-xs font-semibold text-espresso-800 mb-1">
+                          RERA ID (Optional)
                         </label>
                         <input
                           type="text"
-                          placeholder={role === 'developer' ? 'Managing Director' : 'Principal Broker'}
-                          value={signupDesignation}
-                          onChange={(e) => setSignupDesignation(e.target.value)}
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-sand-300 bg-sand-50 focus:bg-white focus:border-forest text-sm font-sans text-espresso-950 focus:outline-none transition-all"
+                          placeholder="MAHARERA/P518..."
+                          value={signupRera}
+                          onChange={(e) => setSignupRera(e.target.value.toUpperCase())}
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-sand-300 bg-sand-50/50 hover:bg-white focus:bg-white focus:border-forest focus:ring-4 focus:ring-forest/10 text-sm font-mono text-espresso-950 transition-all outline-none uppercase"
                         />
                       </div>
                     </div>
 
-                    {/* RERA Number (Cadastral Monospace) */}
                     <div>
-                      <div className="flex items-center justify-between mb-1.5">
-                        <label className="block text-xs font-bold text-espresso-800 uppercase tracking-wider">
-                          RERA Registration ID
-                        </label>
-                        <span className="text-[10px] text-espresso-500 font-mono">
-                          {role === 'developer' ? 'Project / Promoter ID' : 'Agent RERA Certificate'}
-                        </span>
-                      </div>
-                      <input
-                        type="text"
-                        placeholder="e.g. MAHARERA/P51800019283"
-                        value={signupRera}
-                        onChange={(e) => setSignupRera(e.target.value.toUpperCase())}
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-sand-300 bg-sand-50 focus:bg-white focus:border-forest text-sm font-mono text-espresso-950 focus:outline-none transition-all tracking-wide"
-                      />
-                    </div>
-
-                    {/* Password & Strength Meter */}
-                    <div>
-                      <label className="block text-xs font-bold text-espresso-800 uppercase tracking-wider mb-1.5">
-                        Enterprise Password / पासवर्ड
+                      <label className="block text-xs font-semibold text-espresso-800 mb-1">
+                        Enterprise Password
                       </label>
                       <div className="relative flex items-center">
-                        <Lock className="w-4 h-4 absolute left-3.5 text-espresso-500" />
+                        <Lock className="w-4 h-4 absolute left-3.5 text-espresso-400" />
                         <input
                           type={showSignupPassword ? 'text' : 'password'}
                           required
                           placeholder="Min 8 chars, 1 uppercase, 1 symbol"
                           value={signupPassword}
                           onChange={(e) => setSignupPassword(e.target.value)}
-                          className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-sand-300 bg-sand-50 focus:bg-white focus:border-forest text-sm font-sans text-espresso-950 focus:outline-none transition-all"
+                          className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-sand-300 bg-sand-50/50 hover:bg-white focus:bg-white focus:border-forest focus:ring-4 focus:ring-forest/10 text-sm font-sans text-espresso-950 transition-all outline-none"
                         />
                         <button
                           type="button"
                           onClick={() => setShowSignupPassword(!showSignupPassword)}
-                          className="absolute right-3 text-espresso-500 hover:text-espresso-800 p-1"
+                          className="absolute right-3 text-espresso-400 hover:text-espresso-700 p-1"
                         >
                           {showSignupPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                         </button>
                       </div>
 
-                      {/* Password Strength Indicator */}
+                      {/* Minimalist 4-segment progress bar */}
                       {signupPassword && (
-                        <div className="mt-2 space-y-1.5">
-                          <div className="flex items-center justify-between text-[11px]">
-                            <span className="text-espresso-600 font-sans">Strength:</span>
-                            <span className={`font-bold font-mono ${getStrengthLabel().text}`}>
-                              {getStrengthLabel().label}
-                            </span>
+                        <div className="mt-2 space-y-1">
+                          <div className="flex justify-between items-center text-[10px]">
+                            <span className="text-espresso-500 font-sans">Strength:</span>
+                            <span className="font-mono font-bold text-forest">{getStrengthBar().text}</span>
                           </div>
-                          <div className="h-1.5 w-full bg-sand-200 rounded-full overflow-hidden flex gap-1">
-                            <div className={`h-full flex-1 rounded-full transition-all ${passwordScore >= 1 ? getStrengthLabel().color : 'bg-transparent'}`} />
-                            <div className={`h-full flex-1 rounded-full transition-all ${passwordScore >= 2 ? getStrengthLabel().color : 'bg-transparent'}`} />
-                            <div className={`h-full flex-1 rounded-full transition-all ${passwordScore >= 3 ? getStrengthLabel().color : 'bg-transparent'}`} />
-                            <div className={`h-full flex-1 rounded-full transition-all ${passwordScore >= 4 ? getStrengthLabel().color : 'bg-transparent'}`} />
-                          </div>
-
-                          {/* Interactive Checklist */}
-                          <div className="grid grid-cols-2 gap-1 pt-1 text-[10px] text-espresso-600">
-                            <span className={`flex items-center gap-1 ${passwordCriteria.length ? 'text-emerald-700 font-semibold' : ''}`}>
-                              <Check className={`w-3 h-3 ${passwordCriteria.length ? 'text-emerald-600' : 'text-espresso-400'}`} />
-                              8+ Characters
-                            </span>
-                            <span className={`flex items-center gap-1 ${passwordCriteria.hasUpper ? 'text-emerald-700 font-semibold' : ''}`}>
-                              <Check className={`w-3 h-3 ${passwordCriteria.hasUpper ? 'text-emerald-600' : 'text-espresso-400'}`} />
-                              Uppercase (A-Z)
-                            </span>
-                            <span className={`flex items-center gap-1 ${passwordCriteria.hasNumber ? 'text-emerald-700 font-semibold' : ''}`}>
-                              <Check className={`w-3 h-3 ${passwordCriteria.hasNumber ? 'text-emerald-600' : 'text-espresso-400'}`} />
-                              Number (0-9)
-                            </span>
-                            <span className={`flex items-center gap-1 ${passwordCriteria.hasSpecial ? 'text-emerald-700 font-semibold' : ''}`}>
-                              <Check className={`w-3 h-3 ${passwordCriteria.hasSpecial ? 'text-emerald-600' : 'text-espresso-400'}`} />
-                              Special Symbol (!@#$)
-                            </span>
+                          <div className="h-1 w-full bg-sand-200 rounded-full overflow-hidden">
+                            <div className={`h-full ${getStrengthBar().color} ${getStrengthBar().width} transition-all duration-300`} />
                           </div>
                         </div>
                       )}
                     </div>
 
-                    {/* Confirm Password */}
                     <div>
-                      <label className="block text-xs font-bold text-espresso-800 uppercase tracking-wider mb-1.5">
-                        Confirm Password / पासवर्ड की पुष्टि करें
+                      <label className="block text-xs font-semibold text-espresso-800 mb-1">
+                        Confirm Password
                       </label>
                       <input
                         type={showSignupPassword ? 'text' : 'password'}
@@ -745,22 +782,16 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack, initialMode = 'log
                         placeholder="Re-enter your password"
                         value={signupConfirmPassword}
                         onChange={(e) => setSignupConfirmPassword(e.target.value)}
-                        className={`w-full px-3.5 py-2.5 rounded-xl border bg-sand-50 focus:bg-white text-sm font-sans text-espresso-950 focus:outline-none transition-all ${
+                        className={`w-full px-3.5 py-2.5 rounded-xl border bg-sand-50/50 hover:bg-white focus:bg-white text-sm font-sans text-espresso-950 transition-all outline-none ${
                           signupConfirmPassword && signupPassword !== signupConfirmPassword
                             ? 'border-rose-400 focus:border-rose-600'
-                            : 'border-sand-300 focus:border-forest'
+                            : 'border-sand-300 focus:border-forest focus:ring-4 focus:ring-forest/10'
                         }`}
                       />
-                      {signupConfirmPassword && (
-                        <p className={`text-[10px] mt-1 font-semibold ${signupPassword === signupConfirmPassword ? 'text-emerald-700' : 'text-rose-600'}`}>
-                          {signupPassword === signupConfirmPassword ? '✓ Passwords match perfectly' : '✗ Passwords do not match'}
-                        </p>
-                      )}
                     </div>
 
-                    {/* Terms Checkbox */}
-                    <div className="pt-2">
-                      <label className="flex items-start gap-2.5 cursor-pointer text-xs text-espresso-700">
+                    <div className="pt-1">
+                      <label className="flex items-start gap-2 cursor-pointer text-xs text-espresso-600 leading-snug">
                         <input
                           type="checkbox"
                           required
@@ -769,16 +800,15 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack, initialMode = 'log
                           className="mt-0.5 rounded border-sand-400 text-forest focus:ring-forest"
                         />
                         <span>
-                          I certify that I represent an authorized real estate enterprise and agree to Shardeya's RERA compliance protocol and enterprise terms.
+                          I represent an authorized real estate enterprise and agree to Shardeya's RERA compliance terms.
                         </span>
                       </label>
                     </div>
 
-                    {/* Submit Registration */}
                     <button
                       type="submit"
                       disabled={isLoading}
-                      className="w-full py-3.5 px-4 rounded-xl bg-forest hover:bg-forest-light disabled:opacity-50 text-white font-sans font-bold text-xs uppercase tracking-wider shadow-warm-sm transition-all flex items-center justify-center gap-2 mt-4"
+                      className="w-full py-3.5 px-4 rounded-xl bg-forest hover:bg-forest-light disabled:opacity-50 text-white font-sans font-bold text-xs uppercase tracking-wider shadow-warm-sm hover:shadow-warm-md transition-all flex items-center justify-center gap-2 mt-3"
                     >
                       {isLoading ? (
                         <RefreshCw className="w-4 h-4 animate-spin" />
@@ -790,28 +820,26 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack, initialMode = 'log
                       )}
                     </button>
                   </form>
-                )}
+                </div>
+              )}
 
-              </div>
-
-              {/* Secure Card Footer */}
-              <div className="bg-sand-50 px-6 py-3 border-t border-sand-200 flex items-center justify-between text-[11px] text-espresso-600 font-sans">
-                <span className="flex items-center gap-1.5 text-espresso-700">
-                  <ShieldCheck className="w-3.5 h-3.5 text-forest" />
-                  <span>256-Bit TLS 1.3 Enterprise Standard</span>
-                </span>
-                <span className="text-espresso-500 font-mono">AES-256 Auth</span>
-              </div>
             </div>
           )}
 
         </div>
-      </main>
+
+        {/* Bottom Minimal Footer */}
+        <div className="pt-6 border-t border-sand-200/80 flex items-center justify-between text-[11px] text-espresso-500 font-sans">
+          <span>© {new Date().getFullYear()} Shardeya Group Pvt. Ltd.</span>
+          <span className="font-mono text-emerald-800">ISO 27001 • RERA Ready</span>
+        </div>
+
+      </div>
 
       {/* Forgot Password Modal */}
       {showForgotModal && (
         <div className="fixed inset-0 z-50 bg-espresso-950/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl border border-sand-300 max-w-md w-full p-6 shadow-warm-lg animate-fadeIn text-left">
+          <div className="bg-white rounded-2xl border border-sand-300 max-w-md w-full p-6 shadow-2xl animate-fadeIn text-left">
             <div className="flex items-center justify-between pb-3 border-b border-sand-200">
               <div className="flex items-center gap-2">
                 <KeyRound className="w-5 h-5 text-forest" />
@@ -827,8 +855,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack, initialMode = 'log
               </button>
             </div>
 
-            <p className="text-xs text-espresso-600 mt-3">
-              Enter your corporate email address. If an account is registered with Shardeya, an encrypted, time-limited password reset link will be dispatched immediately.
+            <p className="text-xs text-espresso-600 mt-3 leading-relaxed">
+              Enter your corporate email address. A time-limited, encrypted reset authorization link will be dispatched to your inbox.
             </p>
 
             {forgotStatus && (
@@ -848,16 +876,16 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack, initialMode = 'log
 
             <form onSubmit={handleSendReset} className="mt-4 space-y-4">
               <div>
-                <label className="block text-xs font-bold text-espresso-800 uppercase tracking-wider mb-1">
+                <label className="block text-xs font-semibold text-espresso-800 mb-1">
                   Corporate Email
                 </label>
                 <input
                   type="email"
                   required
-                  placeholder="director@developer.com"
+                  placeholder="director@apexdevelopers.com"
                   value={forgotEmail}
                   onChange={(e) => setForgotEmail(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-sand-300 bg-sand-50 focus:bg-white focus:border-forest text-sm font-sans text-espresso-950 focus:outline-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-sand-300 bg-sand-50 focus:bg-white focus:border-forest text-sm font-sans text-espresso-950 outline-none"
                 />
               </div>
 
@@ -881,11 +909,6 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack, initialMode = 'log
           </div>
         </div>
       )}
-
-      {/* Enterprise Footer */}
-      <footer className="w-full py-5 px-4 text-center text-xs text-espresso-500 font-mono border-t border-sand-200 bg-white/50">
-        © {new Date().getFullYear()} Shardeya Group Pvt. Ltd. All rights reserved. • ISO 27001 & RERA Architecture Ready
-      </footer>
 
     </div>
   );
