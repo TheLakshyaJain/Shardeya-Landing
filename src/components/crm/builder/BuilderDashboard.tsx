@@ -73,25 +73,25 @@ export const BuilderDashboard: React.FC<BuilderDashboardProps> = ({
     {
       label: '48h Temporary Holds',
       value: reservedPlotsCount.toString(),
-      subValue: 'Col. Sanjeev Varma & Ananya D.',
+      subValue: reservedPlotsCount > 0 ? `${reservedPlotsCount} plots reserved by buyers` : 'No active reservations',
       icon: Clock,
       tab: 'plots' as CrmTab,
-      badge: 'Expiring Soon',
+      badge: reservedPlotsCount > 0 ? 'Active Holds' : 'None Active',
       badgeColor: 'bg-amber-50 text-amber-800 border-amber-200',
     },
     {
       label: 'Active Buyer Leads',
       value: activeLeadsCount.toString(),
-      subValue: 'Inquiries across WhatsApp & CP',
+      subValue: activeLeadsCount > 0 ? `${activeLeadsCount} inquiries in pipeline` : 'No active inquiries',
       icon: Users,
       tab: 'leads' as CrmTab,
-      badge: '+4 This Week',
+      badge: activeLeadsCount > 0 ? `${activeLeadsCount} Active` : 'Clean Pipeline',
       badgeColor: 'bg-emerald-50 text-emerald-800 border-emerald-200',
     },
     {
       label: 'Pending Follow-Ups Today',
       value: followUpsTodayCount.toString(),
-      subValue: 'Site visits & price negotiations',
+      subValue: followUpsTodayCount > 0 ? `${followUpsTodayCount} tasks scheduled today` : 'No appointments today',
       icon: PhoneCall,
       tab: 'calendar' as CrmTab,
       badge: 'High Priority',
@@ -250,26 +250,32 @@ export const BuilderDashboard: React.FC<BuilderDashboardProps> = ({
           </div>
 
           <div className="divide-y divide-sand-200 mt-2">
-            {plotSales.slice(0, 4).map((sale) => (
-              <div key={sale.id} className="py-3 flex items-center justify-between text-xs">
-                <div>
-                  <div className="font-bold text-espresso-950">{sale.buyerName}</div>
-                  <div className="text-[11px] text-espresso-500 font-mono">
-                    {sale.allotmentLetterNo} • {sale.purchaseDate}
-                  </div>
-                </div>
-                <div className="text-right">
-                  <div className="font-mono font-bold text-espresso-900">
-                    ₹{(sale.dealValue).toLocaleString('en-IN')}
-                  </div>
-                  <span className={`inline-block px-1.5 py-0.5 rounded text-[10px] font-mono font-bold ${
-                    sale.status === 'COMPLETED' ? 'bg-emerald-100 text-emerald-800' : 'bg-blue-100 text-blue-800'
-                  }`}>
-                    {sale.status}
-                  </span>
-                </div>
+            {plotSales.length === 0 ? (
+              <div className="py-8 text-center text-xs text-espresso-500">
+                No unit allotments executed yet. Select an available plot from the matrix to book.
               </div>
-            ))}
+            ) : (
+              plotSales.slice(0, 4).map((sale) => (
+                <div key={sale.id} className="py-3 flex items-center justify-between text-xs">
+                  <div>
+                    <div className="font-bold text-espresso-950">{sale.buyerName}</div>
+                    <div className="text-[11px] text-espresso-500 font-mono">
+                      {sale.allotmentLetterNo} • {sale.purchaseDate}
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="font-mono font-bold text-espresso-900">
+                      ₹{(sale.dealValue).toLocaleString('en-IN')}
+                    </div>
+                    <span className={`inline-block px-1.5 py-0.5 rounded text-[10px] font-mono font-bold ${
+                      sale.status === 'COMPLETED' ? 'bg-emerald-100 text-emerald-800' : 'bg-blue-100 text-blue-800'
+                    }`}>
+                      {sale.status}
+                    </span>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </div>
 
@@ -291,27 +297,33 @@ export const BuilderDashboard: React.FC<BuilderDashboardProps> = ({
           </div>
 
           <div className="divide-y divide-sand-200 mt-2">
-            {leads.slice(0, 4).map((lead) => (
-              <div key={lead.id} className="py-3 flex items-center justify-between text-xs">
-                <div>
-                  <div className="font-bold text-espresso-950 flex items-center gap-1.5">
-                    <span>{lead.fullName}</span>
-                    {lead.isImportant && <span className="text-amber-500">★</span>}
-                  </div>
-                  <div className="text-[11px] text-espresso-500">
-                    {lead.mobile} • Budget: ₹{(lead.budgetMin/100000).toFixed(0)}L - ₹{(lead.budgetMax/100000).toFixed(0)}L
-                  </div>
-                </div>
-                <div className="text-right">
-                  <span className="inline-block px-2 py-0.5 rounded-full text-[10px] font-sans font-bold bg-sand-100 text-espresso-700 border border-sand-200">
-                    {lead.status.replace(/_/g, ' ')}
-                  </span>
-                  <div className="text-[10px] text-espresso-400 mt-0.5">
-                    Follow-up: {lead.followUpDate}
-                  </div>
-                </div>
+            {leads.length === 0 ? (
+              <div className="py-8 text-center text-xs text-espresso-500">
+                No leads in pipeline yet. Click '+ Add Buyer Lead' to register inquiries.
               </div>
-            ))}
+            ) : (
+              leads.slice(0, 4).map((lead) => (
+                <div key={lead.id} className="py-3 flex items-center justify-between text-xs">
+                  <div>
+                    <div className="font-bold text-espresso-950 flex items-center gap-1.5">
+                      <span>{lead.fullName}</span>
+                      {lead.isImportant && <span className="text-amber-500">★</span>}
+                    </div>
+                    <div className="text-[11px] text-espresso-500">
+                      {lead.mobile} • Budget: ₹{(lead.budgetMin/100000).toFixed(0)}L - ₹{(lead.budgetMax/100000).toFixed(0)}L
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <span className="inline-block px-2 py-0.5 rounded-full text-[10px] font-sans font-bold bg-sand-100 text-espresso-700 border border-sand-200">
+                      {lead.status.replace(/_/g, ' ')}
+                    </span>
+                    <div className="text-[10px] text-espresso-400 mt-0.5">
+                      Follow-up: {lead.followUpDate}
+                    </div>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </div>
 

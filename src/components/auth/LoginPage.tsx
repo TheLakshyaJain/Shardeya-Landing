@@ -19,6 +19,13 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack, onEnterApp, initia
   const isHi = language === 'hi';
   const { user, login, signup, logout, requestPasswordReset, getLockoutStatus } = useAuth();
 
+  // If user is already authenticated, direct immediately to dashboard
+  useEffect(() => {
+    if (user && onEnterApp) {
+      onEnterApp();
+    }
+  }, [user, onEnterApp]);
+
   // Mode: Sign In vs Sign Up (toggled naturally via text link, not stacked tabs)
   const [authMode, setAuthMode] = useState<'login' | 'signup'>(initialMode);
   const [role, setRole] = useState<UserRole>('developer');
@@ -123,9 +130,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack, onEnterApp, initia
         setLockoutSeconds(status.remainingSeconds);
       }
     } else {
-      setSuccessToast(isHi ? 'प्रमाणीकरण सफल!' : 'Identity verified successfully.');
       if (onEnterApp) {
-        setTimeout(() => onEnterApp(), 600);
+        onEnterApp();
       }
     }
   };
@@ -176,14 +182,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack, onEnterApp, initia
     if (!result.success) {
       setErrorMessage(result.error || 'Failed to create account.');
     } else {
-      try {
-        confetti({ particleCount: 70, spread: 60, origin: { y: 0.6 } });
-      } catch {
-        // Fallback
-      }
-      setSuccessToast(isHi ? 'खाता सफलतापूर्वक बनाया गया!' : 'Enterprise account created successfully.');
       if (onEnterApp) {
-        setTimeout(() => onEnterApp(), 800);
+        onEnterApp();
       }
     }
   };
@@ -236,71 +236,16 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack, onEnterApp, initia
       <main className="flex-1 flex items-center justify-center px-4 py-10 sm:py-14">
         <div className="w-full max-w-md">
 
-          {/* 1. AUTHENTICATED STATE */}
+          {/* 1. AUTHENTICATED STATE - Direct immediately to dashboard */}
           {user ? (
-            <div className="bg-white rounded-2xl border border-sand-300 p-8 shadow-warm-md text-center animate-fadeIn space-y-6">
-              <div className="w-16 h-16 rounded-full bg-emerald-50 border-2 border-emerald-200 text-forest flex items-center justify-center mx-auto font-serif font-bold text-xl shadow-warm-sm">
-                {user.avatarInitials}
-              </div>
-
-              <div>
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-mono font-bold mb-3">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>AUTHENTICATED SESSION</span>
-                </div>
-                <h2 className="font-serif font-bold text-2xl text-espresso-950">
-                  {user.name}
-                </h2>
-                <p className="text-xs text-espresso-600 font-sans mt-1">
-                  {user.designation}
-                </p>
-                <p className="text-xs font-mono text-forest font-semibold mt-0.5">
-                  {user.organization} {user.reraNumber ? `• ${user.reraNumber}` : ''}
-                </p>
-              </div>
-
-              <div className="p-4 rounded-xl bg-sand-50 border border-sand-200 text-left text-xs space-y-2 font-sans">
-                <div className="flex justify-between text-espresso-600">
-                  <span>Corporate Identity:</span>
-                  <span className="font-mono font-semibold text-espresso-900">{user.email}</span>
-                </div>
-                <div className="flex justify-between text-espresso-600">
-                  <span>Workspace Role:</span>
-                  <span className="font-semibold text-espresso-900 capitalize">
-                    {user.role === 'developer' ? 'Developer Console' : 'Channel Partner Network'}
-                  </span>
-                </div>
-              </div>
-
-              <div className="space-y-2.5 pt-2">
-                <button
-                  onClick={() => {
-                    if (onEnterApp) onEnterApp();
-                    else onBack();
-                  }}
-                  className="w-full py-3 px-4 rounded-xl bg-forest hover:bg-forest-600 text-white font-sans font-bold text-xs uppercase tracking-wider shadow-warm-sm transition-all flex items-center justify-center gap-2"
-                >
-                  <span>{isHi ? 'शारदेया प्लेटफॉर्म में प्रवेश करें' : 'Enter Shardeya Platform'}</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-
-                <button
-                  onClick={onBack}
-                  className="w-full py-2.5 px-4 rounded-xl border border-sand-300 text-espresso-800 hover:bg-sand-100 font-sans font-semibold text-xs tracking-wider uppercase transition-all flex items-center justify-center gap-2"
-                >
-                  <span>{isHi ? 'वेबसाइट पर वापस जाएं' : 'Return to Website'}</span>
-                </button>
-
-                <button
-                  onClick={() => {
-                    logout();
-                    setSuccessToast('');
-                  }}
-                  className="w-full py-2 px-4 rounded-xl text-espresso-600 hover:text-rose-600 hover:bg-rose-50 text-xs font-semibold transition-all"
-                >
-                  Sign Out
-                </button>
-              </div>
+            <div className="bg-white rounded-2xl border border-sand-300 p-8 shadow-warm-md text-center space-y-4 animate-fadeIn">
+              <RefreshCw className="w-8 h-8 text-forest animate-spin mx-auto" />
+              <h3 className="font-serif font-bold text-xl text-espresso-950">
+                {isHi ? 'डैशबोर्ड में प्रवेश किया जा रहा है...' : 'Directing to Shardeya Dashboard...'}
+              </h3>
+              <p className="text-xs text-espresso-600 font-sans">
+                {isHi ? 'कृपया प्रतीक्षा करें, आपकी कार्यपुस्तिका लोड हो रही है।' : 'Please wait, directing you straight to your workspace.'}
+              </p>
             </div>
           ) : (
             /* 2. AUTHENTICATION CARD */

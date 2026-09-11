@@ -13,8 +13,11 @@ import { Footer } from './components/layout/Footer';
 import { DemoModal } from './components/modals/DemoModal';
 import { LoginPage } from './components/auth/LoginPage';
 import { CrmAppShell } from './components/crm/shell/CrmAppShell';
+import { useAuth } from './context/AuthContext';
 
 export const AppContent: React.FC = () => {
+  const { user, isAuthenticated } = useAuth();
+
   const [view, setView] = useState<'landing' | 'auth' | 'app'>(() => {
     if (typeof window !== 'undefined') {
       const hash = window.location.hash;
@@ -34,19 +37,29 @@ export const AppContent: React.FC = () => {
 
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
 
+  // Direct authenticated user straight to dashboard if on auth view
+  useEffect(() => {
+    if (isAuthenticated && view === 'auth') {
+      setView('app');
+      window.location.hash = 'app';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [isAuthenticated, view]);
+
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
       if (hash === '#app') {
         setView('app');
         window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else if (hash === '#login') {
-        setAuthMode('login');
-        setView('auth');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else if (hash === '#signup') {
-        setAuthMode('signup');
-        setView('auth');
+      } else if (hash === '#login' || hash === '#signup') {
+        if (isAuthenticated) {
+          setView('app');
+          window.location.hash = 'app';
+        } else {
+          setAuthMode(hash === '#signup' ? 'signup' : 'login');
+          setView('auth');
+        }
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else if (!hash || hash === '#') {
         setView('landing');
@@ -55,9 +68,13 @@ export const AppContent: React.FC = () => {
 
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
-  }, []);
+  }, [isAuthenticated]);
 
   const handleOpenAuth = (mode: 'login' | 'signup' = 'login') => {
+    if (isAuthenticated) {
+      handleOpenApp();
+      return;
+    }
     setAuthMode(mode);
     setView('auth');
     window.location.hash = mode;
