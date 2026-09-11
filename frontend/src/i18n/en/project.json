@@ -93,7 +93,7 @@
     "restoreConfirm": "Restore this project?",
     "notFound": "This project could not be found.",
     "addPlot": "Add Plot",
-    "addPlots": "Add Plots",
+    "addPlots": "Bulk Add",
     "gridLayout": "Grid Layout",
     "configureGrid": "Configure Grid"
   }

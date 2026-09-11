@@ -101,7 +101,7 @@ export function RangeCreateForm({ projectId, stateCode, onSuccess, onCancel }: R
     <div className="space-y-4">
       <div className="space-y-3">
         {ranges.map((range, index) => (
-          <div key={index} className="grid grid-cols-[1fr_1fr_1fr_1fr_1fr_auto] items-end gap-2">
+          <div key={index} className="grid grid-cols-[1fr_1fr_1fr_1fr_auto] items-end gap-2">
             <div className="space-y-1">
               <Label className="text-xs">{t('quickCreate.range.prefix')}</Label>
               <Input value={range.prefix ?? ''} onChange={(e) => updateRange(index, { prefix: e.target.value })} placeholder="A" />
@@ -128,17 +128,6 @@ export function RangeCreateForm({ projectId, stateCode, onSuccess, onCancel }: R
                 min={1}
                 value={range.end ?? ''}
                 onChange={(e) => updateRange(index, { end: e.target.valueAsNumber })}
-              />
-            </div>
-            <div className="space-y-1">
-              <Label className="text-xs">{t('quickCreate.range.padWidth')}</Label>
-              <Input
-                type="number"
-                inputMode="numeric"
-                min={0}
-                max={6}
-                value={range.padWidth ?? 0}
-                onChange={(e) => updateRange(index, { padWidth: e.target.valueAsNumber || 0 })}
               />
             </div>
             <Button type="button" size="icon" variant="outline" disabled={ranges.length === 1} onClick={() => removeRange(index)}>

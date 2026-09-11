@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
-import { LockKeyhole, Plus, Settings2 } from 'lucide-react';
+import { Plus, Settings2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -41,7 +41,6 @@ export function GridLayoutEditor({ projectId, stateCode }: GridLayoutEditorProps
   const [search, setSearch] = useState('');
   const [selectedPlotId, setSelectedPlotId] = useState<string | null>(null);
   const [armedPlotId, setArmedPlotId] = useState<string | null>(null);
-  const [blockMode, setBlockMode] = useState(false);
   const [addingPlot, setAddingPlot] = useState(false);
   const [configuringGrid, setConfiguringGrid] = useState(false);
 
@@ -56,14 +55,6 @@ export function GridLayoutEditor({ projectId, stateCode }: GridLayoutEditorProps
     },
   });
 
-  const blockedMutation = useMutation({
-    mutationFn: (blockedCells: { row: number; col: number }[]) => {
-      const grid = gridQuery.data!;
-      return putGridConfig(projectId, { rows: grid.rows, cols: grid.cols, blockedCells });
-    },
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['grid', projectId] }),
-  });
-
   async function handleSelectPlotNumber(plotNumber: string) {
     const matches = await listPlots(projectId, { search: plotNumber }, 5);
     const exact = matches.find((p) => p.plotNumber === plotNumber) ?? matches[0];
@@ -71,15 +62,6 @@ export function GridLayoutEditor({ projectId, stateCode }: GridLayoutEditorProps
   }
 
   function handleCellClick(gridRow: number, gridCol: number) {
-    if (blockMode) {
-      const grid = gridQuery.data!;
-      const already = grid.blocked.some(([r, c]) => r === gridRow && c === gridCol);
-      const next = already
-        ? grid.blocked.filter(([r, c]) => !(r === gridRow && c === gridCol))
-        : [...grid.blocked, [gridRow, gridCol] as [number, number]];
-      blockedMutation.mutate(next.map(([row, col]) => ({ row, col })));
-      return;
-    }
     if (armedPlotId) {
       positionMutation.mutate({ plotId: armedPlotId, gridRow, gridCol });
     }
@@ -120,20 +102,6 @@ export function GridLayoutEditor({ projectId, stateCode }: GridLayoutEditorProps
         </div>
         <div className="flex items-center gap-2">
           {canEdit && (
-            <Button
-              type="button"
-              size="sm"
-              variant={blockMode ? 'default' : 'outline'}
-              onClick={() => {
-                setBlockMode((b) => !b);
-                setArmedPlotId(null);
-              }}
-            >
-              <LockKeyhole className="size-4" />
-              {t('grid.blocked')}
-            </Button>
-          )}
-          {canEdit && (
             <Button type="button" size="sm" variant="outline" onClick={() => setConfiguringGrid(true)}>
               <Settings2 className="size-4" />
             </Button>
@@ -156,7 +124,7 @@ export function GridLayoutEditor({ projectId, stateCode }: GridLayoutEditorProps
             filter={filter}
             searchTerm={search || undefined}
             onSelectPlotNumber={handleSelectPlotNumber}
-            armedPlacement={!!armedPlotId || blockMode}
+            armedPlacement={!!armedPlotId}
             onPlaceArmedPlot={handleCellClick}
           />
         ) : (
@@ -165,7 +133,7 @@ export function GridLayoutEditor({ projectId, stateCode }: GridLayoutEditorProps
             filter={filter}
             searchTerm={search || undefined}
             onSelectPlotNumber={handleSelectPlotNumber}
-            armedPlacement={!!armedPlotId || blockMode}
+            armedPlacement={!!armedPlotId}
             onPlaceArmedPlot={handleCellClick}
           />
         )}
