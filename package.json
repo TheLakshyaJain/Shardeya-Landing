@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "server": "node server/index.js",
+    "db:view": "node server/view-db.js",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
