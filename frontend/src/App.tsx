@@ -41,6 +41,7 @@ import { TemplateEditorPage } from '@/features/builder/documents/pages/TemplateE
 import { StatsPage } from '@/features/builder/stats/pages/StatsPage';
 import { NotificationSettingsPage } from '@/features/settings/pages/NotificationSettingsPage';
 import { OpsPage } from '@/features/admin/pages/OpsPage';
+import { SystemPortalPage } from '@/features/portal/pages/SystemPortalPage';
 
 function App() {
   // Once, on app start: attempt a silent cookie-based refresh to restore a
@@ -57,6 +58,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/design" element={<DesignSystemPage />} />
+          <Route path="/portal" element={<SystemPortalPage />} />
 
           <Route
             path="/signup"
@@ -123,6 +125,7 @@ function App() {
             <Route path="stats" element={<StatsPage />} />
             <Route path="settings/notifications" element={<NotificationSettingsPage />} />
             <Route path="admin/ops" element={<OpsPage />} />
+            <Route path="portal" element={<SystemPortalPage />} />
           </Route>
 
           <Route

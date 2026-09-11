@@ -1,6 +1,6 @@
 import type { LucideIcon } from 'lucide-react';
 import {
-  Archive, BarChart3, Building2, Calculator, CalendarDays, ClipboardList, Contact, FileSignature, FileText, Handshake,
+  Archive, BarChart3, Building2, Calculator, CalendarDays, ClipboardList, Contact, Database, FileSignature, FileText, Handshake,
   LayoutDashboard, Users, Wallet,
 } from 'lucide-react';
 
@@ -43,6 +43,7 @@ export function navItemsFor(profile: ShellProfile): NavItem[] {
     // round (see StatsController's own comment on why that split isn't
     // implemented yet).
     items.push({ to: '/builder/stats', labelKey: 'nav.stats', icon: BarChart3, anyOf: ['REPORT_VIEW_ALL'] });
+    items.push({ to: '/portal', labelKey: 'nav.portal', icon: Database });
   }
   return items;
 }

@@ -53,6 +53,17 @@ services:
     ports:
       - "4001:4001"
 
+  pgweb:
+    image: sosedoff/pgweb:latest
+    command: ["--bind=0.0.0.0", "--listen=8081"]
+    environment:
+      PGWEB_DATABASE_URL: postgres://${DB_USER:-shardeya}:${DB_PASSWORD:-shardeya}@postgres:5432/${DB_NAME:-shardeya}?sslmode=disable
+    ports:
+      - "8081:8081"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
   backend:
     build: ./backend
     environment:
