@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   ArrowLeft, ShieldCheck, Phone, Mail, Lock, 
   Eye, EyeOff, CheckCircle2, ArrowRight, Building2, 
-  Users, KeyRound, RefreshCw, Sparkles, Check
+  Users, KeyRound, RefreshCw, Check
 } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 
@@ -126,23 +126,6 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack }) => {
         avatarInitials: role === 'developer' ? 'RS' : 'VM',
       });
     }, 800);
-  };
-
-  // 1-Click Quick Demo Login Fillers
-  const fillDemoDeveloper = () => {
-    setRole('developer');
-    setAuthMethod('email');
-    setEmail('rajeshwar@apexdevelopers.com');
-    setPassword('••••••••••••');
-    setErrorMessage('');
-  };
-
-  const fillDemoBroker = () => {
-    setRole('broker');
-    setAuthMethod('phone');
-    setPhone('9876543210');
-    setErrorMessage('');
-    setOtpSent(false);
   };
 
   return (
@@ -535,44 +518,6 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBack }) => {
                     </button>
                   </form>
                 )}
-
-                {/* 1-Click Demo Logins */}
-                <div className="mt-8 pt-6 border-t border-sand-200 text-left">
-                  <div className="flex items-center justify-between mb-2.5">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-espresso-500 font-bold flex items-center gap-1.5">
-                      <Sparkles className="w-3 h-3 text-amber-600" />
-                      <span>Instant Evaluation Demo Credentials</span>
-                    </span>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-2">
-                    <button
-                      type="button"
-                      onClick={fillDemoDeveloper}
-                      className="p-2.5 rounded-lg border border-sand-300 bg-sand-50 hover:bg-emerald-50 hover:border-emerald-300 text-left transition-all group"
-                    >
-                      <div className="text-xs font-bold text-espresso-950 group-hover:text-emerald-800">
-                        Developer Demo
-                      </div>
-                      <div className="text-[10px] text-espresso-500 font-mono">
-                        Apex Greens Director
-                      </div>
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={fillDemoBroker}
-                      className="p-2.5 rounded-lg border border-sand-300 bg-sand-50 hover:bg-amber-50 hover:border-amber-300 text-left transition-all group"
-                    >
-                      <div className="text-xs font-bold text-espresso-950 group-hover:text-amber-900">
-                        Broker Partner Demo
-                      </div>
-                      <div className="text-[10px] text-espresso-500 font-mono">
-                        Diamond CP Syndicate
-                      </div>
-                    </button>
-                  </div>
-                </div>
 
               </div>
 
