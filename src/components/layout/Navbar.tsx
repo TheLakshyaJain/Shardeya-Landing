@@ -30,7 +30,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo, onOpenLogin }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           
-          {/* Brand Logo - Clean, no subtitle underneath */}
+          {/* Brand Logo - Clean */}
           <a href="#" className="flex items-center gap-3 group">
             <div className="w-9 h-9 rounded-lg bg-forest flex items-center justify-center text-white font-serif font-bold text-lg shadow-warm-sm transition-transform group-hover:scale-105">
               S
@@ -54,7 +54,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo, onOpenLogin }) => {
           </div>
 
           {/* Right Action Bar */}
-          <div className="hidden md:flex items-center gap-3.5">
+          <div className="hidden md:flex items-center gap-4">
             {/* Language Switcher */}
             <button
               onClick={toggleLanguage}
@@ -100,36 +100,26 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo, onOpenLogin }) => {
                 </button>
               </div>
             ) : (
-              <div className="flex items-center gap-2.5">
-                {/* Login Button */}
+              <>
+                {/* ONLY Login Button - exactly like before, no Signup button on landing page */}
                 {onOpenLogin && (
                   <button
                     onClick={() => onOpenLogin('login')}
                     className="text-xs font-bold uppercase tracking-wider text-espresso-800 hover:text-forest transition-colors px-2 py-1.5"
                   >
-                    {isHi ? 'लॉगिन' : 'Sign In'}
-                  </button>
-                )}
-
-                {/* Create Account / Register Button */}
-                {onOpenLogin && (
-                  <button
-                    onClick={() => onOpenLogin('signup')}
-                    className="text-xs font-bold uppercase tracking-wider text-forest hover:text-forest-dark transition-colors px-2 py-1.5 border border-forest/30 rounded-lg hover:bg-forest/5"
-                  >
-                    {isHi ? 'खाता बनाएं' : 'Sign Up'}
+                    {isHi ? 'लॉगिन' : 'Login'}
                   </button>
                 )}
 
                 {/* Request Access VIP CTA */}
                 <button
                   onClick={onOpenDemo}
-                  className="px-4 py-2 rounded-lg bg-forest hover:bg-forest-light text-white font-sans font-bold text-xs uppercase tracking-wider shadow-warm-sm transition-all transform hover:scale-[1.01] active:scale-98 flex items-center gap-1.5 ml-1"
+                  className="px-5 py-2.5 rounded-lg bg-forest hover:bg-forest-light text-white font-sans font-bold text-xs uppercase tracking-wider shadow-warm-sm transition-all transform hover:scale-[1.01] active:scale-98 flex items-center gap-2"
                 >
                   <span>{t.nav.requestAccess}</span>
                   <ChevronRight className="w-3.5 h-3.5" />
                 </button>
-              </div>
+              </>
             )}
           </div>
 
@@ -207,27 +197,17 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo, onOpenLogin }) => {
               </>
             ) : (
               <>
+                {/* Single Login Button exactly like before */}
                 {onOpenLogin && (
-                  <div className="grid grid-cols-2 gap-2">
-                    <button
-                      onClick={() => {
-                        setMobileMenuOpen(false);
-                        onOpenLogin('login');
-                      }}
-                      className="py-2.5 px-4 rounded-lg border border-sand-300 text-espresso-800 font-sans font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2 hover:bg-sand-200 transition-colors"
-                    >
-                      {isHi ? 'साइन इन' : 'Sign In'}
-                    </button>
-                    <button
-                      onClick={() => {
-                        setMobileMenuOpen(false);
-                        onOpenLogin('signup');
-                      }}
-                      className="py-2.5 px-4 rounded-lg border border-forest text-forest bg-forest/5 font-sans font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2 hover:bg-forest/10 transition-colors"
-                    >
-                      {isHi ? 'खाता बनाएं' : 'Sign Up'}
-                    </button>
-                  </div>
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      onOpenLogin('login');
+                    }}
+                    className="w-full py-2.5 px-4 rounded-lg border border-sand-300 text-espresso-800 font-sans font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2 hover:bg-sand-200 transition-colors"
+                  >
+                    {isHi ? 'लॉगिन' : 'Login'}
+                  </button>
                 )}
                 <button
                   onClick={() => {
