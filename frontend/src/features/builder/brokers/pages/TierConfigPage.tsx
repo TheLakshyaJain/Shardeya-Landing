@@ -63,7 +63,8 @@ export function TierConfigPage() {
           </TableHeader>
           <TableBody>
             {tiers.map((tier) => {
-              const rate = rateMap.get(tier.name);
+              const slabRate = rateMap.get(tier.name);
+              const effectiveRate = tier.bonusType === 'RATE_PER_SQFT' ? tier.bonusValue : slabRate;
               return (
                 <TableRow key={tier.id} className="cursor-pointer" onClick={() => setEditing(tier)}>
                   <TableCell className="font-medium">
@@ -73,8 +74,8 @@ export function TierConfigPage() {
                     {tier.minDeals} – {tier.maxDeals ?? '∞'}
                   </TableCell>
                   <TableCell>
-                    {rate != null ? (
-                      <span className="font-medium text-emerald-700 dark:text-emerald-400">₹{rate}/sq.ft.</span>
+                    {effectiveRate != null ? (
+                      <span className="font-medium text-emerald-700 dark:text-emerald-400">₹{effectiveRate}/sq.ft.</span>
                     ) : (
                       '—'
                     )}
@@ -84,7 +85,9 @@ export function TierConfigPage() {
                       ? t('tier.bonusTypeNone')
                       : tier.bonusType === 'PCT'
                         ? `${tier.bonusValue}%`
-                        : tier.bonusValue}
+                        : tier.bonusType === 'RATE_PER_SQFT'
+                          ? `₹${tier.bonusValue}/sq.ft.`
+                          : `₹${tier.bonusValue}`}
                   </TableCell>
                 <TableCell>
                   <Button
@@ -156,6 +159,8 @@ function TierFormDialog({
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['broker-tiers'] });
+      queryClient.invalidateQueries({ queryKey: ['designation-slabs'] });
+      queryClient.invalidateQueries({ queryKey: ['brokers'] });
       onOpenChange(false);
     },
   });
@@ -192,6 +197,7 @@ function TierFormDialog({
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
+                <SelectItem value="RATE_PER_SQFT">{t('tier.bonusTypeRatePerSqft')}</SelectItem>
                 <SelectItem value="NONE">{t('tier.bonusTypeNone')}</SelectItem>
                 <SelectItem value="PCT">{t('tier.bonusTypePct')}</SelectItem>
                 <SelectItem value="FIXED">{t('tier.bonusTypeFixed')}</SelectItem>
@@ -200,8 +206,21 @@ function TierFormDialog({
           </div>
           {bonusType !== 'NONE' && (
             <div className="space-y-2">
-              <Label htmlFor="tier-bonusValue">{t('tier.bonusValue')}</Label>
-              <Input id="tier-bonusValue" type="number" value={bonusValue} onChange={(e) => setBonusValue(e.target.value)} />
+              <Label htmlFor="tier-bonusValue">
+                {bonusType === 'RATE_PER_SQFT'
+                  ? t('tier.ratePerSqftLabel')
+                  : bonusType === 'PCT'
+                    ? t('tier.bonusPctLabel')
+                    : t('tier.bonusValue')}
+              </Label>
+              <Input
+                id="tier-bonusValue"
+                type="number"
+                min="0"
+                step={bonusType === 'PCT' ? '0.01' : '1'}
+                value={bonusValue}
+                onChange={(e) => setBonusValue(e.target.value)}
+              />
             </div>
           )}
           <div className="space-y-2">

@@ -117,6 +117,10 @@ public class DesignationSlab {
         return ratePerSqft;
     }
 
+    public void setRatePerSqft(BigDecimal ratePerSqft) {
+        this.ratePerSqft = ratePerSqft;
+    }
+
     public short getSortOrder() {
         return sortOrder;
     }

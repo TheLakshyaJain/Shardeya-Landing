@@ -232,20 +232,23 @@ public class AuthService {
     // B-14 §20.4 default tiers (Business Executive through President)
     // aligned with designation slabs.
     private void seedDefaultBrokerTiers(UUID orgId) {
-        record DefaultTier(String name, String nameHi, int minDeals, Integer maxDeals, short sortOrder) {
+        record DefaultTier(String name, String nameHi, int minDeals, Integer maxDeals, short sortOrder, java.math.BigDecimal rate) {
         }
         List<DefaultTier> defaults = List.of(
-                new DefaultTier("Business Executive", "बिज़नेस एक्ज़िक्यूटिव", 0, 0, (short) 1),
-                new DefaultTier("Senior Business Executive", "सीनियर बिज़नेस एक्ज़िक्यूटिव", 1, 1, (short) 2),
-                new DefaultTier("Business Development Officer", "बिज़नेस डेवलपमेंट ऑफिसर", 2, 2, (short) 3),
-                new DefaultTier("Business Manager", "बिज़नेस मैनेजर", 3, 5, (short) 4),
-                new DefaultTier("Assistant Sales Director", "असिस्टेंट सेल्स डायरेक्टर", 6, 9, (short) 5),
-                new DefaultTier("Sales Director", "सेल्स डायरेक्टर", 10, 14, (short) 6),
-                new DefaultTier("Vice President", "वाइस प्रेसिडेंट", 15, 19, (short) 7),
-                new DefaultTier("President", "प्रेसिडेंट", 20, null, (short) 8));
+                new DefaultTier("Business Executive", "बिज़नेस एक्ज़िक्यूटिव", 0, 0, (short) 1, new java.math.BigDecimal("160.000")),
+                new DefaultTier("Senior Business Executive", "सीनियर बिज़नेस एक्ज़िक्यूटिव", 1, 1, (short) 2, new java.math.BigDecimal("180.000")),
+                new DefaultTier("Business Development Officer", "बिज़नेस डेवलपमेंट ऑफिसर", 2, 2, (short) 3, new java.math.BigDecimal("200.000")),
+                new DefaultTier("Business Manager", "बिज़नेस मैनेजर", 3, 5, (short) 4, new java.math.BigDecimal("215.000")),
+                new DefaultTier("Assistant Sales Director", "असिस्टेंट सेल्स डायरेक्टर", 6, 9, (short) 5, new java.math.BigDecimal("225.000")),
+                new DefaultTier("Sales Director", "सेल्स डायरेक्टर", 10, 14, (short) 6, new java.math.BigDecimal("235.000")),
+                new DefaultTier("Vice President", "वाइस प्रेसिडेंट", 15, 19, (short) 7, new java.math.BigDecimal("245.000")),
+                new DefaultTier("President", "प्रेसिडेंट", 20, null, (short) 8, new java.math.BigDecimal("255.000")));
         for (DefaultTier d : defaults) {
-            brokerTierRepository.save(new com.shardeya.builder.broker.BrokerTier(
-                    UUID.randomUUID(), orgId, d.name(), d.nameHi(), d.minDeals(), d.maxDeals(), d.sortOrder()));
+            com.shardeya.builder.broker.BrokerTier tier = new com.shardeya.builder.broker.BrokerTier(
+                    UUID.randomUUID(), orgId, d.name(), d.nameHi(), d.minDeals(), d.maxDeals(), d.sortOrder());
+            tier.setBonusType(com.shardeya.builder.broker.BrokerTier.BonusType.RATE_PER_SQFT);
+            tier.setBonusValue(d.rate());
+            brokerTierRepository.save(tier);
         }
     }
 

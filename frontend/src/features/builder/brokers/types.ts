@@ -8,7 +8,7 @@ export type BrokerStatus = 'ACTIVE' | 'INACTIVE' | 'BLOCKED';
 export type CommissionConfigScope = 'GLOBAL' | 'PROJECT' | 'PLOT';
 export type CommissionLedgerStatus = 'PENDING' | 'PARTIALLY_PAID' | 'PAID' | 'CANCELLED';
 export type CommissionPaymentMode = 'CASH' | 'CHEQUE' | 'BANK_TRANSFER' | 'UPI' | 'DD';
-export type BonusType = 'PCT' | 'FIXED' | 'NONE';
+export type BonusType = 'PCT' | 'FIXED' | 'NONE' | 'RATE_PER_SQFT';
 
 export interface BrokerResponse {
   id: string;

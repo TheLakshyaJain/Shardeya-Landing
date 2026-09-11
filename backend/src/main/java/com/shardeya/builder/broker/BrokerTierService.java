@@ -34,16 +34,18 @@ public class BrokerTierService {
     private final BrokerTierRepository tierRepository;
     private final BrokerPartnerRepository brokerRepository;
     private final BrokerTierHistoryRepository historyRepository;
+    private final DesignationSlabRepository designationSlabRepository;
     private final TenantContextBinder tenantContextBinder;
     private final OutboxService outboxService;
     private final EntityManager entityManager;
 
     public BrokerTierService(BrokerTierRepository tierRepository, BrokerPartnerRepository brokerRepository,
-                              BrokerTierHistoryRepository historyRepository, TenantContextBinder tenantContextBinder,
-                              OutboxService outboxService, EntityManager entityManager) {
+                              BrokerTierHistoryRepository historyRepository, DesignationSlabRepository designationSlabRepository,
+                              TenantContextBinder tenantContextBinder, OutboxService outboxService, EntityManager entityManager) {
         this.tierRepository = tierRepository;
         this.brokerRepository = brokerRepository;
         this.historyRepository = historyRepository;
+        this.designationSlabRepository = designationSlabRepository;
         this.tenantContextBinder = tenantContextBinder;
         this.outboxService = outboxService;
         this.entityManager = entityManager;
@@ -71,6 +73,9 @@ public class BrokerTierService {
         if (req.bonusValue() != null) tier.setBonusValue(req.bonusValue());
         tier.setPerksDescription(req.perksDescription());
         tierRepository.save(tier);
+        if (tier.getBonusType() == BrokerTier.BonusType.RATE_PER_SQFT && tier.getBonusValue() != null) {
+            syncDesignationSlabRate(orgId, tier.getName(), tier.getBonusValue());
+        }
         return toResponse(tier);
     }
 
@@ -90,6 +95,9 @@ public class BrokerTierService {
         if (req.bonusValue() != null) tier.setBonusValue(req.bonusValue());
         tier.setPerksDescription(req.perksDescription());
         tierRepository.save(tier);
+        if (tier.getBonusType() == BrokerTier.BonusType.RATE_PER_SQFT && tier.getBonusValue() != null) {
+            syncDesignationSlabRate(orgId, tier.getName(), tier.getBonusValue());
+        }
         // B-14 §10: "Tier threshold edited so a broker no longer qualifies
         // -> they keep their tier (no automatic demotion)" -- editing a
         // tier's own range never re-evaluates brokers currently assigned to
@@ -202,6 +210,14 @@ public class BrokerTierService {
     private void requireAdmin() {
         if (!"BUILDER_ADMIN".equals(tenantContextBinder.current().role())) {
             throw new ForbiddenException("error.brokerTier.adminOnly");
+        }
+    }
+
+    private void syncDesignationSlabRate(UUID orgId, String tierName, java.math.BigDecimal rate) {
+        List<DesignationSlab> slabs = designationSlabRepository.findByNameForOrg(orgId, tierName);
+        for (DesignationSlab slab : slabs) {
+            slab.setRatePerSqft(rate);
+            designationSlabRepository.save(slab);
         }
     }
 

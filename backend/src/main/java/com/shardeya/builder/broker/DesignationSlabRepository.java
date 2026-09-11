@@ -46,4 +46,11 @@ public interface DesignationSlabRepository extends JpaRepository<DesignationSlab
             ORDER BY s.sortOrder ASC
             """)
     List<DesignationSlab> findSlabsAboveSortOrder(@Param("orgId") UUID orgId, @Param("currentSortOrder") short currentSortOrder);
+
+    @Query("""
+            SELECT s FROM DesignationSlab s
+            WHERE (s.orgId = :orgId OR s.orgId IS NULL) AND s.deletedAt IS NULL AND lower(s.name) = lower(:name)
+            ORDER BY (CASE WHEN s.orgId IS NULL THEN 1 ELSE 0 END) ASC
+            """)
+    List<DesignationSlab> findByNameForOrg(@Param("orgId") UUID orgId, @Param("name") String name);
 }

@@ -25,7 +25,7 @@ import java.util.UUID;
 @Table(name = "broker_tier")
 public class BrokerTier {
 
-    public enum BonusType { PCT, FIXED, NONE }
+    public enum BonusType { PCT, FIXED, NONE, RATE_PER_SQFT }
 
     @Id
     private UUID id;
